@@ -55,16 +55,16 @@ Two access keys, two inboxes:
 
 | Key placeholder | Inbox | Used by |
 |---|---|---|
-| `[[WEB3FORMS_KEY_INFO]]` | info@lcautism.org | Home page contact, contact page |
-| `[[WEB3FORMS_KEY_OUTREACH]]` | outreach@lcautism.org | Volunteer, sponsor, event RSVPs |
+| `4aa1988f-ab2b-4f29-94c6-37d5a651298e` | info@lcautism.org | Home page contact, contact page |
+| `c7341c41-b260-4ef0-a8c3-69180da5de8f` | outreach@lcautism.org | Volunteer, sponsor, event RSVPs |
 
 **To activate forms:**
 1. Sign up at https://web3forms.com (free — 250 submissions/mo)
 2. Add `info@lcautism.org` as an inbox → copy the access key
 3. Repeat for `outreach@lcautism.org` → copy that access key
 4. Find-and-replace both placeholders across the repo:
-   - `[[WEB3FORMS_KEY_INFO]]` → the info@ key
-   - `[[WEB3FORMS_KEY_OUTREACH]]` → the outreach@ key
+   - `4aa1988f-ab2b-4f29-94c6-37d5a651298e` → the info@ key
+   - `c7341c41-b260-4ef0-a8c3-69180da5de8f` → the outreach@ key
 5. Commit + push. Forms go live on the next deploy.
 
 ## Events page — how it works

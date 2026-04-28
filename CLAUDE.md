@@ -97,8 +97,8 @@ assets/
 
 Forms post to Web3Forms with two access keys:
 
-- `[[WEB3FORMS_KEY_INFO]]` → `info@lcautism.org` (contact)
-- `[[WEB3FORMS_KEY_OUTREACH]]` → `outreach@lcautism.org` (volunteer, sponsor, RSVP)
+- `4aa1988f-ab2b-4f29-94c6-37d5a651298e` → `info@lcautism.org` (contact)
+- `c7341c41-b260-4ef0-a8c3-69180da5de8f` → `outreach@lcautism.org` (volunteer, sponsor, RSVP)
 
 If a form stops working, FIRST check that the access_key hidden field has a real value (not the `[[...]]` placeholder). Ben sets these before deploy.
 
