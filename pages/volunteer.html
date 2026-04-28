@@ -120,7 +120,11 @@
           If using one Formspree account for all forms, reuse the same endpoint
           with _form_type=Volunteer to route in Formspree's routing rules.
         -->
-        <form action="https://formspree.io/f/[[FORMSPREE_VOLUNTEER_ID]]" method="POST" data-form-name="Volunteer">
+        <form action="https://api.web3forms.com/submit" method="POST" data-form-name="Volunteer">
+          <input type="hidden" name="access_key" value="[[WEB3FORMS_KEY_OUTREACH]]">
+          <input type="hidden" name="subject" value="LCAC Website — New volunteer signup">
+          <input type="hidden" name="from_name" value="LCAC Website">
+          <input type="hidden" name="botcheck" value="">
           <input type="hidden" name="_subject" value="New volunteer sign-up — LCAC website">
           <input type="hidden" name="_form_type" value="Volunteer">
           <input type="text" name="_gotcha" style="display:none" aria-hidden="true" tabindex="-1">

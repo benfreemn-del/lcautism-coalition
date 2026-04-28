@@ -412,7 +412,11 @@
             (Same endpoint as /pages/contact.html — one Formspree account,
             email routing by _form_type on Formspree side.)
           -->
-          <form action="https://formspree.io/f/[[FORMSPREE_CONTACT_ID]]" method="POST" data-form-name="Contact-Home">
+          <form action="https://api.web3forms.com/submit" method="POST" data-form-name="Contact-Home">
+          <input type="hidden" name="access_key" value="[[WEB3FORMS_KEY_INFO]]">
+          <input type="hidden" name="subject" value="LCAC Website — Home page contact form">
+          <input type="hidden" name="from_name" value="LCAC Website">
+          <input type="hidden" name="botcheck" value="">
             <input type="hidden" name="_subject" value="New message from LCAC homepage">
             <input type="hidden" name="_form_type" value="Contact-Home">
             <input type="text" name="_gotcha" style="display:none" aria-hidden="true" tabindex="-1">

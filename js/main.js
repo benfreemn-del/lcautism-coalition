@@ -292,16 +292,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ============================================================
   // FORM SUBMISSION ENHANCEMENT
-  // For every form that posts to Formspree, intercept the submit,
+  // For every form that posts to Web3Forms, intercept the submit,
   // show a loading state + success/error message inline so we don't
   // navigate the user away from the site. Falls back to normal form
-  // behaviour if JS is disabled (form still posts to Formspree).
+  // behaviour if JS is disabled (form still posts to Web3Forms).
   // ============================================================
-  document.querySelectorAll('form[action*="formspree.io"]').forEach((form) => {
+  document.querySelectorAll('form[action*="web3forms.com"]').forEach((form) => {
     form.addEventListener('submit', async (e) => {
       // Skip enhancement if the endpoint is still the placeholder
       const endpoint = form.getAttribute('action') || '';
-      if (endpoint.includes('[[FORMSPREE_')) {
+      const accessKeyField = form.querySelector('input[name="access_key"]');
+      const accessKey = accessKeyField ? accessKeyField.value : '';
+      if (accessKey.includes('[[WEB3FORMS_')) {
         // Prevent a broken POST to an unconfigured endpoint
         e.preventDefault();
         showStatus(form, 'Form submission is not fully configured yet. Please contact info@lcautism.org directly.', 'warn');

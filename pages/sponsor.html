@@ -343,7 +343,11 @@
         FORM SUBMISSION — Formspree endpoint.
         Replace [[FORMSPREE_SPONSOR_ID]] per LCAC_Setup_Guide.docx Step 1.
       -->
-      <form class="sponsor-form fade-in" action="https://formspree.io/f/[[FORMSPREE_SPONSOR_ID]]" method="POST" data-form-name="Sponsor">
+      <form class="sponsor-form fade-in" action="https://api.web3forms.com/submit" method="POST" data-form-name="Sponsor">
+          <input type="hidden" name="access_key" value="[[WEB3FORMS_KEY_OUTREACH]]">
+          <input type="hidden" name="subject" value="LCAC Website — Sponsor inquiry">
+          <input type="hidden" name="from_name" value="LCAC Website">
+          <input type="hidden" name="botcheck" value="">
         <input type="hidden" name="_subject" value="New sponsorship inquiry — LCAC website">
         <input type="hidden" name="_form_type" value="Sponsor">
         <input type="text" name="_gotcha" style="display:none" aria-hidden="true" tabindex="-1">

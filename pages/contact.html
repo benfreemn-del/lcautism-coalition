@@ -301,7 +301,11 @@
           the endpoint ID from https://formspree.io/ after account is created.
           See LCAC_Setup_Guide.docx (Step 1) for the one-time setup.
         -->
-        <form class="contact-form" action="https://formspree.io/f/[[FORMSPREE_CONTACT_ID]]" method="POST" data-form-name="Contact">
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" data-form-name="Contact">
+          <input type="hidden" name="access_key" value="[[WEB3FORMS_KEY_INFO]]">
+          <input type="hidden" name="subject" value="LCAC Website — Contact form submission">
+          <input type="hidden" name="from_name" value="LCAC Website">
+          <input type="hidden" name="botcheck" value="">
           <input type="hidden" name="_subject" value="New contact form submission — LCAC website">
           <input type="hidden" name="_form_type" value="Contact">
           <!-- Honeypot spam protection: bots fill this, humans don't see it -->
