@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | Lewis County Autism Coalition</title>
+  <meta name="description" content="Privacy Policy for the Lewis County Autism Coalition. Learn how we collect, use, and protect your personal information.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="../assets/images/logo.png" type="image/png">
+
+  <style>
+    /* ===== Privacy Page Styles ===== */
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      margin-top: var(--space-2xl);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .privacy-card {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .privacy-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .privacy-card__title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .privacy-card__icon {
+      width: 40px;
+      height: 40px;
+      background: var(--color-bg-blue);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+    .privacy-card__text {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .privacy-card__text ul {
+      margin: var(--space-sm) 0;
+      padding-left: var(--space-lg);
+    }
+    .privacy-card__text li {
+      margin-bottom: var(--space-xs);
+    }
+    .privacy-card__text a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s ease;
+    }
+    .privacy-card__text a:hover {
+      opacity: 0.8;
+    }
+    .privacy-effective {
+      text-align: center;
+      color: var(--color-text-secondary);
+      font-size: 0.85rem;
+      margin-top: var(--space-xl);
+      font-style: italic;
+    }
+  </style>
+  <!-- Google Analytics 4 (consent-gated per cookie banner choice) -->
+  <!-- Replace [[GA4_MEASUREMENT_ID]] with LCACs GA4 ID from LCAC_Setup_Guide.docx Step 3 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    // Default to denied until cookie banner says otherwise (GDPR / CCPA safe)
+    gtag("consent", "default", {
+      "ad_storage": "denied",
+      "analytics_storage": "denied",
+      "wait_for_update": 500
+    });
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.__lcacAnalyticsConsent) {
+        gtag("consent", "update", { "analytics_storage": "granted" });
+      }
+    });
+    gtag("js", new Date());
+    gtag("config", "[[GA4_MEASUREMENT_ID]]", { "anonymize_ip": true });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=[[GA4_MEASUREMENT_ID]]"></script>
+
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__inner">
+      <a href="../index.html" class="navbar__brand">
+        <img src="../assets/images/logo.png" alt="Lewis County Autism Coalition logo" class="navbar__logo">
+        <div class="navbar__name">
+          Lewis County<br>Autism Coalition
+          <span>Napavine, WA</span>
+        </div>
+      </a>
+
+      <div class="navbar__links">
+        <a href="../index.html" class="navbar__link">Home</a>
+        <a href="sdcc.html" class="navbar__link">S&D Center</a>
+        <a href="services.html" class="navbar__link">Services</a>
+        <a href="smart.html" class="navbar__link">SMART</a>
+        <a href="events.html" class="navbar__link">Events</a>
+        <a href="about.html" class="navbar__link">Our Story</a>
+        <a href="volunteer.html" class="navbar__link">Volunteer</a>
+        <a href="contact.html" class="navbar__link">Contact</a>
+      </div>
+
+      <a href="donate.html" class="btn btn--accent btn--sm navbar__cta">Donate</a>
+
+      <button class="navbar__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <a href="#" class="active">EN</a>
+    <a href="espanol.html">ES</a>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <a href="../index.html" class="mobile-menu__link">Home</a>
+    <a href="sdcc.html" class="mobile-menu__link">Spectrum & Development Center</a>
+    <a href="services.html" class="mobile-menu__link">Groups & Services</a>
+    <a href="smart.html" class="mobile-menu__link">SMART Program</a>
+    <a href="events.html" class="mobile-menu__link">Events</a>
+    <a href="about.html" class="mobile-menu__link">Our Story</a>
+    <a href="volunteer.html" class="mobile-menu__link">Volunteer</a>
+    <a href="statewide.html" class="mobile-menu__link">Statewide Collaboration</a>
+    <a href="partners.html" class="mobile-menu__link">Community Partners</a>
+    <a href="contact.html" class="mobile-menu__link">Contact Us</a>
+    <a href="espanol.html" class="mobile-menu__link">Recursos en Español</a>
+    <div class="mobile-menu__cta">
+      <a href="donate.html" class="btn btn--accent btn--lg">Donate Today</a>
+      <a href="sponsor.html" class="btn btn--outline btn--lg">Become a Sponsor</a>
+    </div>
+  </div>
+
+  <!-- ========== PAGE HEADER ========== -->
+  <section class="page-header" id="main">
+    <div class="container fade-in">
+      <span class="section-label">Your Privacy Matters</span>
+      <h1 class="page-header__title">Privacy <span class="highlight">Policy</span></h1>
+      <p class="page-header__subtitle">The Lewis County Autism Coalition is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your personal information.</p>
+    </div>
+  </section>
+
+  <!-- ========== PRIVACY SECTIONS ========== -->
+  <section class="section" id="privacy-content">
+    <div class="container">
+      <div class="privacy-grid fade-in">
+
+        <!-- Information We Collect -->
+        <div class="privacy-card">
+          <h2 class="privacy-card__title">
+            <div class="privacy-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            </div>
+            Information We Collect
+          </h2>
+          <div class="privacy-card__text">
+            <p>We may collect the following personal information when you interact with us:</p>
+            <ul>
+              <li>Your name, email address, and phone number when you contact us, submit a form, or sign up for updates</li>
+              <li>Mailing address if you request printed materials or correspondence</li>
+              <li>Volunteer application details, including availability, skills, and background information</li>
+              <li>Donation records as required by federal and state nonprofit regulations</li>
+            </ul>
+            <p>We only collect information that is necessary to serve you and fulfill our mission. We do not collect data from children without parental consent.</p>
+          </div>
+        </div>
+
+        <!-- How We Use Your Information -->
+        <div class="privacy-card">
+          <h2 class="privacy-card__title">
+            <div class="privacy-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            How We Use Your Information
+          </h2>
+          <div class="privacy-card__text">
+            <p>The information we collect is used to:</p>
+            <ul>
+              <li>Respond to your inquiries, questions, and requests for support</li>
+              <li>Process volunteer applications and coordinate volunteer activities</li>
+              <li>Send you updates about our programs, events, and services -- only if you have opted in to receive communications</li>
+              <li>Process and acknowledge donations, and provide tax receipts</li>
+              <li>Improve our programs, services, and website experience</li>
+            </ul>
+            <p>We will never use your information for purposes unrelated to our mission without your explicit consent.</p>
+          </div>
+        </div>
+
+        <!-- Information Sharing -->
+        <div class="privacy-card">
+          <h2 class="privacy-card__title">
+            <div class="privacy-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            </div>
+            Information Sharing
+          </h2>
+          <div class="privacy-card__text">
+            <p><strong>We do not sell, trade, or rent your personal information to third parties.</strong></p>
+            <p>In limited circumstances, we may share information with:</p>
+            <ul>
+              <li>The Department of Children, Youth, and Families (DCYF), the Developmental Disabilities Administration (DDA), or DSHS as required for contracted services we provide</li>
+              <li>Service providers who assist us with website hosting, email communications, or payment processing -- under strict confidentiality agreements</li>
+              <li>Law enforcement or government agencies when required by law or court order</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Data Security -->
+        <div class="privacy-card">
+          <h2 class="privacy-card__title">
+            <div class="privacy-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            Data Security
+          </h2>
+          <div class="privacy-card__text">
+            <p>We take the security of your information seriously. Our practices include:</p>
+            <ul>
+              <li>Following HIPAA guidelines for any protected health information entrusted to us</li>
+              <li>Compliance with the Washington State Public Records Act (RCW 42.56), including applicable exemptions that protect personal and sensitive information</li>
+              <li>Using secure, encrypted connections for data transmission on our website</li>
+              <li>Limiting access to personal information to authorized staff and volunteers on a need-to-know basis</li>
+            </ul>
+            <p>While we strive to protect your information, no method of electronic transmission or storage is 100% secure. We encourage you to contact us immediately if you believe your information has been compromised.</p>
+          </div>
+        </div>
+
+        <!-- Cookies -->
+        <div class="privacy-card">
+          <h2 class="privacy-card__title">
+            <div class="privacy-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            </div>
+            Cookies
+          </h2>
+          <div class="privacy-card__text">
+            <p>Our website uses basic cookies to ensure proper site functionality, such as remembering your preferences and supporting navigation. These cookies are essential for the website to operate and do not track you for advertising purposes.</p>
+            <p>We do not use third-party advertising cookies. If we use any analytics tools to understand how visitors use our site, the data collected is anonymized and used solely to improve the user experience.</p>
+            <p>You can control cookie settings through your web browser preferences at any time.</p>
+          </div>
+        </div>
+
+        <!-- Contact for Privacy Concerns -->
+        <div class="privacy-card">
+          <h2 class="privacy-card__title">
+            <div class="privacy-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            Contact for Privacy Concerns
+          </h2>
+          <div class="privacy-card__text">
+            <p>If you have questions about this privacy policy, would like to request access to your personal data, or wish to have your information removed from our records, please contact us:</p>
+            <ul>
+              <li>Email: <a href="mailto:info@lcautism.org">info@lcautism.org</a></li>
+              <li>Phone: <a href="tel:3606445222">(360) 644-5222</a></li>
+              <li>Mail: Lewis County Autism Coalition, 1673 S. Market St. PMB #240, Chehalis, WA 98532</li>
+            </ul>
+            <p>We will respond to all privacy-related inquiries within 30 days.</p>
+          </div>
+        </div>
+
+        <!-- Nonprofit Status -->
+        <div class="privacy-card">
+          <h2 class="privacy-card__title">
+            <div class="privacy-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            Nonprofit Status
+          </h2>
+          <div class="privacy-card__text">
+            <p>The Lewis County Autism Coalition is a 501(c)(3) tax-exempt nonprofit organization. Our Employer Identification Number (EIN) is <strong>47-3931045</strong>. We are registered with the Washington Secretary of State's Charities Program and comply with all applicable state and federal regulations governing nonprofit organizations.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="privacy-effective fade-in">This privacy policy was last updated on January 1, 2026. We may update this policy from time to time and will post any changes on this page.</p>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="section" id="cta">
+    <div class="container">
+      <div class="cta-banner fade-in">
+        <h2>Questions or Concerns?</h2>
+        <p>
+          If you have any questions about our privacy practices or would like more information about the Lewis County Autism Coalition, we are happy to help.
+        </p>
+        <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+          <a href="contact.html" class="btn btn--white btn--lg">Contact Us</a>
+          <a href="about.html" class="btn btn--outline btn--lg" style="border-color: #fff; color: #fff;">Our Story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <!-- Brand -->
+        <div class="footer__about">
+          <div class="footer__brand">
+            <img src="../assets/images/logo.png" alt="LCAC Logo">
+            <span class="footer__brand-name">Lewis County<br>Autism Coalition</span>
+          </div>
+          <p>Promoting lifelong belonging and independence for autistic, neurodiverse, and developmentally disabled individuals and their families.</p>
+          <div class="footer__social">
+            <a href="https://www.facebook.com/lewiscountyautismcoalition" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.youtube.com" aria-label="YouTube" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com" aria-label="TikTok" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4>Programs</h4>
+          <div class="footer__links">
+            <a href="smart.html">SMART Program</a>
+            <a href="sdcc.html">S&D Center</a>
+            <a href="services.html">Groups & Services</a>
+            <a href="events.html">Events</a>
+            <a href="statewide.html">WA INCLUDE</a>
+          </div>
+        </div>
+
+        <!-- Get Involved -->
+        <div>
+          <h4>Get Involved</h4>
+          <div class="footer__links">
+            <a href="volunteer.html">Volunteer</a>
+            <a href="donate.html">Donate</a>
+            <a href="sponsor.html">Sponsorship</a>
+            <a href="partners.html">Partners</a>
+            <a href="about.html">Our Story</a>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4>Contact</h4>
+          <div class="footer__contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>375 Linhart Ave NE, Suite B<br>Napavine, WA 98565</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>(360) 644-5222</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>info@lcautism.org</span>
+          </div>
+          <div class="footer__contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>Mailing: 1673 S. Market St. PMB #240, Chehalis, WA 98532</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>&copy; 2026 Lewis County Autism Coalition. All rights reserved. 501(c)(3) Nonprofit.</p>
+        <div>
+          <a href="privacy.html">Privacy Policy</a> &middot;
+          <a href="espanol.html">Espanol</a>
+        </div>
+      </div>
+
+      <div class="footer__credit">
+        <svg width="16" height="16" viewBox="0 0 100 100" fill="currentColor"><path d="M52 18 C56 12, 62 8, 60 4 C58 2, 54 6, 52 10 C50 6, 46 2, 44 4 C42 8, 48 12, 52 18Z"/><ellipse cx="50" cy="24" rx="12" ry="11"/><ellipse cx="54" cy="22" rx="2.5" ry="2.5" fill="#0a0a0a"/><ellipse cx="54.5" cy="21.5" rx="1" ry="1" fill="white"/><path d="M62 25 L74 23 L62 27Z"/><path d="M40 32 Q50 38, 60 32 Q58 36, 50 38 Q42 36, 40 32Z" opacity="0.3"/><ellipse cx="46" cy="50" rx="18" ry="20"/><path d="M34 40 C28 48, 26 58, 30 68 L36 66 C32 58, 32 48, 36 42Z" opacity="0.7"/><path d="M32 52 L28 54" stroke="currentColor" stroke-width="1.5" opacity="0.4"/><path d="M31 56 L27 58" stroke="currentColor" stroke-width="1.5" opacity="0.4"/><path d="M30 60 L26 62" stroke="currentColor" stroke-width="1.5" opacity="0.4"/><path d="M36 66 C28 72, 20 80, 12 90 L18 90 C24 82, 30 74, 38 68Z"/><path d="M38 68 C32 74, 26 82, 20 92 L26 92 C30 84, 34 76, 40 70Z" opacity="0.8"/><path d="M44 68 L42 78 L38 80 M42 78 L44 80 M42 78 L46 80" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/><path d="M50 68 L52 78 L48 80 M52 78 L54 80 M52 78 L56 80" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/><ellipse cx="48" cy="55" rx="8" ry="10" opacity="0.15"/></svg>
+        Created by&nbsp;<a href="https://bluejayportfolio.com" target="_blank" rel="noopener noreferrer">bluejayportfolio.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <a href="#" class="back-to-top" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </a>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

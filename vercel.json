@@ -1,0 +1,155 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/pages/about",
+      "permanent": true
+    },
+    {
+      "source": "/our-story",
+      "destination": "/pages/about",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/pages/services",
+      "permanent": true
+    },
+    {
+      "source": "/programs",
+      "destination": "/pages/services",
+      "permanent": true
+    },
+    {
+      "source": "/events",
+      "destination": "/pages/events",
+      "permanent": true
+    },
+    {
+      "source": "/upcoming-events",
+      "destination": "/pages/events",
+      "permanent": true
+    },
+    {
+      "source": "/volunteer",
+      "destination": "/pages/volunteer",
+      "permanent": true
+    },
+    {
+      "source": "/get-involved",
+      "destination": "/pages/volunteer",
+      "permanent": true
+    },
+    {
+      "source": "/sponsor",
+      "destination": "/pages/sponsor",
+      "permanent": true
+    },
+    {
+      "source": "/sponsors",
+      "destination": "/pages/sponsor",
+      "permanent": true
+    },
+    {
+      "source": "/donate",
+      "destination": "/pages/donate",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/pages/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/pages/contact",
+      "permanent": true
+    },
+    {
+      "source": "/smart",
+      "destination": "/pages/smart",
+      "permanent": true
+    },
+    {
+      "source": "/smart-program",
+      "destination": "/pages/smart",
+      "permanent": true
+    },
+    {
+      "source": "/sdcc",
+      "destination": "/pages/sdcc",
+      "permanent": true
+    },
+    {
+      "source": "/spectrum-development-center",
+      "destination": "/pages/sdcc",
+      "permanent": true
+    },
+    {
+      "source": "/partners",
+      "destination": "/pages/partners",
+      "permanent": true
+    },
+    {
+      "source": "/statewide",
+      "destination": "/pages/statewide",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/pages/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/pages/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/espanol",
+      "destination": "/pages/espanol",
+      "permanent": true
+    },
+    {
+      "source": "/spanish",
+      "destination": "/pages/espanol",
+      "permanent": true
+    },
+    {
+      "source": "/en-espanol",
+      "destination": "/pages/espanol",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ]
+}
