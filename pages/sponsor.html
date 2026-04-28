@@ -159,6 +159,54 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ===== Event Flyer ===== */
+    .event-flyer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: var(--space-2xl);
+    }
+    .event-flyer__frame {
+      display: block;
+      max-width: 560px;
+      width: 100%;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: var(--color-bg-card);
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.06),
+        0 12px 32px rgba(0, 0, 0, 0.12),
+        0 0 0 1px var(--color-border);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      position: relative;
+    }
+    .event-flyer__frame:hover,
+    .event-flyer__frame:focus-visible {
+      transform: translateY(-4px);
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.06),
+        0 20px 48px rgba(0, 0, 0, 0.18),
+        0 0 0 1px var(--color-primary);
+    }
+    .event-flyer__frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .event-flyer__caption {
+      text-align: center;
+      margin-top: var(--space-md);
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    @media (max-width: 600px) {
+      .event-flyer__frame {
+        max-width: 100%;
+        border-radius: var(--radius-lg);
+      }
+    }
   </style>
   <!-- Google Analytics 4 (consent-gated per cookie banner choice) -->
   <!-- Replace [[GA4_MEASUREMENT_ID]] with LCACs GA4 ID from LCAC_Setup_Guide.docx Step 3 -->
@@ -274,6 +322,14 @@
           <p>9:00 AM - 1:00 PM</p>
         </div>
       </div>
+
+      <!-- Event Flyer -->
+      <div class="event-flyer fade-in">
+        <a href="../assets/flyers/bmx-show-2026.jpg" target="_blank" rel="noopener" class="event-flyer__frame" aria-label="Open full-size event flyer in new tab">
+          <img src="../assets/flyers/bmx-show-2026.jpg" alt="3rd Annual Car & BMX Show flyer — June 13th, 2026 at Chehalis Veterans Memorial Museum (100 SW Veterans Way, Chehalis), 9 AM to 1 PM. $20 registration for cars and multiple bikes. Guest appearance by Bill 'Cru' Allen, star of the BMX movie RAD. Live music by Kitty Mae Band. Food, prizes, and a sensory booth. First 100 kids get a free Hot Wheels car. Sponsored by B Side Bikes, Grandmaster Wellpoint, NW Green Homes, and Cornerstone Center for Development." loading="lazy">
+        </a>
+      </div>
+      <p class="event-flyer__caption fade-in">Tap the flyer to open full-size or save it to share.</p>
     </div>
   </section>
 
