@@ -1976,3 +1976,39 @@ body.page-donate .floating-donate {
 @media (max-width: 1023px) {
   .navbar__more { display: none; }
 }
+
+/* ============ NAVBAR FIT FIX (added 2026-05-05 polish) ============
+   The desktop "More ▾" dropdown pushed total nav content past the
+   1200px max-width, squeezing the brand into a tiny 114px column
+   that wrapped "Lewis County / Autism Coalition / Napavine, WA"
+   into 4 broken lines and clipped the Donate CTA.
+   Fix: lock the brand from shrinking, tighten link padding/font,
+   and bump navbar max-width to 1400px on ≥1280px viewports. */
+@media (min-width: 1024px) {
+  .navbar__brand {
+    flex-shrink: 0;
+  }
+  .navbar__name {
+    white-space: nowrap;
+  }
+  .navbar__inner {
+    gap: var(--space-sm);
+  }
+  .navbar__links {
+    gap: 2px;
+    flex-wrap: nowrap;
+  }
+  .navbar__link {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.85rem;
+  }
+  .navbar__more-btn {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.85rem;
+  }
+}
+@media (min-width: 1280px) {
+  .navbar__inner {
+    max-width: 1400px;
+  }
+}
