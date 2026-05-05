@@ -118,4 +118,38 @@ _(scraped photo list will populate here as scraping completes)_
 
 ## ✅ Recently completed
 
-(items move here as they ship)
+### 2026-05-05 — Big content + photo build
+- ✅ TASKS.md tracker created
+- ✅ robots.txt added at site root
+- ✅ Wrapped (360) 644-5222 in `tel:` links sitewide (15 files)
+- ✅ Removed stale Formspree HTML comments (4 files)
+- ✅ Wired BMX flyer (`bmx-show-2026.jpg`) to its event card on events.html
+- ✅ Built **Leadership** page (`pages/leadership.html`) — board roster + Michelle Whitlow ED bio
+- ✅ Built **What Is Autism** page (`pages/whatisautism.html`) — 1100-word public-info article
+- ✅ Built **Vision 2030** page (`pages/vision2030.html`) — 4 strategic goals + action steps
+- ✅ Built **Cultivating Belonging** page (`pages/cultivating.html`)
+- ✅ Built **Court Support** page (`pages/courtsupport.html`)
+- ✅ Built **Summer Camp** page (`pages/summercamp.html`)
+- ✅ Built **SWWA Conference** page (`pages/conference.html`) — postponed-to-Nov-2026 status + 2024 speakers
+- ✅ Built **Santa Sponsor** page (`pages/santasponsor.html`)
+- ✅ Built **Teal Pumpkin Sponsor** page (`pages/tealpumpkin.html`)
+- ✅ Populated **Partners** page (`pages/partners.html`) with 50+ named partners across 9 categories (replaced generic 4-card grid)
+- ✅ Scraped 28 photos from old Wix site → `assets/images/`
+- ✅ Compressed 121 MB → 9.9 MB (92% smaller, all photos now ≤700KB)
+- ✅ Wired real photos into key feature slots:
+  - homepage hero (`hero-friends-eating-outdoors.jpg`)
+  - homepage SDCC card (`sdcc-ribbon-cutting-2025.jpg`)
+  - SDCC "More Than a Building" (`sdcc-building-2025.jpg`)
+  - Leadership ED slot (`michelle-whitlow.jpg`)
+  - Statewide WA INCLUDE feature (`community-team-members.jpg`)
+  - Statewide Local Impact feature (`community-group-smiling.jpg`)
+
+### Still TODO (deferred — see "Photo Gaps" + "Blockers" above)
+- GA4 measurement ID (placeholder still in head)
+- Court Support: replace `mailto:` fallback CTAs with real public Google Form `/viewform` URLs
+- Wire remaining `<!-- TODO: Replace with real photo -->` slots in vision2030.html + summercamp.html + conference.html
+- Mom-provided higher-res originals to replace Wix scrapes (especially leadership headshot + BMX/camp photos that we don't have)
+- Real Instagram / YouTube / TikTok handles for footer (or remove)
+- Stripe Donate Link (replace `/donate` page bouncing to legacy Wix)
+- Update Michelle Whitlow's full bio (Wix scrape only got opening paragraph verbatim)
+
