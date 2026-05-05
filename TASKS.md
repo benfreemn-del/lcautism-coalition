@@ -155,6 +155,14 @@ _(scraped photo list will populate here as scraping completes)_
 ### Confirmed: no LCAC accounts on Instagram / YouTube / TikTok / X / LinkedIn
 Verified via direct scrape of all Wix pages (only Wix template default URLs found, no real LCAC handles) AND Google Search ("Lewis County Autism Coalition" + each platform → no matches). **Conclusion: keep these social icons removed from footer until mom confirms LCAC has accounts on those platforms.** Only Facebook (real URL) is preserved.
 
+### 2026-05-05 — Final autonomous polish (perf + SEO + galleries)
+- ✅ Updated `sitemap.xml` from 14 → 23 URLs (all 9 new pages + 2 sponsor variants now included with proper priorities)
+- ✅ Swapped homepage `og:image` from `logo.png` to a real LCAC photo (`sdcc-ribbon-cutting-2025.jpg`) so social link previews show the community, not just a logo. Also added `og:image:alt` and `twitter:image` for full preview compatibility.
+- ✅ Added `loading="lazy"` to 61 img tags across 24 files. Modern browsers smart-defer below-fold images for faster initial paint and lower data usage on mobile.
+- ✅ Built SDCC photo gallery on `pages/sdcc.html` — "A Look Around" section using 7 previously-unused SDCC photos (building exterior, building 2025, new roof, interior sitting area, ribbon-cutting tables, ribbon-cutting martial arts, big check). Gives the SDCC page real visual proof of the space and the community moments.
+- ✅ Built community photo gallery on `pages/about.html` — "Faces of LCAC" section using 9 previously-unused community + parade photos (women hugging, women smiling, happy parking lot, sun tent, parade jeep, parade family, parade crowd, autism resources table, joined hands unity). Brings the About page to life.
+- ✅ Photo usage: 28 of 29 scraped photos now wired into the site (was 12 before this batch). 1 photo unreferenced (`hero-community.jpg`) — kept on disk as backup.
+
 ### 2026-05-05 — Desktop "More" dropdown
 - ✅ Added a desktop "More ▾" dropdown to the nav so all 11 secondary pages (Leadership, Partners, Statewide, What Is Autism, Vision 2030, Cultivating Belonging, Court Support, Summer Camp, SWWA Conference, Sponsorship, Recursos en Español) are reachable on desktop without opening the hamburger menu. Pure CSS — no JS dependency. Hidden on mobile (≤1023px) — hamburger menu carries those links there. CSS appended to `css/styles.css`. Dropdown HTML inserted in all 24 HTML files via Python (handled both `pages/` prefix on homepage and bare paths on other pages).
 
