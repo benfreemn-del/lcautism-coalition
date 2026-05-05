@@ -151,10 +151,12 @@ _(scraped photo list will populate here as scraping completes)_
 - 🟡 Stripe Donate Link (replace `/donate` page bouncing to legacy Wix)
 - 🟡 Conference page placeholder photos (no usable conference photos in scraped library — Wix conference page was mostly speaker headshot tiles & event flyers)
 - 🟡 Homepage hero photo — current scrape (`hero-friends-eating-outdoors.jpg`) reads stock-y; mom may want to swap with a real LCAC community photo
-- 🟡 Desktop nav doesn't surface 9 of the new pages (only mobile menu does); add a "More" dropdown or secondary nav row when ready
 
 ### Confirmed: no LCAC accounts on Instagram / YouTube / TikTok / X / LinkedIn
 Verified via direct scrape of all Wix pages (only Wix template default URLs found, no real LCAC handles) AND Google Search ("Lewis County Autism Coalition" + each platform → no matches). **Conclusion: keep these social icons removed from footer until mom confirms LCAC has accounts on those platforms.** Only Facebook (real URL) is preserved.
+
+### 2026-05-05 — Desktop "More" dropdown
+- ✅ Added a desktop "More ▾" dropdown to the nav so all 11 secondary pages (Leadership, Partners, Statewide, What Is Autism, Vision 2030, Cultivating Belonging, Court Support, Summer Camp, SWWA Conference, Sponsorship, Recursos en Español) are reachable on desktop without opening the hamburger menu. Pure CSS — no JS dependency. Hidden on mobile (≤1023px) — hamburger menu carries those links there. CSS appended to `css/styles.css`. Dropdown HTML inserted in all 24 HTML files via Python (handled both `pages/` prefix on homepage and bare paths on other pages).
 
 ### 2026-05-05 — Round 2 polish (bio + remaining photo slots)
 - ✅ Expanded Michelle Whitlow's ED bio on Leadership page from 2 paragraphs to full 5-paragraph version (verbatim port from Wix, with proper "Warm regards / Michelle Whitlow, M.S. / Executive Director" sign-off)

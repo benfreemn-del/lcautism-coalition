@@ -1897,3 +1897,82 @@ body.js-ready .stagger.visible > * { opacity: 1; transform: translateY(0); }
 body.page-donate .floating-donate {
   display: none !important;
 }
+
+
+/* ============ DESKTOP "MORE" DROPDOWN (added 2026-05-05) ============
+   Surfaces the 11 secondary pages (Leadership, Partners, Statewide,
+   What Is Autism, Vision 2030, Cultivating Belonging, Court Support,
+   Summer Camp, SWWA Conference, Sponsorship, Recursos en Español) on
+   desktop without forcing users into the hamburger menu. Pure CSS;
+   no JS dependency. On mobile (<= 1023px) it's hidden — the existing
+   hamburger menu carries those links. */
+.navbar__more {
+  position: relative;
+  display: inline-block;
+}
+.navbar__more-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--color-text);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.navbar__more-btn:hover,
+.navbar__more:hover .navbar__more-btn,
+.navbar__more:focus-within .navbar__more-btn {
+  background: var(--color-bg-blue);
+  color: var(--color-primary);
+}
+.navbar__more-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: var(--color-surface, var(--color-white));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 240px;
+  padding: 8px 0;
+  display: none;
+  z-index: 1001;
+}
+.navbar__more:hover .navbar__more-menu,
+.navbar__more:focus-within .navbar__more-menu {
+  display: block;
+}
+.navbar__more-menu a {
+  display: block;
+  padding: 8px 16px;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  transition: background-color var(--transition-fast);
+}
+.navbar__more-menu a:hover,
+.navbar__more-menu a:focus {
+  background: var(--color-bg-blue);
+  color: var(--color-primary);
+}
+[data-theme="dark"] .navbar__more-menu {
+  background: #1a1d27;
+  border-color: #2a2d3a;
+}
+[data-theme="dark"] .navbar__more-menu a {
+  color: #e5e7eb;
+}
+[data-theme="dark"] .navbar__more-menu a:hover {
+  background: #2a2d3a;
+  color: var(--color-primary);
+}
+@media (max-width: 1023px) {
+  .navbar__more { display: none; }
+}
