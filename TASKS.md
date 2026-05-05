@@ -144,16 +144,29 @@ _(scraped photo list will populate here as scraping completes)_
   - Statewide WA INCLUDE feature (`community-team-members.jpg`)
   - Statewide Local Impact feature (`community-group-smiling.jpg`)
 
-### Still TODO (deferred — see "Photo Gaps" + "Blockers" above)
-- GA4 measurement ID (placeholder still in head)
-- Court Support: replace `mailto:` fallback CTAs with real public Google Form `/viewform` URLs
-- Wire remaining `<!-- TODO: Replace with real photo -->` slots in vision2030.html + summercamp.html + conference.html
-- Mom-provided higher-res originals to replace Wix scrapes (especially BMX/camp photos that we don't have)
-- Real Instagram / YouTube / TikTok handles (currently REMOVED from footer — when LCAC has real handles, add back)
-- Stripe Donate Link (replace `/donate` page bouncing to legacy Wix)
-- Update Michelle Whitlow's full bio (Wix scrape only got opening paragraph verbatim)
-- Homepage hero photo — current scrape (`hero-friends-eating-outdoors.jpg`) reads stock-y; mom may want to swap with a real LCAC community photo
-- Desktop nav doesn't surface 9 of the new pages (only mobile menu does); add a "More" dropdown or secondary nav row when ready
+### Still TODO
+- 🔴 GA4 measurement ID (placeholder still in head — only LCAC's Google Analytics admin has this)
+- 🟡 Court Support: replace `mailto:` fallback CTAs with real public Google Form `/viewform` URLs
+- 🟡 Mom-provided higher-res originals to replace Wix scrapes (especially BMX/camp photos that we don't have)
+- 🟡 Stripe Donate Link (replace `/donate` page bouncing to legacy Wix)
+- 🟡 Conference page placeholder photos (no usable conference photos in scraped library — Wix conference page was mostly speaker headshot tiles & event flyers)
+- 🟡 Homepage hero photo — current scrape (`hero-friends-eating-outdoors.jpg`) reads stock-y; mom may want to swap with a real LCAC community photo
+- 🟡 Desktop nav doesn't surface 9 of the new pages (only mobile menu does); add a "More" dropdown or secondary nav row when ready
+
+### Confirmed: no LCAC accounts on Instagram / YouTube / TikTok / X / LinkedIn
+Verified via direct scrape of all Wix pages (only Wix template default URLs found, no real LCAC handles) AND Google Search ("Lewis County Autism Coalition" + each platform → no matches). **Conclusion: keep these social icons removed from footer until mom confirms LCAC has accounts on those platforms.** Only Facebook (real URL) is preserved.
+
+### 2026-05-05 — Round 2 polish (bio + remaining photo slots)
+- ✅ Expanded Michelle Whitlow's ED bio on Leadership page from 2 paragraphs to full 5-paragraph version (verbatim port from Wix, with proper "Warm regards / Michelle Whitlow, M.S. / Executive Director" sign-off)
+- ✅ Wired all 6 remaining placeholder photos:
+  - `summercamp.html` Summer Sensory Camp feature: `summer-camp-sensory-play.jpg`
+  - `summercamp.html` Peer Mentorship feature: `community-kids-playing-parking-lot.jpg`
+  - `vision2030.html` Goal 1 (Acceptance): `community-group-of-people.jpg`
+  - `vision2030.html` Goal 2 (Early Intervention): `community-girl-hugging-grandmother.jpg`
+  - `vision2030.html` Goal 3 (Youth Success): `hero-children-playing-circle.jpg`
+  - `vision2030.html` Goal 4 (Adult Self-Sufficiency): `hero-smiling-teen-boy.jpg`
+- ✅ Confirmed via web search + Wix scrape: no LCAC Instagram/YouTube/TikTok/X/LinkedIn accounts exist publicly. Footer cleanup is correct.
+- 🟡 Conference page still has decorative placeholders — no usable conference photos in scraped library (those photos were mostly 2024 speaker headshot tiles, not general conference shots)
 
 ### 2026-05-05 — QA pass + polish (post-launch)
 - ✅ Fixed RSVP modal auto-opening on /pages/events (was rendering on page load due to inline `display:flex` overriding `[hidden]` attribute)
