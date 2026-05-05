@@ -148,8 +148,19 @@ _(scraped photo list will populate here as scraping completes)_
 - GA4 measurement ID (placeholder still in head)
 - Court Support: replace `mailto:` fallback CTAs with real public Google Form `/viewform` URLs
 - Wire remaining `<!-- TODO: Replace with real photo -->` slots in vision2030.html + summercamp.html + conference.html
-- Mom-provided higher-res originals to replace Wix scrapes (especially leadership headshot + BMX/camp photos that we don't have)
-- Real Instagram / YouTube / TikTok handles for footer (or remove)
+- Mom-provided higher-res originals to replace Wix scrapes (especially BMX/camp photos that we don't have)
+- Real Instagram / YouTube / TikTok handles (currently REMOVED from footer — when LCAC has real handles, add back)
 - Stripe Donate Link (replace `/donate` page bouncing to legacy Wix)
 - Update Michelle Whitlow's full bio (Wix scrape only got opening paragraph verbatim)
+- Homepage hero photo — current scrape (`hero-friends-eating-outdoors.jpg`) reads stock-y; mom may want to swap with a real LCAC community photo
+- Desktop nav doesn't surface 9 of the new pages (only mobile menu does); add a "More" dropdown or secondary nav row when ready
+
+### 2026-05-05 — QA pass + polish (post-launch)
+- ✅ Fixed RSVP modal auto-opening on /pages/events (was rendering on page load due to inline `display:flex` overriding `[hidden]` attribute)
+- ✅ Fixed "an welcoming" → "a welcoming" sitewide (5 instances across 5 files)
+- ✅ Fixed "belonging and belonging" duplicate-word typo on partners.html
+- ✅ Replaced 6 identical board-member bios on Leadership page with role-varied versions
+- ✅ Removed broken Instagram / YouTube / TikTok footer icon links sitewide (were going to bare domains; 72 icon-links removed across 24 files). Facebook (real LCAC URL) preserved.
+- ✅ Shortened mobile menu label "Spectrum & Development Community Center" → "S&D Community Center" sitewide (23 files)
+- ✅ Fixed "Download Flyer (PDF)" button text on events.html — file is actually `.jpg`, button now says "View Event Flyer"
 
