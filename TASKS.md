@@ -118,6 +118,34 @@ _(scraped photo list will populate here as scraping completes)_
 
 ## ✅ Recently completed
 
+### 2026-05-06 — Final pre-DNS-flip audit pass
+
+P0 sitewide ZIP fix:
+- ✅ ZIP code corrected sitewide: `Napavine, WA 98565` → `Napavine, WA 98532` (29 occurrences across 24 HTML files). The wrong ZIP would have broken Google Maps lookups and donor mailings the moment DNS flipped to Vercel.
+
+P1 content / parity fixes vs live lcautism.org Squarespace:
+- ✅ SDCC business hours: `9:00 AM - 4:00 PM` → `9:00 AM - 5:00 PM` (matches Squarespace)
+- ✅ Leadership page: added 7th board card "Vice President — Open Position" with apply-to-join CTA (Squarespace lists VP as the open seat)
+- ✅ Leadership page: added "How to Reach the Team" section with 3 emails (info@, outreach@, executivedirector@) — was previously info@ only
+- ✅ Spanish page (`pages/espanol.html`) mobile menu: added 6 links that English mobile menu had (Court Support, Summer Camp, SWWA Conference, Leadership, Recursos en Español)
+- ✅ Partner name typos fixed:
+  - `LC Primary Care & Family Medicine` → `Lewis County Private Family Medicine` (Squarespace says "Private")
+  - `Community Action Lewis-Mason` → `Community Action Council of Lewis County`
+  - `Arc Washington` → `The ARC of Washington`
+- ✅ services.html hero: replaced `logo.png` placeholder with `community-team-members.jpg`
+- ✅ Conference page banner reframed: "Postponed to November 2026" → "Returning November 2026" (date is past, copy now reads forward-looking)
+
+P2 polish (Rule 20 photo cropping):
+- ✅ Added `object-position: center top` to 21 people-photo `<img>` tags across 6 pages (index, about, sdcc, statewide, summercamp, vision2030). Faces no longer get cropped at the wrong height in 4:3 aspect ratio crops. (Michelle Whitlow's headshot already had it.)
+
+### Still requires LCAC input (not auto-fixable)
+- 🔴 GA4 measurement ID (placeholder still in head — only LCAC's Google Analytics admin has this)
+- 🔴 Court Support Google Form URLs — the page currently uses `mailto:outreach@lcautism.org?subject=...` fallbacks; replace with real `/viewform` URLs from LCAC's Google Forms admin
+- 🔴 Stripe Donate Link — `pages/donate.html` "Donate Now" CTA links to `https://www.lcautism.org/donate` (will infinite-loop after DNS flip). Need real Stripe Donate URL or third-party processor URL.
+- 🟡 Coalition Meetings event card has past date (April 22, 2026) — needs next meeting date from LCAC. Auto-archives via JS but the HTML source still lists it as the first card.
+- 🟡 Conference page placeholder photos (no usable conference photos in scraped library — Mom needs to provide originals)
+- 🟡 Partners section: 60+ partner LOGOS missing (currently text-only chips — works fine, but logos would be richer)
+
 ### 2026-05-05 — Big content + photo build
 - ✅ TASKS.md tracker created
 - ✅ robots.txt added at site root
