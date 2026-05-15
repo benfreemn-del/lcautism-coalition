@@ -260,6 +260,113 @@
     </div>
   </section>
 
+  <!-- ========== EVENT SCHOLARSHIP APPLICATION ========== -->
+  <section class="section section--blue" id="event-scholarship">
+    <div class="container">
+      <div class="text-center fade-in" style="max-width: 820px; margin: 0 auto;">
+        <span class="section-label">Need Help Attending?</span>
+        <h2 class="section-title">Event Scholarship Application</h2>
+        <p class="section-subtitle">
+          We&rsquo;re happy you&rsquo;ve chosen to apply for a full or partial scholarship to attend our event. No barrier should come between you and the connection, learning, and community our events offer. Tell us a little about yourself below &mdash; shortly after you submit, the Lewis County Autism Coalition will reach out to discuss next steps. Can&rsquo;t wait to meet you!
+        </p>
+      </div>
+
+      <div class="fade-in" style="max-width: 760px; margin: var(--space-2xl) auto 0;">
+        <div class="card" style="padding: var(--space-2xl);">
+          <form action="https://api.web3forms.com/submit" method="POST" data-form-name="Event-Scholarship">
+            <input type="hidden" name="access_key" value="c7341c41-b260-4ef0-a8c3-69180da5de8f">
+            <input type="hidden" name="subject" value="LCAC Website &mdash; Event Scholarship Application">
+            <input type="hidden" name="from_name" value="LCAC Website">
+            <input type="hidden" name="botcheck" value="">
+            <input type="text" name="_gotcha" style="display:none" aria-hidden="true" tabindex="-1">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+              <div class="form-group">
+                <label class="form-label" for="schol-first">First Name *</label>
+                <input type="text" id="schol-first" name="first_name" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="schol-last">Last Name *</label>
+                <input type="text" id="schol-last" name="last_name" class="form-input" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="schol-email">Email *</label>
+              <input type="email" id="schol-email" name="email" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="schol-address">Street Address or P.O. Box *</label>
+              <input type="text" id="schol-address" name="street_address" class="form-input" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-md);">
+              <div class="form-group">
+                <label class="form-label" for="schol-city">City, State *</label>
+                <input type="text" id="schol-city" name="city_state" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="schol-zip">Zip Code *</label>
+                <input type="text" id="schol-zip" name="zip_code" class="form-input" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="schol-phone">Phone</label>
+              <input type="tel" id="schol-phone" name="phone" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="schol-event">Which event are you applying for a scholarship to attend? *</label>
+              <input type="text" id="schol-event" name="event_name_applying_for" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="schol-interest">Interest in the Event *</label>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin: 0 0 var(--space-xs);">
+                Why are you interested in participating? Share about your family, your child&rsquo;s age(s), needs (diagnosis if any, behaviors, challenges, concerns), or anything else you feel is important for us to know.
+              </p>
+              <textarea id="schol-interest" name="interest" class="form-textarea" rows="5" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="schol-financial">Financial Need *</label>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin: 0 0 var(--space-xs);">
+                Please describe your financial need for this scholarship. (Please limit your response to 150 words.)
+              </p>
+              <textarea id="schol-financial" name="financial_need" class="form-textarea" rows="4" maxlength="1200" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="schol-amount">Full or Partial Scholarship?</label>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin: 0 0 var(--space-xs);">
+                Are you requesting a FULL or PARTIAL scholarship? If you are able to contribute any portion of the admission cost, please include the dollar amount below.
+              </p>
+              <input type="text" id="schol-amount" name="full_or_partial" class="form-input" placeholder="e.g., Partial &mdash; I can contribute $25">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="schol-accom">Special Accommodations *</label>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin: 0 0 var(--space-xs);">
+                Do you require any special accommodations (e.g., translator, seating, other)? If no, write &ldquo;N/A.&rdquo; If yes, please describe.
+              </p>
+              <textarea id="schol-accom" name="accommodations" class="form-textarea" rows="2" required></textarea>
+            </div>
+
+            <div class="form-group" style="display: flex; align-items: center; gap: var(--space-sm); margin-top: var(--space-md);">
+              <input type="checkbox" id="schol-newsletter" name="newsletter_optin" value="yes" style="width: auto; margin: 0;">
+              <label class="form-label" for="schol-newsletter" style="margin: 0;">Yes, subscribe me to your newsletter.</label>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--lg" style="width: 100%; margin-top: var(--space-lg);">Submit Application</button>
+            <div id="scholarship-form-status" role="status" aria-live="polite" style="text-align: center; margin-top: var(--space-md); min-height: 1.5em;"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== RSVP MODAL (shared, opened by per-event RSVP button) ========== -->
   <div class="rsvp-modal" id="rsvp-modal" hidden style="position:fixed; inset:0; z-index:1000; align-items:center; justify-content:center; padding:var(--space-md);">
     <div class="rsvp-modal__backdrop" data-rsvp-close style="position:absolute; inset:0; background:rgba(15,23,42,0.7); backdrop-filter: blur(4px);"></div>
