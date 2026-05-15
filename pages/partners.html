@@ -83,6 +83,36 @@
     .partner-cta-block a.email-link:hover {
       border-bottom-color: var(--color-primary);
     }
+
+    .partner-chip {
+      display: inline-block;
+      background: var(--color-bg-blue);
+      color: var(--color-text);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: 999px;
+      font-size: 0.95rem;
+      border: 1px solid var(--color-border);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    a.partner-chip:hover {
+      background: var(--color-primary);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .partner-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .partner-category-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--space-md);
+      color: var(--color-primary);
+    }
   </style>
   <!-- Google Analytics 4 (consent-gated per cookie banner choice) -->
   <!-- Replace [[GA4_MEASUREMENT_ID]] with LCACs GA4 ID from LCAC_Setup_Guide.docx Step 3 -->
@@ -200,116 +230,117 @@
       <div class="text-center fade-in">
         <span class="section-label">Our Network</span>
         <h2 class="section-title">Who Makes This Possible</h2>
-        <p class="section-subtitle">More than 50 organizations across Lewis County and Washington State partner with us to expand programs, share resources, and build community.</p>
+        <p class="section-subtitle">At the Lewis County Autism Coalition, we believe in the power of collaboration to create lasting impact. Our community partners play a vital role in our mission to support individuals with autism and developmental disabilities. By joining forces with local businesses, educational institutions, healthcare providers, and other nonprofit organizations, we are able to provide comprehensive services and resources that enhance the quality of life for those we serve. Together, we foster an inclusive community where everyone can thrive.</p>
       </div>
 
       <div class="partner-categories fade-in" style="display: flex; flex-direction: column; gap: var(--space-2xl); margin-top: var(--space-2xl);">
 
         <div class="partner-category">
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--color-primary);">Government & Public Services</h3>
-          <div class="partner-chips" style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Lewis County Developmental Disabilities</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">City of Chehalis</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">City of Centralia</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Lewis County Sheriff's Office</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Chehalis Police Department (Project Guardian)</span>
+          <h3 class="partner-category-title">Government &amp; Public Services</h3>
+          <div class="partner-chips">
+            <a href="https://lewiscountywa.gov/departments/public-health/social-services/developmental-disabilities/" target="_blank" rel="noopener" class="partner-chip">Lewis County Developmental Disabilities</a>
+            <a href="https://www.ci.chehalis.wa.us/" target="_blank" rel="noopener" class="partner-chip">City of Chehalis</a>
+            <a href="https://www.cityofcentralia.com/" target="_blank" rel="noopener" class="partner-chip">City of Centralia</a>
+            <a href="https://lewiscountywa.gov/offices/sheriff/" target="_blank" rel="noopener" class="partner-chip">Lewis County Sheriff&rsquo;s Office</a>
+            <a href="https://www.ci.chehalis.wa.us/police/page/project-guardian" target="_blank" rel="noopener" class="partner-chip">Chehalis Police Department (Project Guardian)</a>
           </div>
         </div>
 
         <div class="partner-category">
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--color-primary);">Healthcare & Medical</h3>
-          <div class="partner-chips" style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Providence</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">WellPoint</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Cornerstone Center for Development</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">CHOICE (Community-Based Care Coordination)</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Coordinated Care</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Community Health Plan of Washington (CHPW)</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Northwest Pediatric Center</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Napavine Family Chiropractic</span>
+          <h3 class="partner-category-title">Healthcare &amp; Medical</h3>
+          <div class="partner-chips">
+            <a href="http://www.providence.org" target="_blank" rel="noopener" class="partner-chip">Providence</a>
+            <a href="https://www.wellpoint.com/wa/medicaid" target="_blank" rel="noopener" class="partner-chip">WellPoint</a>
+            <a href="https://www.cornerstonecfd.com/" target="_blank" rel="noopener" class="partner-chip">Cornerstone Center for Development</a>
+            <a href="https://www.crhnweb.org/community-based-care-coordination" target="_blank" rel="noopener" class="partner-chip">CHOICE (Community-Based Care Coordination)</a>
+            <a href="https://www.crhnweb.org/oralhealth" target="_blank" rel="noopener" class="partner-chip">CRHN Oral Health</a>
+            <a href="https://www.coordinatedcarehealth.com/" target="_blank" rel="noopener" class="partner-chip">Coordinated Care</a>
+            <a href="https://www.chpw.org/" target="_blank" rel="noopener" class="partner-chip">Community Health Plan of Washington (CHPW)</a>
+            <a href="https://nwpeds.com/centralia-campus/centralia-building-a/" target="_blank" rel="noopener" class="partner-chip">Northwest Pediatric Center</a>
+            <a href="https://www.napavinefamilychiropractic.com/" target="_blank" rel="noopener" class="partner-chip">Napavine Family Chiropractic</a>
           </div>
         </div>
 
         <div class="partner-category">
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--color-primary);">Education</h3>
-          <div class="partner-chips" style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Centralia School District</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Chehalis School District</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Toledo School District</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Winlock School District</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Centralia College</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">ESD 113</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Olympic Academy</span>
+          <h3 class="partner-category-title">Education</h3>
+          <div class="partner-chips">
+            <a href="https://www.centraliaschooldistrict.org/" target="_blank" rel="noopener" class="partner-chip">Centralia School District</a>
+            <a href="https://chehalisschools.org/" target="_blank" rel="noopener" class="partner-chip">Chehalis School District</a>
+            <a href="https://www.toledoschools.us/" target="_blank" rel="noopener" class="partner-chip">Toledo School District</a>
+            <a href="https://www.winlockschools.org/" target="_blank" rel="noopener" class="partner-chip">Winlock School District</a>
+            <a href="https://www.centralia.edu/" target="_blank" rel="noopener" class="partner-chip">Centralia College</a>
+            <a href="https://www.esd113.org/" target="_blank" rel="noopener" class="partner-chip">ESD 113</a>
+            <a href="https://olympicacademy.esd113.org/" target="_blank" rel="noopener" class="partner-chip">Olympic Academy</a>
           </div>
         </div>
 
         <div class="partner-category">
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--color-primary);">Behavioral Health & Therapy</h3>
-          <div class="partner-chips" style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Family Applied Behavioral</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Washington Elks Therapy</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">NAMI Lewis County</span>
+          <h3 class="partner-category-title">Behavioral Health &amp; Therapy</h3>
+          <div class="partner-chips">
+            <a href="https://familyappliedbehavioral.com/" target="_blank" rel="noopener" class="partner-chip">Family Applied Behavioral</a>
+            <a href="https://waelks.org/programs/therapy/" target="_blank" rel="noopener" class="partner-chip">Washington Elks Therapy</a>
+            <a href="https://namilewiscountywa.org/" target="_blank" rel="noopener" class="partner-chip">NAMI Lewis County</a>
           </div>
         </div>
 
         <div class="partner-category">
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--color-primary);">Recreation & Leisure</h3>
-          <div class="partner-chips" style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Lewis County Accessible Recreation</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Shanks Glow Golf</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Insert Coin (arcade)</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Lucky Eagle Casino</span>
+          <h3 class="partner-category-title">Recreation &amp; Leisure</h3>
+          <div class="partner-chips">
+            <a href="https://reliableenterprises.org/lewis-county-accessible-recreation/" target="_blank" rel="noopener" class="partner-chip">Lewis County Accessible Recreation</a>
+            <a href="https://shankzglowgolf.com/" target="_blank" rel="noopener" class="partner-chip">Shanks Glow Golf</a>
+            <a href="https://www.insertcoinwa.com/" target="_blank" rel="noopener" class="partner-chip">Insert Coin (arcade)</a>
+            <a href="https://www.luckyeagle.com/" target="_blank" rel="noopener" class="partner-chip">Lucky Eagle Casino</a>
           </div>
         </div>
 
         <div class="partner-category">
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--color-primary);">Employment & Business Support</h3>
-          <div class="partner-chips" style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Lewis County Private Family Medicine (LCPFM)</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Economic Alliance of Lewis County</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">AgWest Farm Credit</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Aldersons (food distribution)</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Busy Bee Automotive</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">B Side Bikes</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Dutch Bros Coffee</span>
+          <h3 class="partner-category-title">Employment &amp; Business Support</h3>
+          <div class="partner-chips">
+            <a href="https://www.lcpfm.com/" target="_blank" rel="noopener" class="partner-chip">Lewis County Pediatric &amp; Family Medicine (LCPFM)</a>
+            <a href="https://lewiscountyalliance.org/" target="_blank" rel="noopener" class="partner-chip">Economic Alliance of Lewis County</a>
+            <a href="https://agwestfc.com/" target="_blank" rel="noopener" class="partner-chip">AgWest Farm Credit</a>
+            <a href="https://aldersons.net/" target="_blank" rel="noopener" class="partner-chip">Aldersons / AWPW</a>
+            <a href="https://www.busybeeautomotive.com/" target="_blank" rel="noopener" class="partner-chip">Busy Bee Automotive</a>
+            <a href="https://bsidebikesinc.com/" target="_blank" rel="noopener" class="partner-chip">B-Side Bikes</a>
+            <a href="https://www.dutchbros.com/our-impact" target="_blank" rel="noopener" class="partner-chip">Dutch Bros Coffee</a>
           </div>
         </div>
 
         <div class="partner-category">
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--color-primary);">Community & Youth Services</h3>
-          <div class="partner-chips" style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Reliable Enterprises</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Pope's Place</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Morningside Services</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Boys & Girls Club of Chehalis</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">In-Tot & Parent to Parent</span>
+          <h3 class="partner-category-title">Community &amp; Youth Services</h3>
+          <div class="partner-chips">
+            <a href="https://reliableenterprises.org/" target="_blank" rel="noopener" class="partner-chip">Reliable Enterprises</a>
+            <a href="https://popesplace.org/" target="_blank" rel="noopener" class="partner-chip">Pope&rsquo;s Place</a>
+            <a href="https://www.morningsideservices.com/" target="_blank" rel="noopener" class="partner-chip">Morningside Services</a>
+            <a href="https://www.bgcchehalis.org/" target="_blank" rel="noopener" class="partner-chip">Boys &amp; Girls Club of Chehalis</a>
+            <span class="partner-chip">In-Tot &amp; Parent to Parent</span>
           </div>
         </div>
 
         <div class="partner-category">
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--color-primary);">Nonprofit & Advocacy</h3>
-          <div class="partner-chips" style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Community Foundation of South Puget Sound</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Give Local (South Puget Sound Gives)</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">United Way Lewis County</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Community Action Council of Lewis County</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">The ARC of Washington</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Autism Acres</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">INATAI</span>
+          <h3 class="partner-category-title">Nonprofit &amp; Advocacy</h3>
+          <div class="partner-chips">
+            <a href="https://www.thecommunityfoundation.com/" target="_blank" rel="noopener" class="partner-chip">Community Foundation of South Puget Sound</a>
+            <a href="https://www.spsgives.org/" target="_blank" rel="noopener" class="partner-chip">Give Local (South Puget Sound Gives)</a>
+            <a href="https://www.lewiscountyuw.com/" target="_blank" rel="noopener" class="partner-chip">United Way Lewis County</a>
+            <a href="https://caclmt.org/" target="_blank" rel="noopener" class="partner-chip">Community Action Council of Lewis-Mason</a>
+            <a href="https://arcwa.org/" target="_blank" rel="noopener" class="partner-chip">The Arc of Washington</a>
+            <a href="https://autismacres.org/" target="_blank" rel="noopener" class="partner-chip">Autism Acres</a>
+            <a href="https://inatai.org/" target="_blank" rel="noopener" class="partner-chip">INATAI</a>
           </div>
         </div>
 
         <div class="partner-category">
-          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--color-primary);">Specialized Services</h3>
-          <div class="partner-chips" style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">PBS KBTC (Carl Ability program)</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Sensory Tool House</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Summit Child Care Development</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Wild Heart Cool Cart</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">D9 Country Market</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Chamberway</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Stella Jones</span>
-            <span class="partner-chip" style="background: var(--color-bg-blue); color: var(--color-text); padding: var(--space-xs) var(--space-md); border-radius: 999px; font-size: 0.95rem; border: 1px solid var(--color-border);">Veterans Museum</span>
+          <h3 class="partner-category-title">Specialized Services</h3>
+          <div class="partner-chips">
+            <a href="https://www.kbtckids.org/" target="_blank" rel="noopener" class="partner-chip">PBS KBTC Kids (Carl Ability program)</a>
+            <a href="https://sensorytoolhouse.com/" target="_blank" rel="noopener" class="partner-chip">Sensory Tool House</a>
+            <a href="https://www.sccdkids.org/" target="_blank" rel="noopener" class="partner-chip">Summit Child Care &amp; Development</a>
+            <a href="https://www.facebook.com/profile.php?id=61557550221756" target="_blank" rel="noopener" class="partner-chip">Wild Heart Cool Cart</a>
+            <a href="https://www.facebook.com/profile.php?id=61573683731653" target="_blank" rel="noopener" class="partner-chip">D9 Country Market</a>
+            <a href="https://chamberway.com/" target="_blank" rel="noopener" class="partner-chip">Chamberway</a>
+            <a href="https://www.stella-jones.com/en" target="_blank" rel="noopener" class="partner-chip">Stella-Jones</a>
+            <a href="https://www.veteransmuseum.org/" target="_blank" rel="noopener" class="partner-chip">Veterans Memorial Museum</a>
           </div>
         </div>
 
