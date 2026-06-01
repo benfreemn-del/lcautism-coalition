@@ -1,0 +1,25 @@
+# Supabase project config for the LCAC email co-pilot edge functions.
+# project_id is the lcac-crm project ref (see lcac-crm-schema.md).
+project_id = "byxuapnhhuxekamgnwaf"
+
+# ---------------------------------------------------------------------------
+# draft-reply: takes an inbound email (from the chosen provider) and stores an
+# AI draft. It does its OWN auth via the inbound provider's verify(), so JWT
+# verification is off here — same pattern as the audited `inbound-email` fn.
+# ---------------------------------------------------------------------------
+[functions.draft-reply]
+verify_jwt = false
+
+# ---------------------------------------------------------------------------
+# send-approved: the ONLY send path. Requires a signed-in staff JWT, and only
+# acts on already-approved drafts.
+# ---------------------------------------------------------------------------
+[functions.send-approved]
+verify_jwt = true
+
+# ---------------------------------------------------------------------------
+# drafts-api: staff-only read/edit/approve/discard for the CRM Drafts tab.
+# Requires a signed-in staff JWT; reads the service-role-only email tables.
+# ---------------------------------------------------------------------------
+[functions.drafts-api]
+verify_jwt = true
