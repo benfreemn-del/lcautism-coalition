@@ -10,6 +10,32 @@ const SUPABASE_ANON_KEY = "sb_publishable_HP0LFR18xtQuMtqAYAHwmw_Tkx2QgJt";
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// Edge functions base (for the email co-pilot Drafts tab). The email tables are
+// service-role-only, so the browser can't read them directly — it calls these
+// staff-JWT-gated functions instead. See supabase/functions/.
+const FUNCTIONS_BASE = SUPABASE_URL + "/functions/v1";
+
+// Call an edge function with the signed-in staff member's JWT.
+async function callFn(name, payload) {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) throw new Error("Not signed in.");
+  const resp = await fetch(`${FUNCTIONS_BASE}/${name}`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${session.access_token}`,
+    },
+    body: JSON.stringify(payload || {}),
+  });
+  let data = null;
+  try { data = await resp.json(); } catch (_e) {}
+  if (!resp.ok) {
+    const msg = (data && (data.error || data.detail)) || `Request failed (${resp.status})`;
+    throw new Error(msg);
+  }
+  return data;
+}
+
 /* ---------------------------------------------------------------------------
    Small helpers
    ------------------------------------------------------------------------- */
@@ -194,6 +220,7 @@ const VIEWS = {
   contacts: renderContacts,
   donations: renderDonations,
   inbox: renderInbox,
+  drafts: renderDrafts,
   reminders: renderReminders,
   grants: renderGrants,
 };
@@ -726,6 +753,146 @@ function convertToContact(row) {
   const first = parts.shift() || "";
   const last = parts.join(" ");
   openContactForm({ first_name: first, last_name: last, email: row.email || "", phone: row.phone || "", contact_type: "community", preferred_language: "en", email_opt_in: false });
+}
+
+/* =========================================================================
+   DRAFTS — Email Co-Pilot (read incoming email + AI draft, edit, approve)
+   -------------------------------------------------------------------------
+   The email tables are service-role-only, so this view talks to the staff-only
+   edge functions (drafts-api / send-approved), NOT the database directly.
+   Approving marks a reply READY — it does NOT send. Sending is a separate,
+   explicit click. Nothing leaves the building without a person saying so.
+   ========================================================================= */
+async function renderDrafts(c) {
+  setLoading(c, "Drafts");
+  let res;
+  try {
+    res = await callFn("drafts-api", { action: "list" });
+  } catch (e) {
+    c.innerHTML = "";
+    c.appendChild(el("h2", { class: "page-title", text: "Drafts" }));
+    c.appendChild(el("p", { class: "page-sub", text: "Replies the assistant has drafted for you to review." }));
+    const note = el("div", { class: "card" });
+    note.appendChild(el("p", { class: "muted", text:
+      "The email co-pilot isn't connected yet. Once Ben plugs in the mailbox and the assistant key, drafted replies will show up here for you to approve." }));
+    note.appendChild(el("p", { class: "muted", style: "font-size:13px", text: "(" + (e.message || "not connected") + ")" }));
+    c.appendChild(note);
+    updateDraftsBadge(0);
+    return;
+  }
+
+  const messages = res.messages || [];
+  const waiting = messages.filter((m) => (m.email_drafts || []).some((d) => d.status === "pending"));
+  updateDraftsBadge(waiting.length);
+
+  c.innerHTML = "";
+  c.appendChild(el("h2", { class: "page-title", text: "Drafts" }));
+  c.appendChild(el("p", { class: "page-sub", text: "The assistant drafted these replies in your voice. Read, tweak if you like, then Approve. Approving does NOT send — you send when you're ready." }));
+
+  // Spend so far this month vs. the cap.
+  if (res.cap) {
+    const { spent_usd = 0, cap_usd = 0 } = res.cap;
+    const capCard = el("div", { class: "card" });
+    capCard.appendChild(el("h3", { text: "This month's assistant usage" }));
+    capCard.appendChild(el("p", { class: "muted", html:
+      `Used <b>$${Number(spent_usd).toFixed(2)}</b> of the <b>$${Number(cap_usd).toFixed(2)}</b> monthly limit. ` +
+      `When the limit is reached, new emails wait for you in the regular way instead of getting a draft — nothing ever overspends.` }));
+    c.appendChild(capCard);
+  }
+
+  if (messages.length === 0) {
+    c.appendChild(el("div", { class: "card" }, el("p", { class: "muted", text: "No emails waiting. You're all caught up." })));
+    return;
+  }
+
+  messages.forEach((m) => c.appendChild(draftCard(m)));
+}
+
+function draftCard(m) {
+  const card = el("div", { class: "card" });
+
+  // Header: who + subject + when.
+  card.appendChild(el("div", {}, [
+    el("strong", { text: m.from_name || m.from_email || "(unknown sender)" }),
+    m.from_email ? el("span", { class: "muted", text: " <" + m.from_email + ">" }) : null,
+    m.mailbox ? el("span", { class: "tag", text: m.mailbox, style: "margin-left:8px" }) : null,
+  ]));
+  card.appendChild(el("div", { class: "muted", style: "font-size:14px;margin:2px 0 10px", text:
+    (m.subject ? m.subject + " · " : "") + fmtDateTime(m.received_at) }));
+
+  // The original email (collapsed-ish, plain).
+  if (m.body_text) {
+    const orig = el("div", { class: "detail-section", style: "margin-top:0" });
+    orig.appendChild(el("h4", { text: "Their message" }));
+    orig.appendChild(el("div", { class: "muted", style: "white-space:pre-wrap", text: m.body_text }));
+    card.appendChild(orig);
+  }
+
+  // Skipped (e.g. cap reached) — no draft to show.
+  if (m.status === "skipped") {
+    const why = m.skip_reason === "monthly_cap_reached"
+      ? "No draft this time — the monthly assistant limit was reached. You can reply the usual way."
+      : "No draft was made for this one. You can reply the usual way.";
+    card.appendChild(el("p", { class: "muted", style: "margin-top:10px", text: why }));
+    return card;
+  }
+
+  const pending = (m.email_drafts || []).find((d) => d.status === "pending");
+  if (!pending) {
+    card.appendChild(el("p", { class: "muted", style: "margin-top:10px", text: "Drafting…" }));
+    return card;
+  }
+
+  // Editable draft.
+  const sec = el("div", { class: "detail-section" });
+  sec.appendChild(el("h4", { text: "Suggested reply (edit freely)" }));
+  const ta = el("textarea", { style: "min-height:160px" });
+  ta.value = pending.edited_body != null ? pending.edited_body : pending.draft_body;
+  sec.appendChild(ta);
+  card.appendChild(sec);
+
+  const actions = el("div", { class: "form-actions", style: "justify-content:flex-start;flex-wrap:wrap" });
+
+  const saveBtn = el("button", { class: "btn btn-ghost btn-small", onclick: async () => {
+    saveBtn.disabled = true;
+    try {
+      await callFn("drafts-api", { action: "save_edit", draft_id: pending.id, body: ta.value });
+      toast("Edit saved.");
+    } catch (e) { toast(e.message, true); }
+    saveBtn.disabled = false;
+  } }, "Save edit");
+
+  const approveBtn = el("button", { class: "btn btn-success btn-small", onclick: async () => {
+    if (!ta.value.trim()) { toast("The reply is empty.", true); return; }
+    approveBtn.disabled = true;
+    try {
+      await callFn("drafts-api", { action: "approve", draft_id: pending.id, body: ta.value });
+      toast("Approved and ready. It won't send until you choose to send it.");
+      switchView("drafts");
+    } catch (e) { toast(e.message, true); approveBtn.disabled = false; }
+  } }, "Approve (ready to send)");
+
+  const discardBtn = el("button", { class: "btn btn-danger-ghost btn-small", onclick: async () => {
+    discardBtn.disabled = true;
+    try {
+      await callFn("drafts-api", { action: "discard", draft_id: pending.id });
+      toast("Draft discarded.");
+      switchView("drafts");
+    } catch (e) { toast(e.message, true); discardBtn.disabled = false; }
+  } }, "Discard");
+
+  actions.appendChild(approveBtn);
+  actions.appendChild(saveBtn);
+  actions.appendChild(discardBtn);
+  card.appendChild(actions);
+  return card;
+}
+
+function updateDraftsBadge(n) {
+  const b = $("#drafts-badge");
+  if (!b) return;
+  if (n > 0) { b.textContent = n; b.hidden = false; }
+  else b.hidden = true;
 }
 
 /* =========================================================================
