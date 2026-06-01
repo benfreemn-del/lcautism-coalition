@@ -1,0 +1,120 @@
+{
+  "name": "TranslationReview",
+  "type": "object",
+  "properties": {
+    "content_type": {
+      "type": "string",
+      "enum": [
+        "Letter",
+        "Message",
+        "Portal Content",
+        "Notification",
+        "Form"
+      ],
+      "description": "Type of content being translated"
+    },
+    "original_text": {
+      "type": "string",
+      "description": "Original English text"
+    },
+    "translated_text": {
+      "type": "string",
+      "description": "AI-generated Spanish translation"
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "AI confidence in translation quality (0-100)"
+    },
+    "flagged_for_review": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if confidence is below threshold"
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Under Review",
+        "Approved",
+        "Rejected"
+      ],
+      "default": "Pending"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Staff member who reviewed translation"
+    },
+    "reviewed_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "final_translation": {
+      "type": "string",
+      "description": "Coordinator-approved translation"
+    },
+    "review_notes": {
+      "type": "string",
+      "description": "Feedback or corrections made"
+    },
+    "published": {
+      "type": "boolean",
+      "default": false,
+      "description": "Only true after coordinator approval"
+    },
+    "published_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "content_type",
+    "original_text",
+    "translated_text",
+    "confidence_score"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

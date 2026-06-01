@@ -1,0 +1,83 @@
+{
+  "name": "Supplier",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Supplier/vendor name"
+    },
+    "contactName": {
+      "type": "string",
+      "description": "Primary contact person"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "productCategories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Categories of products they supply"
+    },
+    "typicalLeadTimeDays": {
+      "type": "number"
+    },
+    "minimumOrderAmount": {
+      "type": "number",
+      "description": "Minimum order amount in dollars"
+    },
+    "minimumOrderQuantity": {
+      "type": "number",
+      "description": "Minimum quantity per item"
+    },
+    "paymentTerms": {
+      "type": "string",
+      "description": "Payment terms (e.g., Net 30)"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "notes": {
+      "type": "string"
+    },
+    "priceHistory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string"
+          },
+          "itemName": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "quantity": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "name",
+    "email"
+  ]
+}

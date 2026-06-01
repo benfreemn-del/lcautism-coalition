@@ -1,0 +1,131 @@
+{
+  "name": "DeEscalationPlan",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date"
+    },
+    "sensory_triggers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "communication_preferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "early_warning_signs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "escalation_signals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "effective_strategies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ineffective_strategies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "preferred_calming_items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "preferred_spaces": {
+      "type": "string"
+    },
+    "avoid_during_crisis": {
+      "type": "string"
+    },
+    "language_to_use": {
+      "type": "string"
+    },
+    "language_to_avoid": {
+      "type": "string"
+    },
+    "staff_notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Active",
+        "Archived"
+      ],
+      "default": "Draft"
+    }
+  },
+  "required": [
+    "client_name"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

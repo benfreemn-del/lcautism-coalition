@@ -1,0 +1,92 @@
+{
+  "name": "OnboardingRequest",
+  "type": "object",
+  "properties": {
+    "staff_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "program_assignments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "contract_end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "For temporary/contracted staff"
+    },
+    "requested_by": {
+      "type": "string",
+      "description": "Email of person submitting request"
+    },
+    "requested_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "approved_by": {
+      "type": "string",
+      "description": "Program Director approval"
+    },
+    "approved_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending Approval",
+        "Approved",
+        "Completed",
+        "Rejected"
+      ],
+      "default": "Pending Approval"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "staff_name",
+    "email",
+    "role",
+    "start_date"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

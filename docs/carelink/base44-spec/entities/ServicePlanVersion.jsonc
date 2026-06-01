@@ -1,0 +1,62 @@
+{
+  "name": "ServicePlanVersion",
+  "type": "object",
+  "properties": {
+    "plan_id": {
+      "type": "string",
+      "description": "ID of the associated service plan"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "ID of the associated client"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Client name for reference"
+    },
+    "plan_title": {
+      "type": "string",
+      "description": "Plan title at time of version"
+    },
+    "version_number": {
+      "type": "number",
+      "description": "Sequential version number"
+    },
+    "snapshot": {
+      "type": "object",
+      "description": "Complete snapshot of plan data at this version",
+      "additionalProperties": true
+    },
+    "changed_by": {
+      "type": "string",
+      "description": "Email of user who made the change"
+    },
+    "change_description": {
+      "type": "string",
+      "description": "Description of what changed"
+    },
+    "change_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the change was made"
+    }
+  },
+  "required": [
+    "plan_id",
+    "client_id",
+    "client_name",
+    "plan_title",
+    "version_number",
+    "snapshot"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": false,
+    "delete": false
+  }
+}

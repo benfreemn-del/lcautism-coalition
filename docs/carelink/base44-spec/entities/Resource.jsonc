@@ -1,0 +1,100 @@
+{
+  "name": "Resource",
+  "type": "object",
+  "properties": {
+    "titleEn": {
+      "type": "string",
+      "description": "Title in English"
+    },
+    "titleEs": {
+      "type": "string",
+      "description": "Title in Spanish"
+    },
+    "descriptionEn": {
+      "type": "string",
+      "description": "Description in English"
+    },
+    "descriptionEs": {
+      "type": "string",
+      "description": "Description in Spanish"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Autism",
+        "ADHD",
+        "IEP/504",
+        "Family Support",
+        "Crisis",
+        "Screening",
+        "Community",
+        "Legal",
+        "Other"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Guide",
+        "Workshop",
+        "Toolkit",
+        "Video",
+        "Website",
+        "Form",
+        "Hotline",
+        "Other"
+      ]
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Languages available (English, Espa\u00f1ol, Other, etc)"
+    },
+    "source": {
+      "type": "string",
+      "description": "Publisher or source organization"
+    },
+    "url": {
+      "type": "string",
+      "description": "External URL to resource"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to feature this resource"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tagType": {
+            "type": "string",
+            "enum": [
+              "Diagnosis",
+              "Age Group",
+              "Sensory Need"
+            ],
+            "description": "Type of tag"
+          },
+          "value": {
+            "type": "string",
+            "description": "Tag value"
+          }
+        },
+        "required": [
+          "tagType",
+          "value"
+        ]
+      },
+      "description": "Tags for filtering by diagnosis, age group, or sensory need"
+    }
+  },
+  "required": [
+    "titleEn",
+    "category",
+    "type"
+  ]
+}

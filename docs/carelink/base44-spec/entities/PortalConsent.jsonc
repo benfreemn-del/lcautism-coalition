@@ -1,0 +1,145 @@
+{
+  "name": "PortalConsent",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Client this consent is for"
+    },
+    "title": {
+      "type": "string",
+      "description": "Consent title (e.g., 'Release to School')"
+    },
+    "description": {
+      "type": "string",
+      "description": "Plain-language explanation"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "roi",
+        "treatment",
+        "program_participation",
+        "media",
+        "evaluation",
+        "other"
+      ],
+      "description": "Type of consent"
+    },
+    "sharing_with": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "school",
+              "provider",
+              "therapist",
+              "agency",
+              "family",
+              "other"
+            ]
+          }
+        }
+      },
+      "description": "Who information is being shared with"
+    },
+    "sharing_what": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What information is shared (evaluations, progress notes, etc)",
+      "default": []
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "active",
+        "revoked",
+        "expired"
+      ],
+      "default": "pending"
+    },
+    "signed_by": {
+      "type": "string",
+      "description": "Name of person who consented"
+    },
+    "signed_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "can_be_revoked": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether family can revoke this consent"
+    },
+    "revoked_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "bilingual_available": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "client_id",
+    "title",
+    "type"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.client_id": {
+            "$in": "{{user.data.children}}"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.client_id": {
+            "$in": "{{user.data.children}}"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

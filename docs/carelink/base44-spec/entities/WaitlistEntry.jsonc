@@ -1,0 +1,116 @@
+{
+  "name": "WaitlistEntry",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "ID of the client waiting"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Client name for quick reference"
+    },
+    "appointment_type": {
+      "type": "string",
+      "enum": [
+        "Assessment",
+        "Follow-up",
+        "Intake",
+        "Treatment",
+        "Consultation",
+        "Other"
+      ],
+      "description": "Type of appointment they're waiting for"
+    },
+    "preferred_provider": {
+      "type": "string",
+      "description": "Preferred staff member (optional)"
+    },
+    "preferred_date_range_start": {
+      "type": "string",
+      "format": "date",
+      "description": "Earliest desired date"
+    },
+    "preferred_date_range_end": {
+      "type": "string",
+      "format": "date",
+      "description": "Latest acceptable date"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Special requirements or notes"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "matched",
+        "cancelled"
+      ],
+      "default": "active",
+      "description": "Waitlist status"
+    },
+    "position": {
+      "type": "number",
+      "description": "Position in waitlist (1 = next available)"
+    },
+    "date_added": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the client was added to waitlist"
+    },
+    "date_matched": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When matched to an appointment"
+    }
+  },
+  "required": [
+    "client_id",
+    "client_name",
+    "appointment_type"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

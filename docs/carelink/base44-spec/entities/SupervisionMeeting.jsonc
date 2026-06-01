@@ -1,0 +1,156 @@
+{
+  "name": "SupervisionMeeting",
+  "type": "object",
+  "properties": {
+    "supervisor_name": {
+      "type": "string"
+    },
+    "supervisee_name": {
+      "type": "string"
+    },
+    "meeting_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "duration_minutes": {
+      "type": "number"
+    },
+    "meeting_type": {
+      "type": "string",
+      "enum": [
+        "Individual Supervision",
+        "Group Supervision",
+        "Case Consultation",
+        "Professional Development",
+        "Performance Review"
+      ],
+      "default": "Individual Supervision"
+    },
+    "topics_covered": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Topics discussed"
+    },
+    "case_presentations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Client cases discussed"
+    },
+    "pd_goals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "goal": {
+            "type": "string"
+          },
+          "target_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Not Started",
+              "In Progress",
+              "Completed"
+            ]
+          }
+        }
+      }
+    },
+    "supervision_notes": {
+      "type": "string"
+    },
+    "consultation_summary": {
+      "type": "string",
+      "description": "Case consultation outcomes"
+    },
+    "action_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Scheduled",
+        "Completed",
+        "Rescheduled",
+        "Cancelled"
+      ],
+      "default": "Completed"
+    }
+  },
+  "required": [
+    "supervisor_name",
+    "supervisee_name",
+    "meeting_date"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.supervisor_name": "{{user.full_name}}"
+        },
+        {
+          "data.supervisee_name": "{{user.full_name}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

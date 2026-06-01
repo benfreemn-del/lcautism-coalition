@@ -1,0 +1,138 @@
+{
+  "name": "DiagnosticEquityRecord",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "referral_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "first_concern_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "first_screening_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "evaluation_referral_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "evaluation_completed_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "diagnosis_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "diagnosis": {
+      "type": "string"
+    },
+    "days_referral_to_screening": {
+      "type": "number"
+    },
+    "days_screening_to_eval": {
+      "type": "number"
+    },
+    "days_eval_to_diagnosis": {
+      "type": "number"
+    },
+    "days_total_referral_to_diagnosis": {
+      "type": "number"
+    },
+    "age_at_first_concern_months": {
+      "type": "number"
+    },
+    "age_at_diagnosis_months": {
+      "type": "number"
+    },
+    "language": {
+      "type": "string"
+    },
+    "ethnicity": {
+      "type": "string"
+    },
+    "race": {
+      "type": "string"
+    },
+    "county": {
+      "type": "string"
+    },
+    "insurance_type": {
+      "type": "string",
+      "enum": [
+        "Medicaid",
+        "Private",
+        "CHIP",
+        "Uninsured",
+        "Other"
+      ]
+    },
+    "barriers_identified": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provider_type_diagnosed": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name",
+    "referral_date"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

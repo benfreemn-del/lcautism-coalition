@@ -1,0 +1,142 @@
+{
+  "name": "CrisisDebrief",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "incident_id": {
+      "type": "string",
+      "description": "Linked BehaviorIncident ID"
+    },
+    "debrief_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "debrief_facilitator": {
+      "type": "string"
+    },
+    "staff_present": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "what_happened": {
+      "type": "string"
+    },
+    "what_worked": {
+      "type": "string"
+    },
+    "what_could_improve": {
+      "type": "string"
+    },
+    "staff_reflections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "description": "staff_name, reflection, stress_level (1-5)"
+    },
+    "contributing_factors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "plan_adjustments": {
+      "type": "string"
+    },
+    "family_communication": {
+      "type": "string",
+      "description": "What was communicated to the family"
+    },
+    "family_response": {
+      "type": "string"
+    },
+    "commitments_to_family": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "description": "commitment, owner, due_date, completed"
+    },
+    "follow_up_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "staff_support_needed": {
+      "type": "boolean",
+      "default": false
+    },
+    "staff_support_notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Complete",
+        "Follow-Up Required"
+      ],
+      "default": "Pending"
+    }
+  },
+  "required": [
+    "client_name",
+    "debrief_date"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.staff_present": "{{user.full_name}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

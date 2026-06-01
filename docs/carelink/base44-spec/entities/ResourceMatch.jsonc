@@ -1,0 +1,131 @@
+{
+  "name": "ResourceMatch",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "match_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "profile_factors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Age, diagnosis, needs, language, location"
+    },
+    "suggested_resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resource_id": {
+            "type": "string"
+          },
+          "resource_name": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "match_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "reason": {
+            "type": "string"
+          },
+          "contact": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "coordinator_approval": {
+      "type": "boolean",
+      "default": false,
+      "description": "Coordinator must approve before offering to family"
+    },
+    "approved_by": {
+      "type": "string"
+    },
+    "approved_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "shared_with_family": {
+      "type": "boolean",
+      "default": false
+    },
+    "family_feedback": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending Approval",
+        "Approved",
+        "Shared",
+        "Archived"
+      ],
+      "default": "Pending Approval"
+    }
+  },
+  "required": [
+    "client_name",
+    "profile_factors",
+    "suggested_resources"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

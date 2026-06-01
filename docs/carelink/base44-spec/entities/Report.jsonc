@@ -1,0 +1,112 @@
+{
+  "name": "Report",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "entity": {
+      "type": "string",
+      "enum": [
+        "Client",
+        "Referral",
+        "Task",
+        "Submission",
+        "Screening",
+        "Consultation",
+        "ConsentForm"
+      ]
+    },
+    "filters": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sort_by": {
+      "type": "string"
+    },
+    "sort_dir": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "default": "desc"
+    },
+    "chart_type": {
+      "type": "string",
+      "enum": [
+        "none",
+        "bar",
+        "pie",
+        "line"
+      ],
+      "default": "none"
+    },
+    "chart_field": {
+      "type": "string"
+    },
+    "is_pinned": {
+      "type": "boolean",
+      "default": false
+    },
+    "last_run": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "entity"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

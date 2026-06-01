@@ -1,0 +1,93 @@
+{
+  "name": "Notification",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "check_in",
+        "check_out",
+        "appointment_status",
+        "other"
+      ],
+      "default": "check_in"
+    },
+    "title": {
+      "type": "string",
+      "description": "Notification title"
+    },
+    "message": {
+      "type": "string",
+      "description": "Notification message"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "Related client ID"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Client name"
+    },
+    "appointment_id": {
+      "type": "string",
+      "description": "Related appointment ID"
+    },
+    "target_role": {
+      "type": "string",
+      "enum": [
+        "front_desk",
+        "provider",
+        "admin",
+        "all"
+      ],
+      "default": "all",
+      "description": "Which role should see this notification"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the notification has been read"
+    },
+    "read_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the notification was read"
+    }
+  },
+  "required": [
+    "type",
+    "title",
+    "message"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.target_role": "admin"
+        },
+        {
+          "data.target_role": "all"
+        },
+        {
+          "data.target_role": "{{user.role}}"
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

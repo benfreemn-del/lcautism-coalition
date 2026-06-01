@@ -1,0 +1,188 @@
+{
+  "name": "MeetingTranscript",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "meeting_type": {
+      "type": "string",
+      "enum": [
+        "IEP Meeting",
+        "Multidisciplinary Team",
+        "Care Coordination",
+        "Family Meeting",
+        "Other"
+      ],
+      "description": "Type of meeting"
+    },
+    "meeting_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "meeting_time": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "organization": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "audio_file_url": {
+      "type": "string",
+      "description": "URL to uploaded audio recording"
+    },
+    "raw_transcript": {
+      "type": "string",
+      "description": "Verbatim transcription with speaker labels"
+    },
+    "redaction_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string"
+          },
+          "speaker": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "PHI",
+              "Confidential",
+              "Personal",
+              "Other"
+            ]
+          },
+          "redacted_text": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "final_transcript": {
+      "type": "string",
+      "description": "Transcript with redactions applied"
+    },
+    "key_decisions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "AI-extracted key decisions and action items"
+    },
+    "consent_status": {
+      "type": "string",
+      "enum": [
+        "Not Obtained",
+        "Pending",
+        "Obtained",
+        "Declined"
+      ],
+      "default": "Pending",
+      "description": "Recording/transcription consent status"
+    },
+    "consent_obtained_from": {
+      "type": "string"
+    },
+    "consent_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "transcribed_by": {
+      "type": "string"
+    },
+    "transcription_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Coordinator who reviewed for redactions"
+    },
+    "reviewed_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Recording",
+        "Transcribing",
+        "Awaiting Consent",
+        "Under Review",
+        "Final",
+        "Archived"
+      ],
+      "default": "Recording"
+    }
+  },
+  "required": [
+    "client_name",
+    "meeting_type",
+    "meeting_date"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "name": "ExecFunctionAssessment",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "administered_by": {
+      "type": "string"
+    },
+    "administered_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "age_years": {
+      "type": "number"
+    },
+    "grade": {
+      "type": "string"
+    },
+    "domain_scores": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "domain_ratings": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "identified_weaknesses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "identified_strengths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "strategies": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "overall_rating": {
+      "type": "string",
+      "enum": [
+        "Within Normal Limits",
+        "Mild Concern",
+        "Moderate Concern",
+        "Significant Concern"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Complete",
+        "In Progress"
+      ],
+      "default": "Draft"
+    }
+  },
+  "required": [
+    "client_name"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

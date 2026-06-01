@@ -1,0 +1,93 @@
+{
+  "name": "TrainingRecord",
+  "type": "object",
+  "properties": {
+    "staff_member": {
+      "type": "string",
+      "description": "Staff member name"
+    },
+    "training_type": {
+      "type": "string",
+      "enum": [
+        "Certification",
+        "Continuing Education",
+        "Culturally Responsive Practice",
+        "Internal Workshop",
+        "Mandatory Training",
+        "Other"
+      ],
+      "description": "Type of training"
+    },
+    "title": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "completion_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date",
+      "description": "For certifications"
+    },
+    "hours_earned": {
+      "type": "number",
+      "description": "CE hours or training duration"
+    },
+    "certificate_url": {
+      "type": "string",
+      "description": "URL to certificate or documentation"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Completed",
+        "In Progress",
+        "Expired",
+        "Renewal Due"
+      ],
+      "default": "Completed"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "staff_member",
+    "training_type",
+    "title",
+    "completion_date"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.staff_member": "{{user.full_name}}"
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

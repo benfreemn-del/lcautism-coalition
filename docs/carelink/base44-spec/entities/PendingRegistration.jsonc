@@ -1,0 +1,77 @@
+{
+  "name": "PendingRegistration",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "description": "Applicant's full name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Applicant's email address"
+    },
+    "role_requested": {
+      "type": "string",
+      "enum": [
+        "Care Coordinator",
+        "Community Health Worker",
+        "Family Navigator",
+        "Administrative Support",
+        "Other"
+      ],
+      "description": "Role they are requesting"
+    },
+    "organization": {
+      "type": "string",
+      "description": "Organization or department they belong to"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Why they need access"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "denied"
+      ],
+      "default": "pending",
+      "description": "Admin review status"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Admin email who reviewed"
+    },
+    "reviewed_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "admin_notes": {
+      "type": "string",
+      "description": "Notes from admin"
+    }
+  },
+  "required": [
+    "full_name",
+    "email"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "name": "CaseSummary",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Linked client"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "summary_period_start": {
+      "type": "string",
+      "format": "date"
+    },
+    "summary_period_end": {
+      "type": "string",
+      "format": "date"
+    },
+    "source_notes_count": {
+      "type": "number",
+      "description": "Number of clinical notes analyzed"
+    },
+    "ai_draft_summary": {
+      "type": "string",
+      "description": "AI-generated initial summary"
+    },
+    "ai_key_themes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Automatically identified themes"
+    },
+    "coordinator_edits": {
+      "type": "string",
+      "description": "Coordinator's edited/approved version"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Under Review",
+        "Approved",
+        "Saved"
+      ],
+      "default": "Draft"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Coordinator who approved"
+    },
+    "reviewed_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "saved": {
+      "type": "boolean",
+      "default": false,
+      "description": "Only true after coordinator approval"
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "client_name",
+    "ai_draft_summary"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

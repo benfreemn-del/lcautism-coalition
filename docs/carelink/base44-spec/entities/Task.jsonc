@@ -1,0 +1,118 @@
+{
+  "name": "Task",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Task title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "In Progress",
+        "Complete",
+        "Cancelled"
+      ],
+      "default": "Pending",
+      "description": "Current status"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Urgent"
+      ],
+      "default": "Medium",
+      "description": "Task priority level"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Due date for the task"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "Email of person task is assigned to"
+    },
+    "staff_member_id": {
+      "type": "string",
+      "description": "ID of the StaffMember this task belongs to"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "ID of related client"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Name of related client"
+    },
+    "program": {
+      "type": "string",
+      "description": "Program this task is associated with"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Follow-up",
+        "Documentation",
+        "Coordination",
+        "Outreach",
+        "Admin",
+        "Other"
+      ],
+      "default": "Other",
+      "description": "Task category"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.assigned_to": "{{user.email}}"
+        },
+        {
+          "$and": [
+            {
+              "data.program": {
+                "$in": "{{user.program_assignments}}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.assigned_to": "{{user.email}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

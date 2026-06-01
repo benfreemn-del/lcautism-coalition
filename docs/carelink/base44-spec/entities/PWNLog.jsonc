@@ -1,0 +1,70 @@
+{
+  "name": "PWNLog",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    },
+    "pwn_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "pwn_type": {
+      "type": "string",
+      "enum": [
+        "Evaluation Proposed",
+        "Evaluation Refused",
+        "Placement Change",
+        "Service Change",
+        "Eligibility Determination",
+        "Other"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "response_deadline": {
+      "type": "string",
+      "format": "date"
+    },
+    "parent_response": {
+      "type": "string"
+    },
+    "parent_response_date": {
+      "type": "string"
+    },
+    "follow_up_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Received",
+        "Response Pending",
+        "Responded",
+        "Disputed",
+        "Resolved"
+      ],
+      "default": "Received"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "assigned_to": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name",
+    "pwn_type"
+  ]
+}

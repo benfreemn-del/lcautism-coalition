@@ -1,0 +1,129 @@
+{
+  "name": "PolicyDocument",
+  "type": "object",
+  "properties": {
+    "policy_number": {
+      "type": "string",
+      "description": "e.g., POL-001"
+    },
+    "title": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Operations",
+        "Clinical",
+        "HR",
+        "Finance",
+        "Compliance",
+        "Technology",
+        "Safety"
+      ],
+      "description": "Policy category"
+    },
+    "version": {
+      "type": "string",
+      "default": "1.0"
+    },
+    "effective_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "last_revised": {
+      "type": "string",
+      "format": "date"
+    },
+    "author": {
+      "type": "string"
+    },
+    "approval_authority": {
+      "type": "string"
+    },
+    "approval_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "document_url": {
+      "type": "string",
+      "description": "URL to full policy document"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Brief summary of policy"
+    },
+    "key_procedures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "revision_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "changes": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "mandatory_for_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Staff roles required to acknowledge"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Published",
+        "Under Review",
+        "Superseded"
+      ],
+      "default": "Draft"
+    },
+    "search_keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "title",
+    "category",
+    "author"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "name": "InventoryTransaction",
+  "type": "object",
+  "properties": {
+    "transactionType": {
+      "type": "string",
+      "enum": [
+        "Receipt",
+        "Distribution",
+        "Adjustment",
+        "Kit Assembly",
+        "Kit Disassembly",
+        "Return",
+        "Transfer",
+        "Damaged",
+        "Donation Received",
+        "Donation Given",
+        "Lost"
+      ],
+      "description": "Type of inventory transaction"
+    },
+    "itemId": {
+      "type": "string",
+      "description": "ID of InventoryItem"
+    },
+    "itemSku": {
+      "type": "string",
+      "description": "SKU of item for quick reference"
+    },
+    "itemName": {
+      "type": "string",
+      "description": "Item name for quick reference"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Quantity involved in transaction (positive for in, negative for out)"
+    },
+    "quantityBefore": {
+      "type": "number",
+      "description": "Stock level before transaction"
+    },
+    "quantityAfter": {
+      "type": "number",
+      "description": "Stock level after transaction"
+    },
+    "clientId": {
+      "type": "string",
+      "description": "Client ID if distribution to specific client"
+    },
+    "clientName": {
+      "type": "string",
+      "description": "Client name for quick reference"
+    },
+    "kitAssemblyId": {
+      "type": "string",
+      "description": "Kit Assembly ID if part of kit assembly"
+    },
+    "transactionDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the transaction occurred"
+    },
+    "performedBy": {
+      "type": "string",
+      "description": "Email of staff member performing transaction"
+    },
+    "performedByName": {
+      "type": "string",
+      "description": "Name of staff member"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for transaction (required for adjustments)"
+    },
+    "reasonCategory": {
+      "type": "string",
+      "enum": [
+        "Standard Distribution",
+        "Workshop Distribution",
+        "Community Event",
+        "Damaged",
+        "Expired",
+        "Donation",
+        "Lost",
+        "Found",
+        "Count Correction",
+        "Transfer",
+        "Other"
+      ]
+    },
+    "fundingSource": {
+      "type": "string",
+      "description": "Funding source for this transaction"
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Supplier name (for receipts)"
+    },
+    "purchaseOrderNumber": {
+      "type": "string",
+      "description": "PO number (for receipts)"
+    },
+    "unitCost": {
+      "type": "number",
+      "description": "Unit cost at time of transaction"
+    },
+    "totalCost": {
+      "type": "number",
+      "description": "Total cost (quantity * unitCost)"
+    },
+    "storageLocation": {
+      "type": "string",
+      "description": "Storage location (for transfers)"
+    },
+    "storageLocationFrom": {
+      "type": "string",
+      "description": "Source location (for transfers)"
+    },
+    "storageLocationTo": {
+      "type": "string",
+      "description": "Destination location (for transfers)"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "supervisorApproval": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether supervisor approved (for large adjustments)"
+    },
+    "supervisorApprovedBy": {
+      "type": "string",
+      "description": "Supervisor email who approved"
+    },
+    "supervisorApprovedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signatureUrl": {
+      "type": "string",
+      "description": "URL to signature image if captured"
+    },
+    "photoUrl": {
+      "type": "string",
+      "description": "URL to photo of distribution if captured"
+    },
+    "familyAcknowledgement": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether family acknowledged receipt"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish"
+      ],
+      "description": "Language used during distribution"
+    },
+    "handoffScriptUsed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether handoff script was used"
+    },
+    "itemsReviewed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether items were reviewed with family"
+    },
+    "substitutions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "originalItemId": {
+            "type": "string"
+          },
+          "originalItemName": {
+            "type": "string"
+          },
+          "substitutedItemId": {
+            "type": "string"
+          },
+          "substitutedItemName": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Any substitutions made during distribution"
+    },
+    "holdId": {
+      "type": "string",
+      "description": "If this fulfills a hold/reservation"
+    },
+    "expirationDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Item expiration date (for dated materials)"
+    },
+    "batchNumber": {
+      "type": "string",
+      "description": "Batch/lot number (for tracking)"
+    }
+  },
+  "required": [
+    "transactionType",
+    "itemId",
+    "quantity",
+    "transactionDate",
+    "performedBy"
+  ]
+}

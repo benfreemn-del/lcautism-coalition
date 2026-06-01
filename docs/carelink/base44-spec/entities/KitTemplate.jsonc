@@ -1,0 +1,246 @@
+{
+  "name": "KitTemplate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Kit template name"
+    },
+    "nameEs": {
+      "type": "string",
+      "description": "Kit name in Spanish"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of kit purpose"
+    },
+    "descriptionEs": {
+      "type": "string",
+      "description": "Spanish description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Post-Diagnosis Welcome",
+        "SMART Team",
+        "Entendiendo El Autismo",
+        "Sensory Starter",
+        "School Advocacy",
+        "Workshop Materials",
+        "Community Outreach",
+        "Sibling Support",
+        "Crisis & Stabilization",
+        "Transition to Adulthood",
+        "Healthcare Partner",
+        "Custom"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "default": "1.0",
+      "description": "Template version"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this template is currently in use"
+    },
+    "contents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "description": "InventoryItem ID"
+          },
+          "itemSku": {
+            "type": "string"
+          },
+          "itemName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number",
+            "default": 1
+          },
+          "isRequired": {
+            "type": "boolean",
+            "default": true
+          },
+          "allowSubstitution": {
+            "type": "boolean",
+            "default": true
+          },
+          "notes": {
+            "type": "string"
+          },
+          "languageVersion": {
+            "type": "string",
+            "enum": [
+              "English",
+              "Spanish",
+              "Bilingual",
+              "Non-language specific"
+            ]
+          },
+          "ageAppropriate": {
+            "type": "string",
+            "description": "Age range this item is appropriate for"
+          },
+          "safetyReviewRequired": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether OT safety review is needed before distribution"
+          }
+        },
+        "required": [
+          "itemId",
+          "quantity"
+        ]
+      },
+      "description": "Items included in this kit"
+    },
+    "targetAgeRange": {
+      "type": "string",
+      "description": "Intended age range"
+    },
+    "targetDiagnosis": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Autism",
+          "ADHD",
+          "Dyslexia",
+          "Dysgraphia",
+          "Dyscalculia",
+          "Learning Differences",
+          "Sensory Processing",
+          "Co-occurring"
+        ]
+      },
+      "description": "Diagnoses this kit is for"
+    },
+    "languagePreference": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish",
+        "Bilingual",
+        "Auto-detect"
+      ],
+      "default": "Auto-detect"
+    },
+    "estimatedCost": {
+      "type": "number",
+      "description": "Total estimated cost of kit"
+    },
+    "assemblyTimeMinutes": {
+      "type": "number",
+      "description": "Estimated time to assemble"
+    },
+    "handoffScriptEn": {
+      "type": "string",
+      "description": "English handoff script/talking points"
+    },
+    "handoffScriptEs": {
+      "type": "string",
+      "description": "Spanish handoff script"
+    },
+    "checklistEn": {
+      "type": "string",
+      "description": "Printable checklist in English"
+    },
+    "checklistEs": {
+      "type": "string",
+      "description": "Printable checklist in Spanish"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Email of creator"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastModifiedBy": {
+      "type": "string"
+    },
+    "lastModifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "changeHistory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "changedBy": {
+            "type": "string"
+          },
+          "changes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "autoSuggestTriggers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Events that trigger auto-suggestion (e.g., 'autism_diagnosis', 'iep_meeting', 'crisis_event', 'transition_age')"
+    },
+    "fundingSource": {
+      "type": "string",
+      "description": "Default funding source for this kit"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "isStandalone": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this is standalone or add-on to another kit"
+    },
+    "compatibleWithKits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Kit template IDs this can be combined with"
+    },
+    "requiresOTReview": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether OT safety review is required before distribution"
+    },
+    "culturalRelevance": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Latino",
+          "Indigenous",
+          "Ta\u00edno",
+          "General",
+          "Other"
+        ]
+      },
+      "description": "Cultural communities this kit serves"
+    }
+  },
+  "required": [
+    "name",
+    "category",
+    "contents"
+  ]
+}

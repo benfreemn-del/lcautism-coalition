@@ -1,0 +1,377 @@
+{
+  "name": "ClientWorkflow",
+  "type": "object",
+  "properties": {
+    "appointment_id": {
+      "type": "string",
+      "description": "ID of the appointment this workflow is for"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "ID of the client"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Client name for quick reference"
+    },
+    "workflow_status": {
+      "type": "string",
+      "enum": [
+        "pre-arrival",
+        "arrived",
+        "in-session",
+        "checking-out",
+        "checked-out",
+        "documentation-pending",
+        "closed"
+      ],
+      "default": "pre-arrival",
+      "description": "Current phase of the workflow"
+    },
+    "visit_type": {
+      "type": "string",
+      "enum": [
+        "initial-intake",
+        "developmental-screening",
+        "diagnostic-consultation",
+        "post-diagnosis-welcome",
+        "iep-504-advocacy",
+        "crisis-followup",
+        "routine-coordination",
+        "workshop-group",
+        "home-visit"
+      ],
+      "description": "Type of visit"
+    },
+    "phase_data": {
+      "type": "object",
+      "properties": {
+        "pre_arrival": {
+          "type": "object",
+          "properties": {
+            "referral_source": {
+              "type": "string"
+            },
+            "triage_completed": {
+              "type": "boolean"
+            },
+            "eligibility_status": {
+              "type": "string"
+            },
+            "care_coordinator_assigned": {
+              "type": "string"
+            },
+            "first_contact_completed": {
+              "type": "boolean"
+            },
+            "pre_visit_packet_sent": {
+              "type": "boolean"
+            }
+          }
+        },
+        "arrival": {
+          "type": "object",
+          "properties": {
+            "arrival_timestamp": {
+              "type": "string"
+            },
+            "greeting_language": {
+              "type": "string"
+            },
+            "sensory_accommodations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "forms_verified": {
+              "type": "boolean"
+            },
+            "insurance_verified": {
+              "type": "boolean"
+            },
+            "funding_source": {
+              "type": "string"
+            },
+            "handoff_to_coordinator_timestamp": {
+              "type": "string"
+            }
+          }
+        },
+        "active_session": {
+          "type": "object",
+          "properties": {
+            "welcome_completed": {
+              "type": "boolean"
+            },
+            "agenda_items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "visit_type_selected": {
+              "type": "string"
+            },
+            "activities_conducted": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "screening_scores": {
+              "type": "object"
+            },
+            "resources_distributed": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "service_plan_updated": {
+              "type": "boolean"
+            },
+            "family_voice_captured": {
+              "type": "boolean"
+            }
+          }
+        },
+        "check_out": {
+          "type": "object",
+          "properties": {
+            "visit_summary_provided": {
+              "type": "boolean"
+            },
+            "documents_signed": {
+              "type": "boolean"
+            },
+            "next_appointment_scheduled": {
+              "type": "boolean"
+            },
+            "next_appointment_date": {
+              "type": "string"
+            },
+            "handoff_to_front_desk_timestamp": {
+              "type": "string"
+            },
+            "feedback_captured": {
+              "type": "boolean"
+            },
+            "departure_timestamp": {
+              "type": "string"
+            }
+          }
+        },
+        "post_visit": {
+          "type": "object",
+          "properties": {
+            "note_finalized": {
+              "type": "boolean"
+            },
+            "note_finalized_timestamp": {
+              "type": "string"
+            },
+            "supervisor_reviewed": {
+              "type": "boolean"
+            },
+            "supervisor_review_timestamp": {
+              "type": "string"
+            },
+            "referrals_executed": {
+              "type": "boolean"
+            },
+            "inventory_replenishment_checked": {
+              "type": "boolean"
+            },
+            "portal_synced": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "visit_note": {
+      "type": "object",
+      "properties": {
+        "time_start": {
+          "type": "string"
+        },
+        "time_end": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "activities": {
+          "type": "string"
+        },
+        "family_voice": {
+          "type": "string"
+        },
+        "plan": {
+          "type": "string"
+        },
+        "next_steps": {
+          "type": "string"
+        },
+        "time_spent_minutes": {
+          "type": "number"
+        },
+        "template_used": {
+          "type": "string"
+        }
+      }
+    },
+    "service_plan": {
+      "type": "object",
+      "properties": {
+        "goals": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "referrals": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "family_priorities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "next_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "barriers": {
+          "type": "string"
+        },
+        "strengths": {
+          "type": "string"
+        }
+      }
+    },
+    "feedback": {
+      "type": "object",
+      "properties": {
+        "overall_rating": {
+          "type": "number"
+        },
+        "staff_rating": {
+          "type": "number"
+        },
+        "what_helped": {
+          "type": "string"
+        },
+        "what_confusing": {
+          "type": "string"
+        },
+        "hopes_next_visit": {
+          "type": "string"
+        },
+        "cultural_responsiveness": {
+          "type": "string"
+        },
+        "language_access": {
+          "type": "string"
+        },
+        "would_recommend": {
+          "type": "boolean"
+        },
+        "additional_comments": {
+          "type": "string"
+        },
+        "allow_anonymous_use": {
+          "type": "boolean"
+        },
+        "consent_to_story": {
+          "type": "boolean"
+        }
+      }
+    },
+    "accessibility_preferences": {
+      "type": "object",
+      "properties": {
+        "language_preference": {
+          "type": "string"
+        },
+        "interpreter_needed": {
+          "type": "boolean"
+        },
+        "sensory_accommodations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "communication_preferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "closure_data": {
+      "type": "object",
+      "properties": {
+        "closure_reason": {
+          "type": "string"
+        },
+        "closure_date": {
+          "type": "string"
+        },
+        "closure_summary_generated": {
+          "type": "boolean"
+        },
+        "final_feedback_captured": {
+          "type": "boolean"
+        },
+        "outstanding_referrals_closed": {
+          "type": "boolean"
+        },
+        "portal_access_updated": {
+          "type": "string"
+        },
+        "follow_up_scheduled": {
+          "type": "boolean"
+        },
+        "follow_up_date": {
+          "type": "string"
+        }
+      }
+    },
+    "created_by": {
+      "type": "string",
+      "description": "Email of staff member who created the workflow"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_updated_by": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "appointment_id",
+    "client_id",
+    "workflow_status"
+  ]
+}

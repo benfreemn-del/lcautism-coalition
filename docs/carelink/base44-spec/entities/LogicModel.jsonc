@@ -1,0 +1,107 @@
+{
+  "name": "LogicModel",
+  "type": "object",
+  "properties": {
+    "model_name": {
+      "type": "string",
+      "description": "Name of the logic model"
+    },
+    "program_name": {
+      "type": "string",
+      "description": "Associated program"
+    },
+    "model_version": {
+      "type": "string",
+      "description": "Version number (e.g., 1.0, 2.1)"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "name, description, amount/unit"
+      },
+      "description": "Resources invested (staff, materials, funding)"
+    },
+    "activities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "name, description, target_participants, duration"
+      },
+      "description": "What the program does"
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "name, description, indicator, annual_target"
+      },
+      "description": "Direct products/deliverables"
+    },
+    "short_term_outcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "name, description, indicator, measurement_method"
+      },
+      "description": "Changes occurring 0-12 months"
+    },
+    "long_term_outcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "name, description, indicator, measurement_method"
+      },
+      "description": "Changes occurring 1-3+ years"
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Underlying assumptions about how change occurs"
+    },
+    "external_factors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "External conditions that may influence success"
+    },
+    "target_population": {
+      "type": "string",
+      "description": "Who the program serves"
+    },
+    "theory_of_change": {
+      "type": "string",
+      "description": "Narrative explanation of how/why change will happen"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "Staff member who created the model"
+    },
+    "last_reviewed_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Approved",
+        "Active",
+        "Archived"
+      ],
+      "default": "Draft"
+    }
+  },
+  "required": [
+    "model_name",
+    "program_name"
+  ]
+}

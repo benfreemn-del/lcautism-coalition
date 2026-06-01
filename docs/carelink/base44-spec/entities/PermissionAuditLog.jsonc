@@ -1,0 +1,83 @@
+{
+  "name": "PermissionAuditLog",
+  "type": "object",
+  "properties": {
+    "staff_id": {
+      "type": "string",
+      "description": "ID of staff member affected"
+    },
+    "staff_name": {
+      "type": "string"
+    },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "permission_granted",
+        "permission_revoked",
+        "role_changed",
+        "caseload_assigned",
+        "caseload_removed",
+        "credential_added",
+        "credential_expired",
+        "training_completed",
+        "status_changed",
+        "login_access",
+        "record_access",
+        "export_action"
+      ]
+    },
+    "action_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "type": "string",
+      "description": "Email of person making the change"
+    },
+    "previous_value": {
+      "type": "string"
+    },
+    "new_value": {
+      "type": "string"
+    },
+    "justification": {
+      "type": "string",
+      "description": "Reason for the change"
+    },
+    "record_accessed": {
+      "type": "string",
+      "description": "If record access, which client or record type"
+    },
+    "hipaa_compliant": {
+      "type": "boolean",
+      "default": true
+    },
+    "ip_address": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Completed",
+        "Pending Approval",
+        "Denied"
+      ]
+    }
+  },
+  "required": [
+    "staff_id",
+    "action_type",
+    "action_timestamp",
+    "actor"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": false,
+    "delete": false
+  }
+}

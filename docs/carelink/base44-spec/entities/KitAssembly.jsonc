@@ -1,0 +1,164 @@
+{
+  "name": "KitAssembly",
+  "type": "object",
+  "properties": {
+    "kitTemplateId": {
+      "type": "string",
+      "description": "ID of KitTemplate used"
+    },
+    "kitTemplateName": {
+      "type": "string",
+      "description": "Template name for quick reference"
+    },
+    "customKitName": {
+      "type": "string",
+      "description": "Custom name if not using template"
+    },
+    "uniqueKitId": {
+      "type": "string",
+      "description": "Unique identifier for this assembled kit (e.g., KIT-2026-0001)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Assembling",
+        "Ready for Distribution",
+        "Reserved",
+        "Distributed",
+        "Cancelled"
+      ],
+      "default": "Assembling"
+    },
+    "assembledBy": {
+      "type": "string",
+      "description": "Email of staff who assembled"
+    },
+    "assembledByName": {
+      "type": "string"
+    },
+    "assembledDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "contents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string"
+          },
+          "itemSku": {
+            "type": "string"
+          },
+          "itemName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "isSubstitution": {
+            "type": "boolean",
+            "default": false
+          },
+          "originalItemId": {
+            "type": "string",
+            "description": "If substitution, the original item"
+          },
+          "substitutionReason": {
+            "type": "string"
+          },
+          "languageVersion": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId",
+          "quantity"
+        ]
+      },
+      "description": "Actual items in this assembled kit"
+    },
+    "totalCost": {
+      "type": "number",
+      "description": "Total cost of all items"
+    },
+    "fundingSource": {
+      "type": "string"
+    },
+    "storageLocation": {
+      "type": "string",
+      "description": "Where assembled kit is stored"
+    },
+    "reservedForClientId": {
+      "type": "string",
+      "description": "Client ID if reserved for specific client"
+    },
+    "reservedForClientName": {
+      "type": "string"
+    },
+    "reservedBy": {
+      "type": "string",
+      "description": "Staff who reserved"
+    },
+    "reservedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "holdExpirationDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "distributedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "distributedTo": {
+      "type": "string",
+      "description": "Client/family name"
+    },
+    "distributedBy": {
+      "type": "string",
+      "description": "Staff who distributed"
+    },
+    "distributionLocation": {
+      "type": "string",
+      "description": "Where distributed (office, home visit, event)"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish"
+      ]
+    },
+    "familyAcknowledgement": {
+      "type": "boolean",
+      "default": false
+    },
+    "signatureUrl": {
+      "type": "string"
+    },
+    "photoUrl": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "checklistReviewed": {
+      "type": "boolean",
+      "default": false
+    },
+    "handoffScriptUsed": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "uniqueKitId",
+    "status",
+    "assembledBy",
+    "assembledDate",
+    "contents"
+  ]
+}

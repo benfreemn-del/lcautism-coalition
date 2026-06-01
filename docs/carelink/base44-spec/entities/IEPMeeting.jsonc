@@ -1,0 +1,85 @@
+{
+  "name": "IEPMeeting",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "meeting_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "meeting_type": {
+      "type": "string",
+      "enum": [
+        "Annual",
+        "Triennial",
+        "Initial",
+        "Revision",
+        "Transition",
+        "Other"
+      ]
+    },
+    "school": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    },
+    "attendees": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "parent_concerns": {
+      "type": "string"
+    },
+    "current_goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assessment_scores": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "progress_notes": {
+      "type": "string"
+    },
+    "coordinator_notes": {
+      "type": "string"
+    },
+    "proposed_services": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "packet_generated": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Upcoming",
+        "Packet Ready",
+        "Meeting Complete",
+        "Follow-up Needed"
+      ],
+      "default": "Upcoming"
+    },
+    "assigned_to": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name",
+    "meeting_type"
+  ]
+}

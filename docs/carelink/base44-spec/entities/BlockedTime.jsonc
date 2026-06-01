@@ -1,0 +1,67 @@
+{
+  "name": "BlockedTime",
+  "type": "object",
+  "properties": {
+    "staff_member": {
+      "type": "string",
+      "description": "Name of staff member blocking time"
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the block starts"
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the block ends"
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "Lunch",
+        "Meeting",
+        "Time Off",
+        "Training",
+        "Administrative",
+        "Clinic Close",
+        "Other"
+      ],
+      "default": "Other"
+    },
+    "description": {
+      "type": "string",
+      "description": "Details about the block"
+    },
+    "is_recurring": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this block repeats"
+    },
+    "recurring_pattern": {
+      "type": "string",
+      "enum": [
+        "Daily",
+        "Weekly",
+        "Bi-weekly",
+        "Monthly"
+      ],
+      "description": "How often the block repeats"
+    },
+    "recurring_end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When recurring block stops"
+    },
+    "series_id": {
+      "type": "string",
+      "description": "ID to group related blocks from a batch creation"
+    }
+  },
+  "required": [
+    "staff_member",
+    "start_time",
+    "end_time",
+    "reason"
+  ]
+}

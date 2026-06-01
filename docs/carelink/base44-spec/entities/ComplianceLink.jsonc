@@ -1,0 +1,107 @@
+{
+  "name": "ComplianceLink",
+  "type": "object",
+  "properties": {
+    "staff_id": {
+      "type": "string",
+      "description": "Staff member ID"
+    },
+    "staff_name": {
+      "type": "string",
+      "description": "Staff member name"
+    },
+    "document_id": {
+      "type": "string",
+      "description": "Uploaded document ID from staff profile"
+    },
+    "document_name": {
+      "type": "string",
+      "description": "Document filename"
+    },
+    "training_course_id": {
+      "type": "string",
+      "description": "Related training course ID"
+    },
+    "training_course_name": {
+      "type": "string",
+      "description": "Training course title"
+    },
+    "link_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the document was linked to the course"
+    },
+    "completion_status": {
+      "type": "string",
+      "enum": [
+        "Completed",
+        "Renewal Due",
+        "Expired",
+        "Pending Review"
+      ],
+      "default": "Completed"
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the certification expires"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "staff_id",
+    "document_id",
+    "training_course_id"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "data.staff_id": "{{user.id}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.staff_id": "{{user.id}}"
+        },
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

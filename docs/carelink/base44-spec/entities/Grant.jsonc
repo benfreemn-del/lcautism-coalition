@@ -1,0 +1,104 @@
+{
+  "name": "Grant",
+  "type": "object",
+  "properties": {
+    "grant_name": {
+      "type": "string",
+      "description": "Name of the grant"
+    },
+    "funder_name": {
+      "type": "string",
+      "description": "Name of the funding organization"
+    },
+    "grant_period_start": {
+      "type": "string",
+      "format": "date",
+      "description": "Grant start date"
+    },
+    "grant_period_end": {
+      "type": "string",
+      "format": "date",
+      "description": "Grant end date"
+    },
+    "total_award_amount": {
+      "type": "number",
+      "description": "Total grant award in dollars"
+    },
+    "current_year_budget": {
+      "type": "number",
+      "description": "Current year allocated budget"
+    },
+    "program_areas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Program areas covered by this grant"
+    },
+    "required_metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "metric_name, metric_type, annual_target, definition"
+      },
+      "description": "Funder-required metrics and targets"
+    },
+    "eligible_service_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Billing codes (e.g., T1016) that can be billed to this grant"
+    },
+    "reporting_frequency": {
+      "type": "string",
+      "enum": [
+        "Quarterly",
+        "Semi-Annual",
+        "Annual"
+      ],
+      "default": "Annual",
+      "description": "How often reports are required"
+    },
+    "report_due_dates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "period, due_date"
+      },
+      "description": "Report due dates by period"
+    },
+    "logic_model_required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Does funder require logic model alignment?"
+    },
+    "logic_model_id": {
+      "type": "string",
+      "description": "Linked LogicModel ID"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Special requirements, funder contacts, restrictions"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Completed",
+        "Pending",
+        "Closed"
+      ],
+      "default": "Active",
+      "description": "Grant status"
+    }
+  },
+  "required": [
+    "grant_name",
+    "funder_name",
+    "grant_period_start",
+    "grant_period_end"
+  ]
+}

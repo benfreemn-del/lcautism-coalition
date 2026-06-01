@@ -1,0 +1,74 @@
+{
+  "name": "ServiceCoordination",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "service_name": {
+      "type": "string"
+    },
+    "service_type": {
+      "type": "string",
+      "enum": [
+        "Speech Therapy",
+        "Occupational Therapy",
+        "ABA",
+        "Physical Therapy",
+        "Mental Health",
+        "School Support",
+        "Respite Care",
+        "Medical",
+        "Community",
+        "Other"
+      ]
+    },
+    "provider_name": {
+      "type": "string"
+    },
+    "provider_org": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Pending",
+        "On Hold",
+        "Discontinued"
+      ],
+      "default": "Active"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "reauthorization_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "frequency": {
+      "type": "string"
+    },
+    "goals": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "gaps_identified": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "client_name",
+    "service_name",
+    "service_type"
+  ]
+}

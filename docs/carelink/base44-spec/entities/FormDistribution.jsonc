@@ -1,0 +1,140 @@
+{
+  "name": "FormDistribution",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Associated client"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "client_email": {
+      "type": "string"
+    },
+    "form_type": {
+      "type": "string",
+      "enum": [
+        "demographic",
+        "roi",
+        "consent",
+        "intake",
+        "session_log"
+      ],
+      "description": "Type of form being distributed"
+    },
+    "form_title": {
+      "type": "string"
+    },
+    "sent_by": {
+      "type": "string",
+      "description": "Staff member who sent the form"
+    },
+    "sent_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "sent_via_email": {
+      "type": "boolean",
+      "default": true
+    },
+    "access_link": {
+      "type": "string",
+      "description": "Secure unique link for form access"
+    },
+    "reminder_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "reminder_sent_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "completion_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "completed",
+        "expired"
+      ],
+      "default": "pending"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "response_data": {
+      "type": "object",
+      "description": "Completed form data",
+      "additionalProperties": true
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "archived",
+        "cancelled"
+      ],
+      "default": "active"
+    }
+  },
+  "required": [
+    "client_name",
+    "form_type",
+    "form_title"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.client_email": "{{user.email}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

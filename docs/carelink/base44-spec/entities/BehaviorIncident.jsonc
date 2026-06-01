@@ -1,0 +1,177 @@
+{
+  "name": "BehaviorIncident",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "incident_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "incident_time": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "duration_minutes": {
+      "type": "number"
+    },
+    "staff_present": {
+      "type": "string"
+    },
+    "antecedent_setting": {
+      "type": "string",
+      "description": "What was happening before"
+    },
+    "antecedent_triggers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "behavior_description": {
+      "type": "string"
+    },
+    "behavior_topography": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "e.g. hitting, screaming, elopement"
+    },
+    "intensity": {
+      "type": "string",
+      "enum": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ]
+    },
+    "consequence": {
+      "type": "string",
+      "description": "What happened immediately after"
+    },
+    "consequence_type": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "function_hypothesis": {
+      "type": "string",
+      "enum": [
+        "Attention",
+        "Escape/Avoidance",
+        "Sensory/Automatic",
+        "Tangible/Access",
+        "Communication",
+        "Unknown"
+      ]
+    },
+    "function_confidence": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Moderate",
+        "High"
+      ]
+    },
+    "intervention_used": {
+      "type": "string"
+    },
+    "intervention_outcome": {
+      "type": "string",
+      "enum": [
+        "Effective",
+        "Partially Effective",
+        "Ineffective"
+      ]
+    },
+    "injury_occurred": {
+      "type": "boolean",
+      "default": false
+    },
+    "injury_details": {
+      "type": "string"
+    },
+    "property_damage": {
+      "type": "boolean",
+      "default": false
+    },
+    "restraint_used": {
+      "type": "boolean",
+      "default": false
+    },
+    "parent_notified": {
+      "type": "boolean",
+      "default": false
+    },
+    "parent_notified_date": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Complete",
+        "Reviewed"
+      ],
+      "default": "Draft"
+    }
+  },
+  "required": [
+    "client_name",
+    "incident_date"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

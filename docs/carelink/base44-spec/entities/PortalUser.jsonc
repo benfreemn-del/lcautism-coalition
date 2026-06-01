@@ -1,0 +1,287 @@
+{
+  "name": "PortalUser",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Portal user email address"
+    },
+    "full_name": {
+      "type": "string",
+      "description": "Full name"
+    },
+    "preferred_name": {
+      "type": "string",
+      "description": "Preferred name for portal display"
+    },
+    "pronouns": {
+      "type": "string",
+      "enum": [
+        "he/him",
+        "she/her",
+        "they/them",
+        "custom"
+      ],
+      "description": "Pronouns"
+    },
+    "custom_pronouns": {
+      "type": "string",
+      "description": "Custom pronouns if selected"
+    },
+    "profile_photo_url": {
+      "type": "string",
+      "description": "URL to profile photo"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "primary_parent",
+        "secondary_parent",
+        "authorized_caregiver",
+        "youth",
+        "advocate",
+        "legal_representative"
+      ],
+      "description": "Portal user role"
+    },
+    "relationship_to_child": {
+      "type": "string",
+      "enum": [
+        "parent",
+        "grandparent",
+        "foster_parent",
+        "guardian",
+        "advocate",
+        "lawyer",
+        "self"
+      ],
+      "description": "Relationship to enrolled child"
+    },
+    "preferred_language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish"
+      ],
+      "default": "English",
+      "description": "Preferred language"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number for SMS and voice contact"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_registration",
+        "active",
+        "suspended",
+        "closed"
+      ],
+      "default": "pending_registration",
+      "description": "Account status"
+    },
+    "is_verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Email verified"
+    },
+    "mfa_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Multi-factor authentication enabled"
+    },
+    "mfa_method": {
+      "type": "string",
+      "enum": [
+        "sms",
+        "email",
+        "authenticator_app"
+      ],
+      "description": "Preferred MFA method"
+    },
+    "last_login": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last login timestamp"
+    },
+    "children": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of children this user has access to",
+      "default": []
+    },
+    "household_id": {
+      "type": "string",
+      "description": "ID of household this user belongs to"
+    },
+    "communication_preferences": {
+      "type": "object",
+      "properties": {
+        "appointment_reminders": {
+          "type": "string",
+          "enum": [
+            "email",
+            "sms",
+            "in_portal",
+            "none"
+          ],
+          "default": "email"
+        },
+        "message_alerts": {
+          "type": "string",
+          "enum": [
+            "email",
+            "sms",
+            "in_portal",
+            "none"
+          ],
+          "default": "in_portal"
+        },
+        "document_requests": {
+          "type": "string",
+          "enum": [
+            "email",
+            "sms",
+            "in_portal",
+            "none"
+          ],
+          "default": "email"
+        },
+        "resource_updates": {
+          "type": "string",
+          "enum": [
+            "email",
+            "sms",
+            "in_portal",
+            "none"
+          ],
+          "default": "in_portal"
+        },
+        "digest_mode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Bundle non-urgent items into daily/weekly summary"
+        },
+        "quiet_hours_enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "quiet_hours_start": {
+          "type": "string",
+          "description": "HH:MM format"
+        },
+        "quiet_hours_end": {
+          "type": "string",
+          "description": "HH:MM format"
+        }
+      },
+      "description": "Notification and communication preferences"
+    },
+    "accessibility_settings": {
+      "type": "object",
+      "properties": {
+        "high_contrast_mode": {
+          "type": "boolean",
+          "default": false
+        },
+        "text_size": {
+          "type": "string",
+          "enum": [
+            "small",
+            "normal",
+            "large",
+            "xlarge"
+          ],
+          "default": "normal"
+        },
+        "reduced_motion": {
+          "type": "boolean",
+          "default": false
+        },
+        "plain_language_toggle": {
+          "type": "boolean",
+          "default": false
+        },
+        "sensory_friendly_mode": {
+          "type": "boolean",
+          "default": false
+        },
+        "screen_reader_optimized": {
+          "type": "boolean",
+          "default": false
+        },
+        "low_bandwidth_mode": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "description": "Accessibility preferences"
+    },
+    "onboarding_completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether onboarding tour was completed"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "default": "WA"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Internal staff notes about this portal user"
+    }
+  },
+  "required": [
+    "email",
+    "full_name",
+    "role"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "id": "{{user.id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "id": "{{user.id}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

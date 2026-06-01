@@ -1,0 +1,104 @@
+{
+  "name": "PolicyAcknowledgement",
+  "type": "object",
+  "properties": {
+    "staff_member": {
+      "type": "string"
+    },
+    "policy_id": {
+      "type": "string",
+      "description": "Policy being acknowledged"
+    },
+    "policy_title": {
+      "type": "string"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "acknowledged_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "acknowledgement_type": {
+      "type": "string",
+      "enum": [
+        "Initial Review",
+        "Annual Review",
+        "Update Review",
+        "Mandatory Refresh"
+      ],
+      "default": "Initial Review"
+    },
+    "signature": {
+      "type": "string",
+      "description": "Electronic signature or confirmation"
+    },
+    "signature_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Acknowledged",
+        "Pending",
+        "Overdue"
+      ],
+      "default": "Acknowledged"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "staff_member",
+    "policy_id",
+    "policy_title"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.staff_member": "{{user.full_name}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

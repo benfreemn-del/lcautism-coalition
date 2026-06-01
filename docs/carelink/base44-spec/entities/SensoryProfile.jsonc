@@ -1,0 +1,106 @@
+{
+  "name": "SensoryProfile",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "administered_by": {
+      "type": "string"
+    },
+    "administered_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "age_months": {
+      "type": "number"
+    },
+    "responses": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "domain_scores": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "auditory, visual, tactile, vestibular, proprioceptive, interoceptive"
+    },
+    "domain_patterns": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Hypersensitive, Hyposensitive, Typical for each domain"
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strategies": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "overall_pattern": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Complete"
+      ],
+      "default": "Draft"
+    }
+  },
+  "required": [
+    "client_name"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
