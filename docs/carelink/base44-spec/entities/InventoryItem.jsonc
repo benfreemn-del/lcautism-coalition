@@ -1,0 +1,188 @@
+{
+  "name": "InventoryItem",
+  "type": "object",
+  "properties": {
+    "sku": {
+      "type": "string",
+      "description": "Unique SKU/barcode identifier (e.g., BIND-001, FIDG-002)"
+    },
+    "nameEn": {
+      "type": "string",
+      "description": "Item name in English"
+    },
+    "nameEs": {
+      "type": "string",
+      "description": "Item name in Spanish"
+    },
+    "descriptionEn": {
+      "type": "string",
+      "description": "Description in English"
+    },
+    "descriptionEs": {
+      "type": "string",
+      "description": "Description in Spanish"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Post-Diagnosis Binder",
+        "SMART Packet",
+        "Entendiendo El Autismo",
+        "Sensory & Fidget Tools",
+        "Weighted & Proprioceptive",
+        "Communication Supports",
+        "Books & Parent Guides",
+        "School Advocacy",
+        "Sibling Resources",
+        "Community Resources",
+        "Visual Schedules",
+        "AAC Cards",
+        "Other"
+      ],
+      "description": "Item category"
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "More specific subcategory"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Physical Item",
+        "Kit",
+        "Digital Resource",
+        "Printed Material"
+      ],
+      "default": "Physical Item"
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Supplier/vendor name"
+    },
+    "supplierContact": {
+      "type": "string",
+      "description": "Supplier contact information"
+    },
+    "unitCost": {
+      "type": "number",
+      "description": "Cost per unit"
+    },
+    "fundingSource": {
+      "type": "string",
+      "description": "Primary funding source (grant, contract, donation)"
+    },
+    "stockOnHand": {
+      "type": "number",
+      "default": 0,
+      "description": "Current quantity in inventory"
+    },
+    "reorderThreshold": {
+      "type": "number",
+      "default": 10,
+      "description": "Minimum stock level before reorder"
+    },
+    "reorderQuantity": {
+      "type": "number",
+      "default": 25,
+      "description": "Suggested reorder quantity"
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "Spectrum Center",
+        "Mobile Outreach Kit",
+        "Partner Site",
+        "Off-site Storage",
+        "Other"
+      ],
+      "default": "Spectrum Center"
+    },
+    "storageLocationDetail": {
+      "type": "string",
+      "description": "Specific location (e.g., Shelf A-3, Bin 12)"
+    },
+    "languageVersion": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish",
+        "Bilingual",
+        "Non-language specific"
+      ],
+      "default": "Non-language specific"
+    },
+    "culturalRelevance": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Latino",
+          "Indigenous",
+          "Ta\u00edno",
+          "General",
+          "Other"
+        ]
+      },
+      "description": "Cultural communities this item serves"
+    },
+    "ageRange": {
+      "type": "string",
+      "description": "Target age range (e.g., '3-5 years', 'All ages')"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "How this item helps the family"
+    },
+    "howToUse": {
+      "type": "string",
+      "description": "Instructions for use"
+    },
+    "photoUrl": {
+      "type": "string",
+      "description": "Photo of the item"
+    },
+    "resourceLibraryId": {
+      "type": "string",
+      "description": "Link to related Resource entity"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Retired",
+        "Out of Stock",
+        "Discontinued"
+      ],
+      "default": "Active"
+    },
+    "isKitComponent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this item is part of a standard kit"
+    },
+    "leadTimeDays": {
+      "type": "number",
+      "description": "Typical lead time from supplier in days"
+    },
+    "minimumOrderQuantity": {
+      "type": "number",
+      "default": 1
+    },
+    "lastReorderDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "lastDistributedDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "sku",
+    "nameEn",
+    "category"
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "name": "GeneratedLetter",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "letter_type": {
+      "type": "string",
+      "enum": [
+        "Referral Letter",
+        "Advocacy Letter",
+        "School Communication",
+        "Insurance Appeal",
+        "Diagnosis Support Letter",
+        "Service Request",
+        "IEP Support Letter",
+        "Transition Letter"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish"
+      ],
+      "default": "English"
+    },
+    "recipient_name": {
+      "type": "string"
+    },
+    "recipient_organization": {
+      "type": "string"
+    },
+    "letter_body": {
+      "type": "string"
+    },
+    "merge_fields_used": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "generated_by": {
+      "type": "string"
+    },
+    "generated_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "sent_date": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Ready",
+        "Sent",
+        "Archived"
+      ],
+      "default": "Draft"
+    }
+  },
+  "required": [
+    "client_name",
+    "letter_type"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

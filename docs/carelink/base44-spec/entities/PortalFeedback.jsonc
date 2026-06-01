@@ -1,0 +1,117 @@
+{
+  "name": "PortalFeedback",
+  "type": "object",
+  "properties": {
+    "portal_user_id": {
+      "type": "string",
+      "description": "Who provided feedback"
+    },
+    "feedback_type": {
+      "type": "string",
+      "enum": [
+        "quick_feedback",
+        "survey",
+        "feature_request",
+        "bug_report",
+        "general"
+      ],
+      "description": "Type of feedback"
+    },
+    "page_or_feature": {
+      "type": "string",
+      "description": "What they were using when providing feedback"
+    },
+    "title": {
+      "type": "string",
+      "description": "Brief title"
+    },
+    "message": {
+      "type": "string",
+      "description": "Feedback content"
+    },
+    "rating": {
+      "type": "number",
+      "description": "1-5 rating if survey"
+    },
+    "sentiment": {
+      "type": "string",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative"
+      ],
+      "description": "Feedback sentiment"
+    },
+    "is_anonymous": {
+      "type": "boolean",
+      "default": false
+    },
+    "would_like_followup": {
+      "type": "boolean",
+      "default": false
+    },
+    "contact_email": {
+      "type": "string",
+      "description": "If they want followup"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "reviewed",
+        "in_progress",
+        "resolved"
+      ],
+      "default": "new"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish"
+      ],
+      "default": "English"
+    }
+  },
+  "required": [
+    "portal_user_id",
+    "feedback_type",
+    "message"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.portal_user_id": "{{user.id}}"
+        }
+      ]
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

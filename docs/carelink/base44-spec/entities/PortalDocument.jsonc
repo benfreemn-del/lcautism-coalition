@@ -1,0 +1,188 @@
+{
+  "name": "PortalDocument",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Client this document belongs to"
+    },
+    "name": {
+      "type": "string",
+      "description": "Document name"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "consent",
+        "evaluation",
+        "iep",
+        "504",
+        "school_correspondence",
+        "medical",
+        "advocacy",
+        "service_summary",
+        "assessment_results",
+        "other"
+      ],
+      "description": "Document category"
+    },
+    "description": {
+      "type": "string",
+      "description": "Plain-language description of what this document is"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "URL to document file"
+    },
+    "family_visible": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether family can view this"
+    },
+    "document_type": {
+      "type": "string",
+      "enum": [
+        "consent_form",
+        "release",
+        "agreement",
+        "evaluation",
+        "iep",
+        "504_plan",
+        "medical_record",
+        "school_record",
+        "other"
+      ],
+      "description": "Type of document"
+    },
+    "requires_signature": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether signature is needed"
+    },
+    "signature_status": {
+      "type": "string",
+      "enum": [
+        "not_required",
+        "pending",
+        "signed",
+        "declined"
+      ],
+      "default": "not_required"
+    },
+    "signed_by": {
+      "type": "string",
+      "description": "Name of person who signed"
+    },
+    "signed_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signature_data": {
+      "type": "object",
+      "properties": {
+        "signature_image_url": {
+          "type": "string"
+        },
+        "signed_timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ip_address": {
+          "type": "string"
+        },
+        "device": {
+          "type": "string"
+        }
+      },
+      "description": "Audit-grade signature record"
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "is_expired": {
+      "type": "boolean",
+      "default": false
+    },
+    "uploaded_by": {
+      "type": "string",
+      "description": "Email of person who uploaded (staff or family)"
+    },
+    "uploaded_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "bilingual_available": {
+      "type": "boolean",
+      "default": false,
+      "description": "English and Spanish versions available"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish",
+        "both"
+      ],
+      "default": "English"
+    }
+  },
+  "required": [
+    "client_id",
+    "name",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.client_id": {
+            "$in": "{{user.data.children}}"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.client_id": {
+            "$in": "{{user.data.children}}"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

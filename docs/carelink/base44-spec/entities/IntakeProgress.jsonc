@@ -1,0 +1,87 @@
+{
+  "name": "IntakeProgress",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "current_step": {
+      "type": "number",
+      "default": 0
+    },
+    "total_steps": {
+      "type": "number",
+      "default": 6
+    },
+    "step_data": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "In Progress",
+        "Complete",
+        "Abandoned"
+      ],
+      "default": "In Progress"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish"
+      ],
+      "default": "English"
+    }
+  },
+  "required": [
+    "client_id"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

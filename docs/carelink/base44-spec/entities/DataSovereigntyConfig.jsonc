@@ -1,0 +1,154 @@
+{
+  "name": "DataSovereigntyConfig",
+  "type": "object",
+  "properties": {
+    "nation_name": {
+      "type": "string",
+      "description": "Tribal nation or community name"
+    },
+    "nation_identifier": {
+      "type": "string",
+      "description": "Unique slug/code for this nation's config"
+    },
+    "contact_name": {
+      "type": "string"
+    },
+    "contact_title": {
+      "type": "string"
+    },
+    "contact_email": {
+      "type": "string"
+    },
+    "contact_phone": {
+      "type": "string"
+    },
+    "data_storage_preference": {
+      "type": "string",
+      "enum": [
+        "Platform Default",
+        "Nation-Controlled Export Only",
+        "Restricted \u2014 No Cloud Storage",
+        "Requires Nation Approval"
+      ],
+      "default": "Platform Default"
+    },
+    "aggregate_reporting_allowed": {
+      "type": "boolean",
+      "default": true,
+      "description": "Can anonymized data be included in aggregate/grant reports?"
+    },
+    "aggregate_reporting_conditions": {
+      "type": "string",
+      "description": "Conditions or limitations on aggregate reporting"
+    },
+    "external_sharing_allowed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Can data be shared with external agencies (e.g., state, federal)?"
+    },
+    "external_sharing_conditions": {
+      "type": "string"
+    },
+    "cultural_data_access_policy": {
+      "type": "string",
+      "enum": [
+        "Staff Only",
+        "Coordinator + Supervisor",
+        "Admin Only",
+        "Nation-Designated Staff Only"
+      ],
+      "default": "Coordinator + Supervisor"
+    },
+    "tribal_enrollment_data_visible": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether tribal enrollment numbers are visible in the platform"
+    },
+    "ceremony_data_visible": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether ceremony/cultural practice data is visible to care team"
+    },
+    "export_restrictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Fields that cannot be included in data exports"
+    },
+    "requires_nation_review_for_reports": {
+      "type": "boolean",
+      "default": false,
+      "description": "Does the nation require review/approval before any report is published?"
+    },
+    "nation_review_contact": {
+      "type": "string"
+    },
+    "data_retention_years": {
+      "type": "number",
+      "default": 7,
+      "description": "How long records should be retained (years)"
+    },
+    "deletion_upon_request": {
+      "type": "boolean",
+      "default": true,
+      "description": "Will records be deleted upon tribal nation or family request?"
+    },
+    "hipaa_plus_tribal_protections": {
+      "type": "boolean",
+      "default": true,
+      "description": "Apply HIPAA + additional tribal data protections"
+    },
+    "custom_consent_language": {
+      "type": "string",
+      "description": "Nation-specific consent language to display to families"
+    },
+    "custom_consent_language_es": {
+      "type": "string"
+    },
+    "acknowledgment_signed_by": {
+      "type": "string"
+    },
+    "acknowledgment_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Pending Review",
+        "Inactive"
+      ],
+      "default": "Active"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "nation_name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "name": "RoleTemplate",
+  "type": "object",
+  "properties": {
+    "role_name": {
+      "type": "string",
+      "description": "Name of the role"
+    },
+    "description": {
+      "type": "string"
+    },
+    "default_permissions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Default permissions granted to this role"
+    },
+    "data_access_level": {
+      "type": "string",
+      "enum": [
+        "view_only",
+        "create_edit_own",
+        "full_caseload_access",
+        "approve_finalize",
+        "admin_access",
+        "export_reporting"
+      ]
+    },
+    "phi_access": {
+      "type": "boolean",
+      "description": "Can access Protected Health Information"
+    },
+    "screening_data_access": {
+      "type": "boolean",
+      "description": "Can access developmental screening results (ASQ-3, ADOS-2, etc.)"
+    },
+    "educational_records_access": {
+      "type": "boolean",
+      "description": "Can access IEP, 504, educational records (requires FERPA training)"
+    },
+    "crisis_notes_access": {
+      "type": "boolean",
+      "description": "Can access crisis stabilization notes"
+    },
+    "export_access": {
+      "type": "boolean"
+    },
+    "approval_authority": {
+      "type": "boolean",
+      "description": "Can approve documentation and access changes"
+    },
+    "staff_management": {
+      "type": "boolean",
+      "description": "Can manage other staff and permissions"
+    },
+    "required_credentials": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Credentials required for this role"
+    },
+    "required_training": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Training/certifications required"
+    },
+    "caseload_limit": {
+      "type": "number",
+      "description": "Default max caseload size"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "default": "Active"
+    }
+  },
+  "required": [
+    "role_name",
+    "data_access_level"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

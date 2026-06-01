@@ -1,0 +1,127 @@
+{
+  "name": "PortalHousehold",
+  "type": "object",
+  "properties": {
+    "household_name": {
+      "type": "string",
+      "description": "Optional household identifier (e.g., 'Smith Family')"
+    },
+    "primary_contact_id": {
+      "type": "string",
+      "description": "ID of primary parent/guardian PortalUser"
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of all PortalUsers in household",
+      "default": []
+    },
+    "children": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of enrolled clients (children)",
+      "default": []
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "closed"
+      ],
+      "default": "active"
+    },
+    "language_preference": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish",
+        "bilingual"
+      ],
+      "default": "English"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "default": "WA"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Staff notes about household"
+    },
+    "cultural_practices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Cultural practices or traditions to recognize in care",
+      "default": []
+    },
+    "heritage": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Heritage identities (Latino, Indigenous, etc)",
+      "default": []
+    }
+  },
+  "required": [
+    "primary_contact_id"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.primary_contact_id": "{{user.id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.primary_contact_id": "{{user.id}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

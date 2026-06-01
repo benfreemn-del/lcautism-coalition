@@ -1,0 +1,78 @@
+{
+  "name": "TrainingCourse",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Course title"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "HIPAA Training",
+        "FERPA Training",
+        "CPR/First Aid",
+        "BCBA Certification",
+        "Clinical Skills",
+        "Culturally Responsive Practice",
+        "Safety Protocols",
+        "Other"
+      ],
+      "description": "Training category"
+    },
+    "description": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string",
+      "description": "Training provider/organization"
+    },
+    "required_for_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Staff roles that require this training",
+      "default": []
+    },
+    "renewal_frequency_months": {
+      "type": "number",
+      "description": "How often training needs to be renewed (0 = no renewal needed)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Archived"
+      ],
+      "default": "Active"
+    },
+    "compliance_tracked": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to track staff completion of this course"
+    }
+  },
+  "required": [
+    "title",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

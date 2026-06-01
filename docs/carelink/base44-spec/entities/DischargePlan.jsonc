@@ -1,0 +1,71 @@
+{
+  "name": "DischargePlan",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "discharge_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "discharge_reason": {
+      "type": "string",
+      "enum": [
+        "Goals Met",
+        "Family Request",
+        "Moved",
+        "Aged Out",
+        "Declined Services",
+        "Other"
+      ]
+    },
+    "steps_completed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary_letter_generated": {
+      "type": "boolean",
+      "default": false
+    },
+    "summary_letter_date": {
+      "type": "string"
+    },
+    "summary_notes": {
+      "type": "string"
+    },
+    "family_feedback_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "family_feedback_received": {
+      "type": "boolean",
+      "default": false
+    },
+    "family_feedback_rating": {
+      "type": "number"
+    },
+    "family_feedback_comments": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "In Progress",
+        "Complete"
+      ],
+      "default": "In Progress"
+    },
+    "assigned_to": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name"
+  ]
+}

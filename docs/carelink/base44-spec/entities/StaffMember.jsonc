@@ -1,0 +1,266 @@
+{
+  "name": "StaffMember",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Full name of staff member"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "URL to staff member photo"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email address"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "role": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Executive Director",
+          "Program Director",
+          "Community Health and Developmental Support Specialist",
+          "Bilingual Program Coordinator",
+          "Community Health Worker",
+          "Care Coordinator",
+          "Family Navigator",
+          "Workshop Facilitator",
+          "Administrative Support",
+          "Volunteer/Peer Mentor",
+          "Contracted Clinical Consultant",
+          "Multidisciplinary Partner",
+          "Reception",
+          "Assistance",
+          "Tech Support"
+        ]
+      },
+      "description": "Staff roles",
+      "default": []
+    },
+    "program_assignments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Programs assigned to (SMART Team, Autism Package, Entendiendo El Autismo, etc.)",
+      "default": []
+    },
+    "credentials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "BCBA",
+              "BCBA-D",
+              "RN",
+              "LCSW",
+              "MFT",
+              "QIDP",
+              "CHW Certification",
+              "SLP",
+              "OT",
+              "Psychologist",
+              "HIPAA Training",
+              "FERPA Training",
+              "CPR/First Aid",
+              "Background Check",
+              "Other"
+            ]
+          },
+          "issue_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "expiration_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": [
+              "Verified",
+              "Pending",
+              "Expired",
+              "Not Required"
+            ]
+          }
+        }
+      },
+      "description": "Credentials and certifications"
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique document identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Document filename"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to uploaded document"
+          },
+          "upload_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date document was uploaded"
+          },
+          "type": {
+            "type": "string",
+            "description": "File type (PDF, DOC, etc.)"
+          }
+        }
+      },
+      "description": "Certification and training documents",
+      "default": []
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "English",
+          "Spanish",
+          "Vietnamese",
+          "Russian",
+          "Other"
+        ]
+      },
+      "default": [
+        "English"
+      ],
+      "description": "Languages spoken"
+    },
+    "caseload_assignments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of clients assigned to this staff member",
+      "default": []
+    },
+    "caseload_capacity": {
+      "type": "number",
+      "description": "Maximum number of clients this staff can serve",
+      "default": 0
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom permissions beyond role defaults",
+      "default": []
+    },
+    "hipaa_agreement_signed": {
+      "type": "boolean",
+      "default": false,
+      "description": "HIPAA agreement acknowledgment"
+    },
+    "hipaa_signed_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "ferpa_training_completed": {
+      "type": "boolean",
+      "default": false
+    },
+    "ferpa_training_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "background_check_completed": {
+      "type": "boolean",
+      "default": false
+    },
+    "background_check_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "supervisor": {
+      "type": "string",
+      "description": "Email or ID of supervising staff member"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Pending Onboarding",
+        "On Leave",
+        "Inactive",
+        "Archived"
+      ],
+      "default": "Pending Onboarding"
+    },
+    "hire_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "last_login": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "temporary_access_end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "For contracted consultants with time-limited access"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "role"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

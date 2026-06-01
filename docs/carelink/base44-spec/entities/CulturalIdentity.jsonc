@@ -1,0 +1,159 @@
+{
+  "name": "CulturalIdentity",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "tribal_affiliations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Federally recognized or self-identified tribal nations"
+    },
+    "tribal_enrollment_status": {
+      "type": "string",
+      "enum": [
+        "Enrolled Member",
+        "Descendant",
+        "Affiliated",
+        "Prefer Not to Say",
+        "Not Applicable"
+      ]
+    },
+    "tribal_enrollment_number": {
+      "type": "string",
+      "description": "Optional \u2014 stored separately, access restricted to admin"
+    },
+    "heritage_nations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional nations, communities, or heritage groups"
+    },
+    "languages_spoken_at_home": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "indigenous_language": {
+      "type": "string",
+      "description": "Specific Indigenous or heritage language"
+    },
+    "spiritual_practices": {
+      "type": "string",
+      "enum": [
+        "Traditional",
+        "Christian",
+        "Blend of Both",
+        "Other",
+        "Prefer Not to Share"
+      ],
+      "description": "Family-defined spiritual orientation"
+    },
+    "clan_society": {
+      "type": "string",
+      "description": "Clan, society, or band affiliation if family chooses to share"
+    },
+    "cultural_identity_notes": {
+      "type": "string",
+      "description": "Free-form notes from family about cultural identity and values"
+    },
+    "family_cultural_values": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Family-articulated values to guide care"
+    },
+    "two_spirit_identity": {
+      "type": "boolean",
+      "default": false,
+      "description": "Two-Spirit identity, if family chooses to share"
+    },
+    "access_level": {
+      "type": "string",
+      "enum": [
+        "Coordinator Only",
+        "Full Care Team",
+        "Admin Only"
+      ],
+      "default": "Coordinator Only",
+      "description": "Who can view this cultural identity record"
+    },
+    "data_sharing_consent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Family consent to share cultural data in aggregate reports"
+    },
+    "data_sharing_consent_date": {
+      "type": "string"
+    },
+    "completed_by": {
+      "type": "string"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date"
+    },
+    "review_notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "name": "Appointment",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "ID of the client for this appointment"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Client name for quick reference"
+    },
+    "title": {
+      "type": "string",
+      "description": "Appointment title/type"
+    },
+    "description": {
+      "type": "string",
+      "description": "Appointment details or notes"
+    },
+    "appointment_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the appointment is scheduled"
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the appointment ends"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "description": "Duration in minutes"
+    },
+    "appointment_type": {
+      "type": "string",
+      "enum": [
+        "Assessment",
+        "Follow-up",
+        "Intake",
+        "Treatment",
+        "Consultation",
+        "Other"
+      ],
+      "default": "Other"
+    },
+    "provider": {
+      "type": "string",
+      "description": "Staff member or provider name"
+    },
+    "location_type": {
+      "type": "string",
+      "enum": [
+        "In person",
+        "Online",
+        "Drop-off"
+      ],
+      "default": "In person",
+      "description": "Type of appointment location"
+    },
+    "location": {
+      "type": "string",
+      "description": "Appointment location"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Scheduled",
+        "Completed",
+        "Cancelled",
+        "No-show",
+        "Rescheduled"
+      ],
+      "default": "Scheduled"
+    },
+    "check_in_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the client checked in"
+    },
+    "check_in_provider": {
+      "type": "string",
+      "description": "Staff member who performed check-in"
+    },
+    "check_out_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the client checked out"
+    },
+    "check_out_provider": {
+      "type": "string",
+      "description": "Staff member who performed check-out"
+    },
+    "referral_id": {
+      "type": "string",
+      "description": "ID of the incoming referral this appointment is linked to"
+    },
+    "referral_source": {
+      "type": "string",
+      "description": "Source of the referral (for quick reference)"
+    },
+    "required_forms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "form_distribution_id": {
+            "type": "string",
+            "description": "ID of the form distribution record"
+          },
+          "form_title": {
+            "type": "string",
+            "description": "Title of the form"
+          },
+          "is_required": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether this form is required before appointment"
+          }
+        }
+      },
+      "default": [],
+      "description": "Forms linked to this appointment"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "send_reminder": {
+      "type": "boolean",
+      "default": true,
+      "description": "Send reminder to client"
+    },
+    "reminder_sent": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "client_id",
+    "client_name",
+    "title",
+    "appointment_date"
+  ]
+}

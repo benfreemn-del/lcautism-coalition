@@ -1,0 +1,102 @@
+{
+  "name": "PortalAccess",
+  "type": "object",
+  "properties": {
+    "portal_user_id": {
+      "type": "string",
+      "description": "ID of PortalUser"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "ID of Client they can access"
+    },
+    "permission_level": {
+      "type": "string",
+      "enum": [
+        "view_only",
+        "view_and_upload",
+        "view_upload_and_message"
+      ],
+      "default": "view_only",
+      "description": "What the user can do"
+    },
+    "visible_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specific fields user can view (e.g., goals, appointments, progress_notes)",
+      "default": [
+        "appointments",
+        "messages",
+        "goals_summary",
+        "documents_pending"
+      ]
+    },
+    "approved": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether coordinator approved this access"
+    },
+    "approved_by": {
+      "type": "string",
+      "description": "Coordinator email who approved"
+    },
+    "approved_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_approval",
+        "active",
+        "suspended",
+        "revoked"
+      ],
+      "default": "pending_approval",
+      "description": "Access status"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Why this access was granted"
+    }
+  },
+  "required": [
+    "portal_user_id",
+    "client_id"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.portal_user_id": "{{user.id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "name": "PortalInvitation",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Email address being invited"
+    },
+    "invited_by": {
+      "type": "string",
+      "description": "Email of staff member who sent invitation"
+    },
+    "invited_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When invitation was sent"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "ID of child/client this invitation is for"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Name of child for context"
+    },
+    "household_id": {
+      "type": "string",
+      "description": "Household this invitation belongs to"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "primary_parent",
+        "secondary_parent",
+        "authorized_caregiver",
+        "youth",
+        "advocate",
+        "legal_representative"
+      ],
+      "description": "Role being invited for"
+    },
+    "relationship_to_child": {
+      "type": "string",
+      "description": "Relationship (parent, grandparent, etc)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "declined",
+        "expired"
+      ],
+      "default": "pending",
+      "description": "Invitation status"
+    },
+    "token": {
+      "type": "string",
+      "description": "Unique secure token for registration link"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When invitation expires (typically 30 days)"
+    },
+    "message": {
+      "type": "string",
+      "description": "Custom message from coordinator"
+    },
+    "accepted_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "portal_user_id": {
+      "type": "string",
+      "description": "ID of created PortalUser after acceptance"
+    }
+  },
+  "required": [
+    "email",
+    "client_id",
+    "role"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

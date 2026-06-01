@@ -1,0 +1,145 @@
+{
+  "name": "OutcomeRecord",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "record_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "period_label": {
+      "type": "string",
+      "description": "e.g. Q1 2025, 6-month review"
+    },
+    "developmental_domain": {
+      "type": "string",
+      "enum": [
+        "Communication",
+        "Adaptive Behavior",
+        "Social-Emotional",
+        "Motor",
+        "Cognitive",
+        "Academic",
+        "Self-Care",
+        "Overall"
+      ]
+    },
+    "baseline_score": {
+      "type": "number"
+    },
+    "current_score": {
+      "type": "number"
+    },
+    "goal_score": {
+      "type": "number"
+    },
+    "measurement_tool": {
+      "type": "string"
+    },
+    "school_placement": {
+      "type": "string",
+      "enum": [
+        "General Ed (Full Inclusion)",
+        "General Ed w/ Support",
+        "Resource Room",
+        "Self-Contained",
+        "Special Day Class",
+        "Non-Public School",
+        "Home/Hospital",
+        "None/Pre-K",
+        "Post-Secondary"
+      ]
+    },
+    "school_placement_change": {
+      "type": "boolean",
+      "default": false
+    },
+    "family_wellbeing_score": {
+      "type": "number",
+      "description": "1-10 family-reported"
+    },
+    "family_wellbeing_notes": {
+      "type": "string"
+    },
+    "services_active": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "service_hours_monthly": {
+      "type": "number"
+    },
+    "primary_diagnosis": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "ethnicity": {
+      "type": "string"
+    },
+    "county": {
+      "type": "string"
+    },
+    "recorded_by": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name",
+    "record_date",
+    "developmental_domain"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

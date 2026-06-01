@@ -1,0 +1,76 @@
+{
+  "name": "OutreachEvent",
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "Presentation",
+        "Health Fair",
+        "School Visit",
+        "Faith Community",
+        "Partner Meeting",
+        "Media",
+        "Other"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "organization": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "languages_served": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "staff_presenter": {
+      "type": "string"
+    },
+    "audience_count": {
+      "type": "number"
+    },
+    "topics_covered": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "materials_distributed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "referrals_generated": {
+      "type": "number",
+      "default": 0
+    },
+    "follow_up_contacts": {
+      "type": "number",
+      "default": 0
+    },
+    "engagement_outcome": {
+      "type": "string"
+    },
+    "grant_program": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "event_type"
+  ]
+}

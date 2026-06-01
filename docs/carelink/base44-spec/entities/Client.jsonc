@@ -1,0 +1,430 @@
+{
+  "name": "Client",
+  "type": "object",
+  "properties": {
+    "client_id_number": {
+      "type": "string",
+      "description": "Unique LCAC ID number (e.g., LCAC-0001)"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "URL to client headshot photo"
+    },
+    "legal_last_name": {
+      "type": "string",
+      "description": "Legal last name"
+    },
+    "legal_first_name": {
+      "type": "string",
+      "description": "Legal first name"
+    },
+    "preferred_name": {
+      "type": "string"
+    },
+    "dob": {
+      "type": "string",
+      "format": "date"
+    },
+    "age_group": {
+      "type": "string",
+      "enum": [
+        "Pediatric",
+        "Adult"
+      ],
+      "description": "Whether client is pediatric or adult"
+    },
+    "school_name": {
+      "type": "string",
+      "description": "School name (for pediatric clients)"
+    },
+    "school_district": {
+      "type": "string",
+      "description": "School district (for pediatric clients)"
+    },
+    "sex_at_birth": {
+      "type": "string",
+      "enum": [
+        "Male",
+        "Female",
+        "Intersex",
+        "Prefer not to say"
+      ]
+    },
+    "current_gender": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "default": "WA"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "primary_phone": {
+      "type": "string"
+    },
+    "secondary_phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "preferred_language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish",
+        "Russian",
+        "Vietnamese",
+        "Other"
+      ],
+      "default": "English"
+    },
+    "interpreter_needed": {
+      "type": "boolean",
+      "default": false
+    },
+    "interpreter_language": {
+      "type": "string"
+    },
+    "voicemail_ok": {
+      "type": "boolean",
+      "default": true
+    },
+    "caregiver_name": {
+      "type": "string"
+    },
+    "caregiver_relationship": {
+      "type": "string"
+    },
+    "caregiver_phone": {
+      "type": "string"
+    },
+    "caregiver_email": {
+      "type": "string"
+    },
+    "legal_authority": {
+      "type": "string"
+    },
+    "insurance_provider": {
+      "type": "string"
+    },
+    "insurance_policy_id": {
+      "type": "string"
+    },
+    "insurance_holder_name": {
+      "type": "string"
+    },
+    "insurance_holder_relationship": {
+      "type": "string"
+    },
+    "housing_status": {
+      "type": "string",
+      "enum": [
+        "Permanent",
+        "Doubling up",
+        "Transitional",
+        "Shelter",
+        "Unsheltered",
+        "Prefer not to say"
+      ]
+    },
+    "ethnicity": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "race": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contact_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "programs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Programs client is enrolled in (SMART Team, Autism Package, etc.)",
+      "default": []
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique document identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Document filename"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to uploaded document"
+          },
+          "type": {
+            "type": "string",
+            "description": "File MIME type"
+          },
+          "size": {
+            "type": "number",
+            "description": "File size in bytes"
+          },
+          "upload_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the document was uploaded"
+          }
+        }
+      },
+      "description": "Uploaded client documents",
+      "default": []
+    },
+    "attached_resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resource_id": {
+            "type": "string",
+            "description": "ID of the attached resource from Resource entity"
+          },
+          "title": {
+            "type": "string",
+            "description": "Resource title"
+          },
+          "category": {
+            "type": "string",
+            "description": "Resource category"
+          },
+          "type": {
+            "type": "string",
+            "description": "Resource type (Guide, Workshop, etc.)"
+          },
+          "url": {
+            "type": "string",
+            "description": "External URL to resource"
+          },
+          "source": {
+            "type": "string",
+            "description": "Resource source/publisher"
+          },
+          "attached_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the resource was attached"
+          },
+          "attached_by": {
+            "type": "string",
+            "description": "Staff member who attached the resource"
+          }
+        }
+      },
+      "description": "Library resources attached to this client",
+      "default": []
+    },
+    "notes": {
+      "type": "string"
+    },
+    "staff_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique note identifier"
+          },
+          "author": {
+            "type": "string",
+            "description": "Staff member who wrote the note"
+          },
+          "email": {
+            "type": "string",
+            "description": "Author's email"
+          },
+          "content": {
+            "type": "string",
+            "description": "Note content"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "Care Plan",
+              "Meeting",
+              "Concern",
+              "Progress Update",
+              "Follow-up",
+              "General"
+            ],
+            "default": "General",
+            "description": "Note category"
+          },
+          "is_pinned": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether note is pinned to top"
+          },
+          "mentions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [],
+            "description": "Email addresses of mentioned staff"
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "filename": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "uploaded_at": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "default": [],
+            "description": "Attached files to the note"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the note was created"
+          },
+          "edited_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the note was last edited"
+          },
+          "edited_by": {
+            "type": "string",
+            "description": "Email of staff member who edited"
+          }
+        }
+      },
+      "description": "Private staff notes for care coordination",
+      "default": []
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Pending",
+        "Closed"
+      ],
+      "default": "Active"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "Primary assigned case worker (legacy)"
+    },
+    "assigned_providers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names of all assigned providers/staff members",
+      "default": []
+    },
+    "caution_level": {
+      "type": "string",
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "none",
+      "description": "Caution level for staff awareness"
+    },
+    "hipaa_acknowledged": {
+      "type": "boolean",
+      "default": false
+    },
+    "hipaa_acknowledged_date": {
+      "type": "string"
+    },
+    "esignature": {
+      "type": "string"
+    },
+    "esignature_date": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "legal_first_name",
+    "legal_last_name",
+    "caregiver_name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "data.programs": {
+                "$in": "{{user.program_assignments}}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.programs": {
+            "$in": "{{user.program_assignments}}"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

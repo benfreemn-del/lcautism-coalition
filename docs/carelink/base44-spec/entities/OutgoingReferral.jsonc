@@ -1,0 +1,147 @@
+{
+  "name": "OutgoingReferral",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "referral_type": {
+      "type": "string",
+      "enum": [
+        "Evaluator",
+        "Therapist",
+        "Specialist",
+        "School",
+        "Community",
+        "Other"
+      ],
+      "default": "Specialist"
+    },
+    "provider_name": {
+      "type": "string"
+    },
+    "provider_org": {
+      "type": "string"
+    },
+    "provider_phone": {
+      "type": "string"
+    },
+    "provider_email": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "date_sent": {
+      "type": "string",
+      "format": "date"
+    },
+    "expected_wait_weeks": {
+      "type": "number"
+    },
+    "expected_contact_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Sent",
+        "Pending Confirmation",
+        "Scheduled",
+        "In Progress",
+        "Completed",
+        "Declined",
+        "No Response"
+      ],
+      "default": "Sent"
+    },
+    "outcome": {
+      "type": "string"
+    },
+    "outcome_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "assigned_to": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Urgent"
+      ],
+      "default": "Medium"
+    },
+    "consent_obtained": {
+      "type": "boolean",
+      "default": false
+    },
+    "consent_notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name",
+    "provider_name",
+    "referral_type"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.assigned_to": "{{user.email}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.assigned_to": "{{user.email}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

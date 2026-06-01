@@ -1,0 +1,78 @@
+{
+  "name": "InventoryHold",
+  "type": "object",
+  "properties": {
+    "itemId": {
+      "type": "string",
+      "description": "InventoryItem ID"
+    },
+    "itemSku": {
+      "type": "string"
+    },
+    "itemName": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Quantity being held"
+    },
+    "clientId": {
+      "type": "string",
+      "description": "Client ID this is reserved for"
+    },
+    "clientName": {
+      "type": "string"
+    },
+    "kitAssemblyId": {
+      "type": "string",
+      "description": "Kit Assembly ID if part of a kit"
+    },
+    "holdType": {
+      "type": "string",
+      "enum": [
+        "Client Reservation",
+        "Kit Assembly",
+        "Event Preparation",
+        "Workshop Preparation"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Fulfilled",
+        "Expired",
+        "Cancelled"
+      ],
+      "default": "Active"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expirationDate": {
+      "type": "string",
+      "format": "date",
+      "description": "When hold expires and items return to inventory"
+    },
+    "fulfilledDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "fulfilledBy": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "itemId",
+    "quantity",
+    "holdType",
+    "createdBy"
+  ]
+}

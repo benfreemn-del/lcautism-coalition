@@ -1,0 +1,120 @@
+{
+  "name": "ConsentForm",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "recipient_name": {
+      "type": "string",
+      "description": "Who information is released to"
+    },
+    "recipient_organization": {
+      "type": "string"
+    },
+    "recipient_phone": {
+      "type": "string"
+    },
+    "recipient_email": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Purpose of disclosure"
+    },
+    "information_to_release": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "authorized_by": {
+      "type": "string",
+      "description": "Name of parent/guardian authorizing"
+    },
+    "relationship": {
+      "type": "string"
+    },
+    "signature": {
+      "type": "string"
+    },
+    "signature_date": {
+      "type": "string"
+    },
+    "effective_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Expired",
+        "Revoked",
+        "Pending"
+      ],
+      "default": "Active"
+    },
+    "revocation_date": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name",
+    "recipient_name",
+    "authorized_by"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

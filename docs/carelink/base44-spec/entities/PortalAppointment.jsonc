@@ -1,0 +1,157 @@
+{
+  "name": "PortalAppointment",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Client this appointment is for"
+    },
+    "title": {
+      "type": "string",
+      "description": "Appointment title"
+    },
+    "appointment_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "therapy",
+        "evaluation",
+        "iep_meeting",
+        "504_meeting",
+        "school_meeting",
+        "medical",
+        "visit",
+        "other"
+      ],
+      "description": "Type of appointment"
+    },
+    "provider_name": {
+      "type": "string",
+      "description": "Name of provider/facilitator"
+    },
+    "location": {
+      "type": "string",
+      "description": "Physical location or 'virtual'"
+    },
+    "address": {
+      "type": "string"
+    },
+    "is_virtual": {
+      "type": "boolean",
+      "default": false
+    },
+    "virtual_join_link": {
+      "type": "string",
+      "description": "URL for virtual visit join"
+    },
+    "description": {
+      "type": "string",
+      "description": "Plain-language description"
+    },
+    "what_to_bring": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Items to bring",
+      "default": []
+    },
+    "preparation_notes": {
+      "type": "string",
+      "description": "How to prepare"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "confirmed",
+        "reminder_sent",
+        "completed",
+        "cancelled",
+        "no_show"
+      ],
+      "default": "scheduled"
+    },
+    "family_confirmed": {
+      "type": "boolean",
+      "default": false
+    },
+    "family_confirmed_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reminder_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "reminder_preferences": {
+      "type": "object",
+      "properties": {
+        "one_week_before": {
+          "type": "boolean"
+        },
+        "one_day_before": {
+          "type": "boolean"
+        },
+        "two_hours_before": {
+          "type": "boolean"
+        }
+      },
+      "description": "Reminder timing preferences"
+    },
+    "can_reschedule": {
+      "type": "boolean",
+      "default": true
+    },
+    "can_cancel": {
+      "type": "boolean",
+      "default": true
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_id",
+    "title",
+    "appointment_date"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.client_id": {
+            "$in": "{{user.data.children}}"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

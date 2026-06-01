@@ -1,0 +1,197 @@
+{
+  "name": "ServicePlan",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "ID of the associated client"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Client name for quick reference"
+    },
+    "plan_title": {
+      "type": "string",
+      "description": "Title of the service plan"
+    },
+    "goals_summary": {
+      "type": "string",
+      "description": "Overall plan goals summary"
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Not Started",
+              "In Progress",
+              "Achieved",
+              "Discontinued"
+            ],
+            "default": "Not Started"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "target_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "completion_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "default": [],
+      "description": "Goals with progress tracking"
+    },
+    "interventions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "frequency": {
+            "type": "string",
+            "enum": [
+              "Daily",
+              "Weekly",
+              "Bi-weekly",
+              "Monthly"
+            ]
+          },
+          "responsible_staff": {
+            "type": "string"
+          }
+        }
+      },
+      "default": [],
+      "description": "Interventions in the plan"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Completed",
+        "On Hold",
+        "Archived"
+      ],
+      "default": "Active",
+      "description": "Current status of the plan"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the plan starts"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Anticipated end date"
+    },
+    "progress_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "staff_member": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      },
+      "default": [],
+      "description": "Progress notes and updates"
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date",
+      "description": "Last review date"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Staff member who last reviewed"
+    },
+    "version_number": {
+      "type": "number",
+      "default": 1,
+      "description": "Current version number for history tracking"
+    }
+  },
+  "required": [
+    "client_id",
+    "client_name",
+    "plan_title"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "name": "IEERequest",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    },
+    "request_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "evaluation_area": {
+      "type": "string",
+      "enum": [
+        "Psychoeducational",
+        "Speech-Language",
+        "Occupational Therapy",
+        "Physical Therapy",
+        "Functional Behavioral",
+        "Assistive Technology",
+        "Other"
+      ]
+    },
+    "reason_for_request": {
+      "type": "string"
+    },
+    "letter_sent_date": {
+      "type": "string"
+    },
+    "district_response": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Agreed - At Public Expense",
+        "Denied - Will Conduct Own",
+        "Partial Agreement",
+        "No Response"
+      ],
+      "default": "Pending"
+    },
+    "district_response_date": {
+      "type": "string"
+    },
+    "evaluator_selected": {
+      "type": "string"
+    },
+    "evaluation_completed_date": {
+      "type": "string"
+    },
+    "outcome": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Letter Sent",
+        "Awaiting Response",
+        "Evaluation Scheduled",
+        "Complete",
+        "Disputed"
+      ],
+      "default": "Draft"
+    },
+    "assigned_to": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name",
+    "evaluation_area"
+  ]
+}

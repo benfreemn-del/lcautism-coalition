@@ -1,0 +1,181 @@
+{
+  "name": "PDSAProject",
+  "type": "object",
+  "properties": {
+    "project_name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "team_lead": {
+      "type": "string"
+    },
+    "team_members": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "cycle_number": {
+      "type": "number",
+      "default": 1,
+      "description": "PDSA cycle iteration"
+    },
+    "plan_statement": {
+      "type": "string",
+      "description": "What do we want to accomplish?"
+    },
+    "plan_hypothesis": {
+      "type": "string",
+      "description": "Our prediction for change"
+    },
+    "do_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Actions taken during DO phase"
+    },
+    "do_date_range": {
+      "type": "object",
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "measurement_method": {
+      "type": "string",
+      "description": "How will we measure success?"
+    },
+    "baseline_metric": {
+      "type": "number"
+    },
+    "current_metric": {
+      "type": "number"
+    },
+    "metric_unit": {
+      "type": "string",
+      "description": "e.g., %, count, hours"
+    },
+    "study_findings": {
+      "type": "string",
+      "description": "What did we learn? What worked? What didn't?"
+    },
+    "study_data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "value": {
+            "type": "number"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "adaptations": {
+      "type": "string",
+      "description": "What will we change for next cycle?"
+    },
+    "lessons_learned": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_cycle_plan": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planning",
+        "In Progress",
+        "Study Phase",
+        "Completed",
+        "On Hold"
+      ],
+      "default": "Planning"
+    },
+    "impact_summary": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "project_name",
+    "team_lead",
+    "start_date"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.team_lead": "{{user.full_name}}"
+        },
+        {
+          "data.team_members": "{{user.full_name}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.team_lead": "{{user.full_name}}"
+        },
+        {
+          "data.team_members": "{{user.full_name}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

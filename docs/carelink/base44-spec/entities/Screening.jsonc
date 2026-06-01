@@ -1,0 +1,131 @@
+{
+  "name": "Screening",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "tool": {
+      "type": "string",
+      "enum": [
+        "ASQ-3",
+        "M-CHAT-R/F",
+        "SWYC",
+        "Other"
+      ]
+    },
+    "age_months": {
+      "type": "number"
+    },
+    "administered_by": {
+      "type": "string"
+    },
+    "administered_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish"
+      ],
+      "default": "English"
+    },
+    "responses": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "total_score": {
+      "type": "number"
+    },
+    "domain_scores": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "result": {
+      "type": "string",
+      "enum": [
+        "Typical",
+        "Monitor",
+        "Refer",
+        "Incomplete"
+      ]
+    },
+    "flagged_domains": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "follow_up_action": {
+      "type": "string"
+    },
+    "follow_up_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Complete",
+        "In Progress",
+        "Pending Review"
+      ],
+      "default": "Complete"
+    }
+  },
+  "required": [
+    "client_name",
+    "tool"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

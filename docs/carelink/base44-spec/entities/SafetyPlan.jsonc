@@ -1,0 +1,153 @@
+{
+  "name": "SafetyPlan",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date"
+    },
+    "warning_signs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "internal_coping": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Things to do alone to distract"
+    },
+    "social_distractions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "People/places to distract"
+    },
+    "support_contacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "professional_contacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "crisis_lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "environmental_safety_steps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Steps to reduce access without listing methods"
+    },
+    "reasons_for_living": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "safe_environment_confirmed": {
+      "type": "boolean",
+      "default": false
+    },
+    "caregiver_involved": {
+      "type": "boolean",
+      "default": true
+    },
+    "caregiver_name": {
+      "type": "string"
+    },
+    "signature": {
+      "type": "string"
+    },
+    "signature_date": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Active",
+        "Expired",
+        "Revised"
+      ],
+      "default": "Draft"
+    }
+  },
+  "required": [
+    "client_name"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

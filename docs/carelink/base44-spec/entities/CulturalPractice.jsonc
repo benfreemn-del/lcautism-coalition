@@ -1,0 +1,166 @@
+{
+  "name": "CulturalPractice",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "practice_name": {
+      "type": "string"
+    },
+    "practice_type": {
+      "type": "string",
+      "enum": [
+        "Ceremony",
+        "Seasonal Gathering",
+        "Food Tradition",
+        "Language Practice",
+        "Prayer / Spiritual Ritual",
+        "Traditional Healing",
+        "Storytelling",
+        "Arts / Crafts",
+        "Song / Dance",
+        "Land-based Activity",
+        "Family Gathering",
+        "Other"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Family-provided description of the practice"
+    },
+    "frequency": {
+      "type": "string",
+      "enum": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Seasonally",
+        "Annually",
+        "As Needed",
+        "Varies"
+      ]
+    },
+    "season_or_timing": {
+      "type": "string",
+      "description": "Time of year or circumstances when practice occurs"
+    },
+    "care_plan_integration": {
+      "type": "string",
+      "description": "How this practice should be honored/incorporated into care"
+    },
+    "scheduling_considerations": {
+      "type": "string",
+      "description": "Appointment / scheduling conflicts or needs to accommodate"
+    },
+    "staff_guidance": {
+      "type": "string",
+      "description": "What staff should know or do to support this practice"
+    },
+    "things_to_avoid": {
+      "type": "string",
+      "description": "Actions, language, or scheduling conflicts to avoid"
+    },
+    "community_involved": {
+      "type": "boolean",
+      "default": false
+    },
+    "elder_or_healer_involved": {
+      "type": "boolean",
+      "default": false
+    },
+    "contact_for_coordination": {
+      "type": "string",
+      "description": "Community contact for coordination if applicable"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Core Identity",
+        "Important",
+        "Nice to Honor"
+      ],
+      "default": "Important"
+    },
+    "included_in_care_plan": {
+      "type": "boolean",
+      "default": false
+    },
+    "access_level": {
+      "type": "string",
+      "enum": [
+        "Coordinator Only",
+        "Full Care Team",
+        "Admin Only"
+      ],
+      "default": "Full Care Team"
+    },
+    "documented_by": {
+      "type": "string"
+    },
+    "documented_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Seasonal"
+      ],
+      "default": "Active"
+    }
+  },
+  "required": [
+    "client_name",
+    "practice_name",
+    "practice_type"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

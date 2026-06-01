@@ -1,0 +1,194 @@
+{
+  "name": "OnboardingRecord",
+  "type": "object",
+  "properties": {
+    "staff_member": {
+      "type": "string"
+    },
+    "staff_email": {
+      "type": "string"
+    },
+    "hire_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "position": {
+      "type": "string"
+    },
+    "supervisor": {
+      "type": "string"
+    },
+    "onboarding_start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "documents_required": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "document": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "completion_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "description": "I-9, W4, background check, etc."
+    },
+    "system_access_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "system": {
+            "type": "string"
+          },
+          "access_granted": {
+            "type": "boolean"
+          },
+          "access_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "training_milestones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "training": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "completion_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "description": "HIPAA, safety protocols, system training"
+    },
+    "day_30_checkin": {
+      "type": "object",
+      "properties": {
+        "scheduled_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "completed_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "feedback": {
+          "type": "string"
+        },
+        "adjustments_needed": {
+          "type": "string"
+        }
+      }
+    },
+    "day_60_checkin": {
+      "type": "object",
+      "properties": {
+        "scheduled_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "completed_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "feedback": {
+          "type": "string"
+        },
+        "adjustments_needed": {
+          "type": "string"
+        }
+      }
+    },
+    "day_90_checkin": {
+      "type": "object",
+      "properties": {
+        "scheduled_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "completed_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "feedback": {
+          "type": "string"
+        },
+        "performance_summary": {
+          "type": "string"
+        },
+        "probation_status": {
+          "type": "string",
+          "enum": [
+            "Passed",
+            "Needs Extension",
+            "Ended"
+          ]
+        }
+      }
+    },
+    "orientation_completed": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "In Progress",
+        "Completed",
+        "On Hold"
+      ],
+      "default": "In Progress"
+    }
+  },
+  "required": [
+    "staff_member",
+    "hire_date",
+    "position"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.staff_email": "{{user.email}}"
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

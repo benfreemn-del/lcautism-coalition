@@ -1,0 +1,244 @@
+{
+  "name": "Referral",
+  "type": "object",
+  "properties": {
+    "child_name": {
+      "type": "string",
+      "description": "Child's full name"
+    },
+    "dob": {
+      "type": "string",
+      "format": "date"
+    },
+    "age": {
+      "type": "string"
+    },
+    "county": {
+      "type": "string"
+    },
+    "preferred_language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish",
+        "Russian",
+        "Vietnamese",
+        "Other"
+      ],
+      "default": "English"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "Healthcare Provider",
+        "School / District",
+        "Self / Family",
+        "Community Partner",
+        "WA INCLUDE",
+        "DDA",
+        "Crisis / ER",
+        "Other"
+      ]
+    },
+    "referrer_name": {
+      "type": "string",
+      "description": "Name of referring person or organization"
+    },
+    "referrer_org": {
+      "type": "string",
+      "description": "Referring organization"
+    },
+    "referrer_phone": {
+      "type": "string"
+    },
+    "referrer_email": {
+      "type": "string"
+    },
+    "contact_name": {
+      "type": "string",
+      "description": "Parent / caregiver contact name"
+    },
+    "contact_phone": {
+      "type": "string"
+    },
+    "contact_email": {
+      "type": "string"
+    },
+    "contact_relationship": {
+      "type": "string"
+    },
+    "requested_services": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Services being requested",
+      "default": []
+    },
+    "presenting_concerns": {
+      "type": "string",
+      "description": "Clinical / support concerns described by referrer"
+    },
+    "urgency_notes": {
+      "type": "string",
+      "description": "Notes explaining urgency level"
+    },
+    "iep_status": {
+      "type": "string",
+      "enum": [
+        "Has IEP",
+        "Has 504",
+        "Evaluation Pending",
+        "No IEP/504",
+        "Unknown"
+      ],
+      "description": "School plan status (for school-source referrals)"
+    },
+    "school_name": {
+      "type": "string"
+    },
+    "school_grade": {
+      "type": "string"
+    },
+    "school_district": {
+      "type": "string"
+    },
+    "diagnosis_known": {
+      "type": "boolean",
+      "default": false
+    },
+    "diagnosis_notes": {
+      "type": "string"
+    },
+    "insurance_type": {
+      "type": "string"
+    },
+    "consent_obtained": {
+      "type": "boolean",
+      "default": false
+    },
+    "consent_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "consent_notes": {
+      "type": "string"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "Assigned coordinator email or name"
+    },
+    "date_received": {
+      "type": "string",
+      "format": "date"
+    },
+    "date_first_contact": {
+      "type": "string",
+      "format": "date"
+    },
+    "contact_attempts": {
+      "type": "number",
+      "default": 0
+    },
+    "intake_appointment_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Urgent"
+      ],
+      "default": "Medium"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "New",
+        "Under Review",
+        "Pending Information",
+        "Assigned",
+        "Contact Attempted",
+        "Engaged",
+        "Enrolled",
+        "Declined",
+        "Closed",
+        "Transferred"
+      ],
+      "default": "New"
+    },
+    "decline_reason": {
+      "type": "string"
+    },
+    "internal_notes": {
+      "type": "string",
+      "description": "Staff-only internal notes"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for referral (legacy)"
+    },
+    "notes": {
+      "type": "string",
+      "description": "General notes"
+    },
+    "converted_client_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "child_name"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.assigned_to": "{{user.email}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.assigned_to": "{{user.email}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

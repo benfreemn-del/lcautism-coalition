@@ -1,0 +1,126 @@
+{
+  "name": "ADHDAssessment",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "assessment_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "clinician": {
+      "type": "string"
+    },
+    "parent_responses": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "teacher_responses": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "parent_inattention_score": {
+      "type": "number"
+    },
+    "parent_hyperactivity_score": {
+      "type": "number"
+    },
+    "teacher_inattention_score": {
+      "type": "number"
+    },
+    "teacher_hyperactivity_score": {
+      "type": "number"
+    },
+    "parent_total": {
+      "type": "number"
+    },
+    "teacher_total": {
+      "type": "number"
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "Below Threshold",
+        "At Risk",
+        "Clinically Significant"
+      ]
+    },
+    "presentation": {
+      "type": "string",
+      "enum": [
+        "Predominantly Inattentive",
+        "Predominantly Hyperactive-Impulsive",
+        "Combined Presentation",
+        "Insufficient Data"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Incomplete",
+        "Awaiting Teacher",
+        "Complete"
+      ],
+      "default": "Incomplete"
+    }
+  },
+  "required": [
+    "client_name"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "name": "Submission",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "ID of the linked client"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "form_type": {
+      "type": "string",
+      "description": "Type of form submitted"
+    },
+    "form_title": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Complete",
+        "Draft",
+        "Awaiting Signature",
+        "Pending Review"
+      ],
+      "default": "Complete"
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Form field values"
+    },
+    "signature": {
+      "type": "string"
+    },
+    "signature_date": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "form_type"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

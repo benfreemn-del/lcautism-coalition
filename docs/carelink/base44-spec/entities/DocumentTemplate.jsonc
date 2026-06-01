@@ -1,0 +1,79 @@
+{
+  "name": "DocumentTemplate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Template name (e.g., 'Consent Form', 'Medical Release')"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Medical",
+        "Legal",
+        "Intake",
+        "Referral",
+        "Other"
+      ],
+      "description": "Document category"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the template"
+    },
+    "content": {
+      "type": "string",
+      "description": "Template content with placeholders like {{client_name}}, {{email}}, {{date}}"
+    },
+    "placeholders": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of available placeholders (e.g., 'client_name', 'email', 'dob')",
+      "default": []
+    },
+    "file_extension": {
+      "type": "string",
+      "enum": [
+        "pdf",
+        "docx",
+        "txt"
+      ],
+      "default": "docx",
+      "description": "File format for generated documents"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this template is available for use"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "Email of staff member who created template"
+    }
+  },
+  "required": [
+    "name",
+    "category",
+    "content"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

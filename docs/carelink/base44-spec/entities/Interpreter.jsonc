@@ -1,0 +1,78 @@
+{
+  "name": "Interpreter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "organization": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "language_pairs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dialects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "credential_type": {
+      "type": "string",
+      "enum": [
+        "Certified Medical",
+        "Community",
+        "Staff Bilingual",
+        "Contractor",
+        "Other"
+      ]
+    },
+    "certification_number": {
+      "type": "string"
+    },
+    "certification_expiry": {
+      "type": "string",
+      "format": "date"
+    },
+    "modalities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "availability": {
+      "type": "string"
+    },
+    "avg_family_rating": {
+      "type": "number"
+    },
+    "total_sessions": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Pending Verification"
+      ],
+      "default": "Active"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

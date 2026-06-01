@@ -1,0 +1,126 @@
+{
+  "name": "ADOS2Assessment",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "module": {
+      "type": "string",
+      "enum": [
+        "Toddler",
+        "Module 1",
+        "Module 2",
+        "Module 3",
+        "Module 4"
+      ]
+    },
+    "administered_by": {
+      "type": "string"
+    },
+    "administered_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "age_years": {
+      "type": "number"
+    },
+    "domain_scores": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "sa_total": {
+      "type": "number",
+      "description": "Social Affect total"
+    },
+    "rrb_total": {
+      "type": "number",
+      "description": "Restricted & Repetitive Behaviors total"
+    },
+    "overall_total": {
+      "type": "number"
+    },
+    "comparison_score": {
+      "type": "number",
+      "description": "Calibrated Severity Score 1-10"
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "No Concern",
+        "Mild-Moderate Concern",
+        "Autism Spectrum Concern",
+        "Autism Concern"
+      ]
+    },
+    "algorithm_items": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "clinical_observations": {
+      "type": "string"
+    },
+    "summary_narrative": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Complete",
+        "Reviewed"
+      ],
+      "default": "Draft"
+    }
+  },
+  "required": [
+    "client_name",
+    "module"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

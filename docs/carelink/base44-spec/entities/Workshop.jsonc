@@ -1,0 +1,92 @@
+{
+  "name": "Workshop",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "title_es": {
+      "type": "string"
+    },
+    "workshop_type": {
+      "type": "string",
+      "enum": [
+        "Entendiendo El Autismo",
+        "ADHD Info",
+        "IEP Rights",
+        "Sensory Strategies",
+        "Crisis Support",
+        "Community Awareness",
+        "Other"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "time": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "Spanish",
+        "English",
+        "Bilingual"
+      ],
+      "default": "Spanish"
+    },
+    "facilitator": {
+      "type": "string"
+    },
+    "max_capacity": {
+      "type": "number"
+    },
+    "registrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "attendees_count": {
+      "type": "number"
+    },
+    "materials_distributed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "survey_responses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "avg_satisfaction": {
+      "type": "number"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "Registration Open",
+        "Complete",
+        "Cancelled"
+      ],
+      "default": "Planned"
+    }
+  },
+  "required": [
+    "title",
+    "workshop_type"
+  ]
+}

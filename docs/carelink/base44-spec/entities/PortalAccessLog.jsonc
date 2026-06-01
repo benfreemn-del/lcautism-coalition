@@ -1,0 +1,69 @@
+{
+  "name": "PortalAccessLog",
+  "type": "object",
+  "properties": {
+    "staff_member_email": {
+      "type": "string",
+      "description": "Staff member who accessed"
+    },
+    "staff_name": {
+      "type": "string"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "Client whose record was accessed"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "access_type": {
+      "type": "string",
+      "enum": [
+        "view",
+        "update",
+        "download",
+        "export"
+      ],
+      "description": "Type of access"
+    },
+    "what_was_accessed": {
+      "type": "string",
+      "description": "What section/data was accessed"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ip_address": {
+      "type": "string"
+    },
+    "device": {
+      "type": "string"
+    },
+    "is_family_visible": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether family can see this access in their audit log"
+    },
+    "justification": {
+      "type": "string",
+      "description": "Reason for access if required by policy"
+    }
+  },
+  "required": [
+    "staff_member_email",
+    "client_id",
+    "access_type",
+    "timestamp"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": false,
+    "delete": false
+  }
+}

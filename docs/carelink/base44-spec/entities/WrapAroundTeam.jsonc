@@ -1,0 +1,61 @@
+{
+  "name": "WrapAroundTeam",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "natural_supports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "professional_supports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "meeting_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "action_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "team_vision": {
+      "type": "string"
+    },
+    "family_strengths": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "On Hold",
+        "Complete"
+      ],
+      "default": "Active"
+    },
+    "assigned_to": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name"
+  ]
+}

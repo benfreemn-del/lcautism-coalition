@@ -1,0 +1,172 @@
+{
+  "name": "PortalMessage",
+  "type": "object",
+  "properties": {
+    "conversation_id": {
+      "type": "string",
+      "description": "Unique conversation ID"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "Client this conversation is about"
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "description": "Portal user or staff email"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "family",
+              "coordinator",
+              "provider",
+              "team"
+            ]
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "All participants in conversation"
+    },
+    "sender_id": {
+      "type": "string",
+      "description": "Who sent this message"
+    },
+    "sender_name": {
+      "type": "string"
+    },
+    "sender_role": {
+      "type": "string",
+      "enum": [
+        "family",
+        "coordinator",
+        "provider",
+        "team"
+      ]
+    },
+    "message_type": {
+      "type": "string",
+      "enum": [
+        "text",
+        "templated",
+        "system"
+      ],
+      "default": "text"
+    },
+    "content": {
+      "type": "string",
+      "description": "Message text"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "default": [],
+      "description": "Attached files"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false
+    },
+    "read_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "English",
+        "Spanish"
+      ],
+      "default": "English"
+    },
+    "translation_available": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether staff-reviewed translation exists"
+    },
+    "translated_content": {
+      "type": "string",
+      "description": "Pre-translated content if available"
+    },
+    "requires_translation": {
+      "type": "boolean",
+      "default": false,
+      "description": "Family requested human translation"
+    }
+  },
+  "required": [
+    "conversation_id",
+    "client_id",
+    "sender_id",
+    "content"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.participants.user_id": "{{user.id}}"
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.participants.user_id": "{{user.id}}"
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

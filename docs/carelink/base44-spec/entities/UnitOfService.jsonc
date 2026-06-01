@@ -1,0 +1,111 @@
+{
+  "name": "UnitOfService",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Associated client ID"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Client name for reporting"
+    },
+    "service_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of service"
+    },
+    "service_type": {
+      "type": "string",
+      "enum": [
+        "Service Coordination",
+        "Care Conference",
+        "Crisis Contact",
+        "Transition Planning",
+        "IEP Support",
+        "Family Training",
+        "Outreach Contact",
+        "Discharge Summary",
+        "Progress Note",
+        "Intake Note"
+      ],
+      "description": "Type of service provided"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "description": "Length of service in minutes"
+    },
+    "billing_code": {
+      "type": "string",
+      "description": "Associated billing code (e.g., T1016, H0046)"
+    },
+    "grant_id": {
+      "type": "string",
+      "description": "Grant this unit is billable to"
+    },
+    "grant_name": {
+      "type": "string",
+      "description": "Grant name for quick reference"
+    },
+    "funding_source": {
+      "type": "string",
+      "description": "Funder name or acronym"
+    },
+    "clinical_note_id": {
+      "type": "string",
+      "description": "Linked ClinicalNote ID (source document)"
+    },
+    "coordinator_name": {
+      "type": "string",
+      "description": "Staff who provided service"
+    },
+    "location": {
+      "type": "string",
+      "enum": [
+        "Home",
+        "Office",
+        "School",
+        "Community",
+        "Telehealth",
+        "Phone",
+        "Hospital",
+        "Other"
+      ],
+      "description": "Service location"
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "People present during service"
+    },
+    "invoice_batch_id": {
+      "type": "string",
+      "description": "Linked to generated invoice/batch"
+    },
+    "invoice_status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Submitted",
+        "Billed",
+        "Paid"
+      ],
+      "default": "Draft",
+      "description": "Invoice status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional details for funder"
+    }
+  },
+  "required": [
+    "client_id",
+    "service_date",
+    "service_type",
+    "billing_code",
+    "grant_id",
+    "funding_source"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "name": "TransitionPlan",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_name": {
+      "type": "string"
+    },
+    "current_age": {
+      "type": "number"
+    },
+    "transition_age_target": {
+      "type": "number"
+    },
+    "self_advocacy_goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "vocational_goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "adult_services_identified": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dda_referral_status": {
+      "type": "string",
+      "enum": [
+        "Not Started",
+        "In Progress",
+        "Submitted",
+        "Approved",
+        "Denied"
+      ],
+      "default": "Not Started"
+    },
+    "iep_transition_section": {
+      "type": "boolean",
+      "default": false
+    },
+    "guardianship_discussion": {
+      "type": "boolean",
+      "default": false
+    },
+    "housing_planning": {
+      "type": "string"
+    },
+    "employment_interest": {
+      "type": "string"
+    },
+    "strengths": {
+      "type": "string"
+    },
+    "barriers": {
+      "type": "string"
+    },
+    "next_review_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "On Hold",
+        "Complete"
+      ],
+      "default": "Active"
+    },
+    "assigned_to": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_name"
+  ]
+}
