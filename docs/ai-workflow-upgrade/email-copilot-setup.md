@@ -49,22 +49,19 @@ supabase secrets set --project-ref byxuapnhhuxekamgnwaf \
   MONTHLY_USD_CAP=20
 ```
 
-### 5. Inbound Apps Scripts — 20 min · script.google.com (×3 inboxes)
-For **each** inbox (info@, outreach@, executivedirector@), signed in as that account:
-1. New project at script.google.com → paste `email-copilot-inbound-apps-script.js`.
-2. Set `INBOX_NAME` to `info` / `outreach` / `executivedirector`.
-3. Project Settings → Script Properties → add `WEBHOOK_SECRET` = the same string from step 4.
-4. Triggers → add a **time-based** trigger on `checkAndForwardNewEmails`, every 5 minutes.
-5. Run once manually to approve the Gmail permission prompt.
+### 5. Apps Scripts — 25 min · script.google.com (one project per inbox)
+Do this **once per inbox** (info@, outreach@, executivedirector@), signed in as that account. Both scripts go in the **same** project — that's 3 projects total, not 6.
+1. New project at script.google.com.
+2. Paste **both** `email-copilot-inbound-apps-script.js` and `email-copilot-send-apps-script.js` into it (no conflicts — different function names).
+3. Set `INBOX_NAME` to `info` / `outreach` / `executivedirector` in **both** functions.
+4. Project Settings → Script Properties → add all three:
+   - `WEBHOOK_SECRET` = the same string from step 4
+   - `SUPABASE_URL` = `https://byxuapnhhuxekamgnwaf.supabase.co`
+   - `SUPABASE_SERVICE_KEY` = the lcac-crm **service_role** key (Supabase → Settings → API)
+5. Triggers → add **two** time-based triggers (every 5 min): one on `checkAndForwardNewEmails`, one on `sendApprovedReplies`.
+6. Run each function once to approve the Gmail permission prompts.
 
-### 6. Outbound Apps Scripts — 15 min · same 3 accounts
-For **each** inbox (can be the same project as step 5, or a new one):
-1. Paste `email-copilot-send-apps-script.js`, set `INBOX_NAME` to match.
-2. Script Properties: `SUPABASE_URL` = `https://byxuapnhhuxekamgnwaf.supabase.co`, `SUPABASE_SERVICE_KEY` = the lcac-crm **service_role** key (Supabase → Settings → API).
-3. Triggers → time-based on `sendApprovedReplies`, every 5 minutes.
-4. Run once to approve the Gmail send permission.
-
-### 7. Test end-to-end — 10 min
+### 6. Test end-to-end — 10 min
 1. Send a test email to info@.
 2. Within ~5 min it appears in the CRM **Email Replies** tab with a draft.
 3. Edit a word, click **Approve & Send** → within ~5 min the reply lands in your test inbox, sent from info@.
@@ -83,4 +80,4 @@ For **each** inbox (can be the same project as step 5, or a new one):
 ## Notes
 - **Cost:** ~$0.18/month at LCAC volume (Haiku). The $20 cap is a safety net, not an expectation.
 - **Confirm before you start:** all 3 inboxes are Google Workspace, and you have access to each account to add Apps Scripts.
-- **Decision:** you can ship steps 1–5 first (drafts appear, Michelle approves but nothing sends yet), then add step 6 later to turn on sending. Approve & Send just marks them "approved" until the outbound script exists.
+- **Drafts-only first (optional):** to start with drafts only — Michelle reviews and approves, but nothing sends yet — just skip the `sendApprovedReplies` trigger in step 5. Approved replies queue up safely until you add it.

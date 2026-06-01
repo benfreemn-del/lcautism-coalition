@@ -85,11 +85,11 @@ Deno.serve(async (req: Request) => {
     await sb.from("queued_replies").insert({
       inbox, from_email, from_name, subject, body_text,
       gmail_thread_id, gmail_message_id,
-      status: "skipped",
+      status: "pending",
       error: `Monthly AI cap ($${MONTHLY_USD_CAP}) reached — no draft generated.`,
-      draft_body: "[Monthly draft limit reached. Please write this reply manually.]",
+      draft_body: "[Monthly draft limit reached — please write this reply by hand.]",
     });
-    return new Response(JSON.stringify({ ok: true, skipped: "cap" }), { status: 200 });
+    return new Response(JSON.stringify({ ok: true, capped: true }), { status: 200 });
   }
 
   // ---- try to match a known contact ----

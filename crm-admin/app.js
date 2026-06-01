@@ -243,13 +243,19 @@ function loadRepliesBadge() {
 
 async function renderReplies(c) {
   setLoading(c, "Email Replies");
-  let pending, cost;
+  let pending, cost, sent;
   try {
-    [pending, cost] = await Promise.all([
+    [pending, cost, sent] = await Promise.all([
       run(sb.from("queued_replies").select("*").eq("status", "pending").order("created_at", { ascending: false }), "Loading drafts"),
       run(sb.from("system_costs").select("*").eq("month", monthKey()).maybeSingle(), "Loading usage"),
+      run(sb.from("queued_replies").select("*").eq("status", "sent").order("sent_at", { ascending: false }).limit(10), "Loading sent"),
     ]);
-  } catch (e) { return; }
+  } catch (e) {
+    c.innerHTML = "";
+    c.appendChild(el("h2", { class: "page-title", text: "Email Replies" }));
+    c.appendChild(el("div", { class: "card" }, [el("p", { class: "muted", text: "This feature isn't turned on yet. Once the email co-pilot is set up, draft replies will appear here." })]));
+    return;
+  }
 
   updateRepliesBadge(pending.length);
 
@@ -263,7 +269,6 @@ async function renderReplies(c) {
 
   if (pending.length === 0) {
     c.appendChild(el("div", { class: "card" }, [el("p", { class: "muted", text: "No drafts waiting. When a new email arrives, a ready-to-send reply will appear here." })]));
-    return;
   }
 
   pending.forEach((r) => {
@@ -323,6 +328,20 @@ async function renderReplies(c) {
     card.appendChild(actions);
     c.appendChild(card);
   });
+
+  if (sent && sent.length) {
+    const sd = el("details", { style: "margin-top:16px" });
+    sd.appendChild(el("summary", { class: "muted", style: "cursor:pointer", text: `Recently sent (${sent.length})` }));
+    const list = el("div", { class: "card", style: "margin-top:8px" });
+    sent.forEach((s) => {
+      list.appendChild(el("div", { class: "attn-item", style: "flex-direction:column;align-items:flex-start;gap:2px" }, [
+        el("div", {}, [el("strong", { text: s.from_name || s.from_email || "(unknown)" }), el("span", { class: "muted", text: s.subject ? " — " + esc(s.subject) : "" })]),
+        el("div", { class: "muted", style: "font-size:13px", text: "Sent " + fmtDateTime(s.sent_at) }),
+      ]));
+    });
+    sd.appendChild(list);
+    c.appendChild(sd);
+  }
 }
 
 /* =========================================================================
