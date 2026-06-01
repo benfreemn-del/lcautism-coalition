@@ -173,6 +173,7 @@ function showApp(session) {
   $("#user-email").textContent = session.user.email;
   $("#login-form").reset();
   switchView(currentView || "dashboard");
+  loadRepliesBadge();
 }
 
 sb.auth.onAuthStateChange((_event, session) => {
@@ -194,6 +195,7 @@ const VIEWS = {
   contacts: renderContacts,
   donations: renderDonations,
   inbox: renderInbox,
+  replies: renderReplies,
   reminders: renderReminders,
   grants: renderGrants,
 };
@@ -217,6 +219,129 @@ function setLoading(container, title) {
   container.innerHTML = "";
   if (title) container.appendChild(el("h2", { class: "page-title", text: title }));
   container.appendChild(el("div", { class: "loading", text: "Loading..." }));
+}
+
+/* =========================================================================
+   EMAIL REPLIES (AI-drafted replies waiting for Michelle to approve)
+   ========================================================================= */
+function monthKey() {
+  return new Date().toISOString().slice(0, 7); // YYYY-MM
+}
+
+function updateRepliesBadge(n) {
+  const b = $("#replies-badge");
+  if (!b) return;
+  if (n > 0) { b.textContent = String(n); b.hidden = false; }
+  else b.hidden = true;
+}
+
+function loadRepliesBadge() {
+  sb.from("queued_replies").select("id").eq("status", "pending")
+    .then(({ data }) => { if (data) updateRepliesBadge(data.length); })
+    .catch(() => {});
+}
+
+async function renderReplies(c) {
+  setLoading(c, "Email Replies");
+  let pending, cost, sent;
+  try {
+    [pending, cost, sent] = await Promise.all([
+      run(sb.from("queued_replies").select("*").eq("status", "pending").order("created_at", { ascending: false }), "Loading drafts"),
+      run(sb.from("system_costs").select("*").eq("month", monthKey()).maybeSingle(), "Loading usage"),
+      run(sb.from("queued_replies").select("*").eq("status", "sent").order("sent_at", { ascending: false }).limit(10), "Loading sent"),
+    ]);
+  } catch (e) {
+    c.innerHTML = "";
+    c.appendChild(el("h2", { class: "page-title", text: "Email Replies" }));
+    c.appendChild(el("div", { class: "card" }, [el("p", { class: "muted", text: "This feature isn't turned on yet. Once the email co-pilot is set up, draft replies will appear here." })]));
+    return;
+  }
+
+  updateRepliesBadge(pending.length);
+
+  c.innerHTML = "";
+  c.appendChild(el("h2", { class: "page-title", text: "Email Replies" }));
+  c.appendChild(el("p", { class: "page-sub", text: "AI-written draft replies in your voice. Read each one, edit if you like, then Approve & Send. Nothing sends until you approve it." }));
+
+  const spent = cost && cost.total_usd != null ? Number(cost.total_usd) : 0;
+  const count = cost && cost.draft_count != null ? cost.draft_count : 0;
+  c.appendChild(el("div", { class: "muted", style: "margin-bottom:12px;font-size:14px", text: `This month: $${spent.toFixed(2)} across ${count} draft${count === 1 ? "" : "s"}.` }));
+
+  if (pending.length === 0) {
+    c.appendChild(el("div", { class: "card" }, [el("p", { class: "muted", text: "No drafts waiting. When a new email arrives, a ready-to-send reply will appear here." })]));
+  }
+
+  pending.forEach((r) => {
+    const card = el("div", { class: "card" });
+    card.appendChild(el("div", {}, [
+      el("strong", { text: r.from_name || r.from_email || "(unknown sender)" }),
+      el("span", { class: "muted", text: r.from_email ? ` — ${r.from_email}` : "" }),
+    ]));
+    card.appendChild(el("div", { class: "muted", style: "font-size:14px;margin-bottom:6px", text: `${r.inbox ? r.inbox + "@ · " : ""}${r.subject ? esc(r.subject) + " · " : ""}${fmtDateTime(r.created_at)}` }));
+
+    if (r.body_text) {
+      const orig = el("details", { style: "margin-bottom:8px" });
+      orig.appendChild(el("summary", { class: "muted", style: "cursor:pointer;font-size:13px", text: "Show original message" }));
+      orig.appendChild(el("div", { class: "muted", style: "white-space:pre-wrap;font-size:13px;margin-top:6px", text: r.body_text }));
+      card.appendChild(orig);
+    }
+
+    const ta = el("textarea", { class: "reply-draft", rows: "8", style: "width:100%" });
+    ta.value = r.edited_body || r.draft_body || "";
+    card.appendChild(ta);
+
+    const actions = el("div", { class: "form-actions", style: "justify-content:flex-start;flex-wrap:wrap" });
+    const approveBtn = el("button", { class: "btn btn-success btn-small" }, "Approve & Send");
+    approveBtn.addEventListener("click", async () => {
+      const body = ta.value.trim();
+      if (!body) { toast("The reply is empty.", true); return; }
+      approveBtn.disabled = true;
+      try {
+        await run(sb.from("queued_replies").update({
+          status: "approved",
+          edited_body: body,
+          approved_at: new Date().toISOString(),
+        }).eq("id", r.id), "Approving");
+        if (r.contact_id) {
+          await sb.from("interactions").insert({
+            contact_id: r.contact_id,
+            type: "email",
+            summary: "Replied to: " + (r.subject || "(no subject)"),
+            occurred_at: new Date().toISOString(),
+          });
+        }
+        toast("Approved — it'll send within a few minutes.");
+        switchView("replies");
+      } catch (err) { approveBtn.disabled = false; }
+    });
+    const discardBtn = el("button", { class: "btn btn-ghost btn-small" }, "Discard");
+    discardBtn.addEventListener("click", async () => {
+      discardBtn.disabled = true;
+      try {
+        await run(sb.from("queued_replies").update({ status: "discarded" }).eq("id", r.id), "Discarding");
+        toast("Draft discarded.");
+        switchView("replies");
+      } catch (err) { discardBtn.disabled = false; }
+    });
+    actions.appendChild(approveBtn);
+    actions.appendChild(discardBtn);
+    card.appendChild(actions);
+    c.appendChild(card);
+  });
+
+  if (sent && sent.length) {
+    const sd = el("details", { style: "margin-top:16px" });
+    sd.appendChild(el("summary", { class: "muted", style: "cursor:pointer", text: `Recently sent (${sent.length})` }));
+    const list = el("div", { class: "card", style: "margin-top:8px" });
+    sent.forEach((s) => {
+      list.appendChild(el("div", { class: "attn-item", style: "flex-direction:column;align-items:flex-start;gap:2px" }, [
+        el("div", {}, [el("strong", { text: s.from_name || s.from_email || "(unknown)" }), el("span", { class: "muted", text: s.subject ? " — " + esc(s.subject) : "" })]),
+        el("div", { class: "muted", style: "font-size:13px", text: "Sent " + fmtDateTime(s.sent_at) }),
+      ]));
+    });
+    sd.appendChild(list);
+    c.appendChild(sd);
+  }
 }
 
 /* =========================================================================
