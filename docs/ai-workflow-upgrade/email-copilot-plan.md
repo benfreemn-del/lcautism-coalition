@@ -6,6 +6,8 @@
 
 **Goal:** incoming emails to LCAC get a draft reply written *in Michelle's voice*; she reviews and approves; only approved replies send. She goes from "write every email" to "skim and click approve."
 
+**Scaffold status (built, not live):** the code for Option 1 now exists in the repo — DB migration (`migrations/0002_email_copilot.sql`), edge functions (`supabase/functions/draft-reply`, `send-approved`, `drafts-api`), a provider-agnostic inbound seam, voice profile, hard-capped LLM call, and a "Drafts" tab in the CRM. Nothing is wired or deployed yet. The exact plug-in steps (migration, mailbox decision, secrets, cap) are in `email-copilot-setup.md`.
+
 ---
 
 ## ⚠️ Important: nothing existing is reusable here
