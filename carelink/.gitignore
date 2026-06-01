@@ -1,0 +1,6 @@
+# CareLink dev scaffold — local artifacts only. (This is carelink/.gitignore;
+# the repo root .gitignore is intentionally NOT touched.)
+node_modules/
+dist/
+.env
+*.local
