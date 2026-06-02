@@ -4,15 +4,20 @@ Print this. Keep it next to your laptop.
 
 ## How to start every session
 
-1. Open Terminal (search "Terminal" or "PowerShell" on Windows)
-2. Type these two lines:
+**Just double-click the "Start LCAC" icon on your desktop.**
+
+A window opens and Claude starts up *inside your website project* — so it
+already knows your to-do list, your events, all of it. Wait for it to say
+something like "What would you like to work on today?", then talk to it in
+plain English.
+
+That's the whole thing. (If that icon ever goes missing, text Ben.)
+
+*Backup way — only if the icon is gone:* open PowerShell and type these two lines:
    ```
-   cd "C:\path\to\lcautism-coalition"
+   cd "%USERPROFILE%\Documents\LCAC"
    claude
    ```
-3. Wait for Claude to say something like "What would you like to work on today?"
-
-That's it. Now you just talk in plain English.
 
 ---
 
