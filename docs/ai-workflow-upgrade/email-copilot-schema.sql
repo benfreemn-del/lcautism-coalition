@@ -100,3 +100,24 @@ grant execute on function public.increment_email_cost(text, numeric) to service_
 --   where tablename in ('queued_replies','system_costs');     -- both true
 -- select grantee, privilege_type from information_schema.role_table_grants
 --   where table_name = 'queued_replies' order by grantee;     -- no 'anon' rows
+
+-- ---------------------------------------------------------------------
+-- v5: voice profile / app settings (added 2026-06)
+-- Stores the distilled "voice profile" learned from Michelle's real
+-- emails. Staff-readable only; never anon. The edge function (service
+-- role) reads it and falls back to the built-in default voice if unset.
+-- ---------------------------------------------------------------------
+create table if not exists public.app_settings (
+  key        text primary key,
+  value      text,
+  updated_at timestamptz not null default now()
+);
+
+alter table public.app_settings enable row level security;
+
+drop policy if exists app_settings_staff_select on public.app_settings;
+create policy app_settings_staff_select on public.app_settings
+  for select to authenticated using (true);
+
+revoke all on public.app_settings from anon;
+grant select on public.app_settings to authenticated;
