@@ -3,7 +3,19 @@
 This file tracks ongoing work on the Lewis County Autism Coalition site.
 **Mom + Ben + Claude all see this.** Updated as items get done or new gaps surface.
 
-Last updated: 2026-05-05
+Last updated: 2026-06-02
+
+---
+
+## 📧 EMAIL HELPER — almost done
+
+The AI email co-pilot that drafts replies in Michelle's voice is **built, deployed,
+and tested**. Full how-to: **`EMAIL-TOOL-GUIDE.md`**.
+
+- ✅ Drafting function live, CRM **Email Replies** tab live, $20/mo cap on, login working
+- ⬜ **One step left (Ben):** connect the three Gmail inboxes via Google Apps Scripts —
+  steps in `docs/ai-workflow-upgrade/email-copilot-setup.md` (Step 5). Until then, real
+  emails won't flow in automatically.
 
 ---
 
