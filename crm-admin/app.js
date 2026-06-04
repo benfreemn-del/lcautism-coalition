@@ -198,6 +198,7 @@ const VIEWS = {
   replies: renderReplies,
   reminders: renderReminders,
   grants: renderGrants,
+  settings: renderSettings,
 };
 
 function switchView(view) {
@@ -324,6 +325,7 @@ async function renderReplies(c) {
     });
     const discardBtn = el("button", { class: "btn btn-ghost btn-small" }, "Discard");
     discardBtn.addEventListener("click", async () => {
+      if (!confirm("Discard this draft? It won't be sent, and it can't be brought back.")) return;
       discardBtn.disabled = true;
       try {
         await run(sb.from("queued_replies").update({ status: "discarded" }).eq("id", r.id), "Discarding");
@@ -1067,4 +1069,63 @@ function openGrantForm(existing = null) {
     } catch (err) { saveBtn.disabled = false; }
   });
   openModal(form);
+}
+
+/* =========================================================================
+   SETTINGS (Michelle edits her voice + what the co-pilot knows about LCAC)
+   ========================================================================= */
+async function renderSettings(c) {
+  setLoading(c, "Settings");
+  let rows;
+  try {
+    rows = await run(
+      sb.from("app_settings").select("key,value").in("key", ["voice_profile", "knowledge_base"]),
+      "Loading settings"
+    );
+  } catch (e) {
+    c.innerHTML = "";
+    c.appendChild(el("h2", { class: "page-title", text: "Settings" }));
+    c.appendChild(el("div", { class: "card" }, [el("p", { class: "muted", text: "Settings aren't available yet. Once the email co-pilot is set up, you'll be able to edit them here." })]));
+    return;
+  }
+
+  const byKey = {};
+  (rows || []).forEach((r) => (byKey[r.key] = r.value || ""));
+
+  c.innerHTML = "";
+  c.appendChild(el("h2", { class: "page-title", text: "Settings" }));
+  c.appendChild(el("p", { class: "page-sub", text: "Control how the email co-pilot writes for you. Changes take effect on the next draft." }));
+
+  const voiceCard = el("div", { class: "card" });
+  voiceCard.appendChild(el("h3", { text: "How I sound" }));
+  voiceCard.appendChild(el("p", { class: "muted", style: "margin-top:0", text: "A short description of your writing voice — your tone, how you greet people, how you sign off. The co-pilot copies this style. Leave blank to use the built-in friendly default." }));
+  const voiceTa = el("textarea", { rows: "10", style: "width:100%" });
+  voiceTa.value = byKey.voice_profile || "";
+  voiceCard.appendChild(voiceTa);
+  c.appendChild(voiceCard);
+
+  const kbCard = el("div", { class: "card" });
+  kbCard.appendChild(el("h3", { text: "What Claude knows about LCAC" }));
+  kbCard.appendChild(el("p", { class: "muted", style: "margin-top:0", text: "Facts the co-pilot can use in replies — programs, meeting dates, locations, who to contact for what. Keep it current; the co-pilot only knows what's written here." }));
+  const kbTa = el("textarea", { rows: "12", style: "width:100%" });
+  kbTa.value = byKey.knowledge_base || "";
+  kbCard.appendChild(kbTa);
+  c.appendChild(kbCard);
+
+  const actions = el("div", { class: "form-actions", style: "justify-content:flex-start" });
+  const saveBtn = el("button", { class: "btn btn-primary" }, "Save changes");
+  saveBtn.addEventListener("click", async () => {
+    saveBtn.disabled = true;
+    try {
+      const now = new Date().toISOString();
+      await run(sb.from("app_settings").upsert([
+        { key: "voice_profile", value: voiceTa.value.trim(), updated_at: now },
+        { key: "knowledge_base", value: kbTa.value.trim(), updated_at: now },
+      ], { onConflict: "key" }), "Saving settings");
+      toast("Saved — the next draft will use these.");
+    } catch (e) { /* run() already showed the error */ }
+    saveBtn.disabled = false;
+  });
+  actions.appendChild(saveBtn);
+  c.appendChild(actions);
 }
