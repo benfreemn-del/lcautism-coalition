@@ -279,6 +279,14 @@ async function renderReplies(c) {
     ]));
     card.appendChild(el("div", { class: "muted", style: "font-size:14px;margin-bottom:6px", text: `${r.inbox ? r.inbox + "@ · " : ""}${r.subject ? esc(r.subject) + " · " : ""}${fmtDateTime(r.created_at)}` }));
 
+    if (r.flag) {
+      const sev = r.flag === "sensitive";
+      card.appendChild(el("div", {
+        style: `display:inline-block;margin:0 0 8px;padding:4px 10px;border-radius:999px;font-size:13px;font-weight:600;${sev ? "background:#fde8e6;color:#b5483b" : "background:#fdf0e1;color:#c9692e"}`,
+        text: (sev ? "🔴 Sensitive — review carefully" : "⚑ Important") + (r.flag_reason ? " · " + r.flag_reason : ""),
+      }));
+    }
+
     if (r.body_text) {
       const orig = el("details", { style: "margin-bottom:8px" });
       orig.appendChild(el("summary", { class: "muted", style: "cursor:pointer;font-size:13px", text: "Show original message" }));
