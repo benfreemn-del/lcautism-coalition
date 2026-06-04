@@ -121,3 +121,14 @@ create policy app_settings_staff_select on public.app_settings
 
 revoke all on public.app_settings from anon;
 grant select on public.app_settings to authenticated;
+
+-- ---------------------------------------------------------------------
+-- v7: flag important/sensitive drafts (still drafted, just highlighted)
+-- ---------------------------------------------------------------------
+alter table public.queued_replies add column if not exists flag text;        -- 'important' | 'sensitive' | null
+alter table public.queued_replies add column if not exists flag_reason text;
+
+-- The drafter also reads app_settings key 'knowledge_base' (LCAC facts) and
+-- auto-captures unknown senders into public.contacts (categorized via the
+-- email's content), and learns from recently-sent replies. No schema change
+-- needed for those beyond the app_settings table above.
