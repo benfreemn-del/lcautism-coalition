@@ -40,6 +40,19 @@ function monthKey(): string {
   return new Date().toISOString().slice(0, 7);
 }
 
+// v6: True for bulk / marketing / automated mail that should never get a drafted reply.
+function looksBulk(fromEmail: string, fromName: string, subject: string, body: string): boolean {
+  const sender = (fromEmail + " " + fromName).toLowerCase();
+  const blob = (subject + " " + body).toLowerCase();
+  if (/(^|[._\-])(no-?reply|do-?not-?reply|donotreply|mailer-daemon|postmaster|bounce|bounces|notifications?|newsletter|mailer|noreply)([._@\-]|$)/.test(sender)) return true;
+  if (blob.includes("unsubscribe")) return true;
+  if (blob.includes("view this email in your browser") || blob.includes("view in browser")) return true;
+  if (blob.includes("manage your preferences") || blob.includes("manage preferences")) return true;
+  if (blob.includes("you are receiving this") || blob.includes("you received this email")) return true;
+  if (blob.includes("update your email preferences")) return true;
+  return false;
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method !== "POST") return new Response("Method not allowed", { status: 405 });
   if (req.headers.get("x-webhook-secret") !== WEBHOOK_SECRET) return new Response("Unauthorized", { status: 401 });
@@ -56,6 +69,13 @@ Deno.serve(async (req: Request) => {
   const gmail_message_id = (p.gmail_message_id || "").toString();
   const thread = Array.isArray(p.thread) ? p.thread.slice(-6) : [];
   const prior = Array.isArray(p.prior) ? p.prior.slice(0, 3) : [];
+
+  // Skip bulk / marketing / no-reply mail BEFORE spending any tokens.
+  if (looksBulk(from_email, from_name, subject, body_text)) {
+    return new Response(JSON.stringify({ ok: true, skipped: "bulk" }), {
+      status: 200, headers: { "content-type": "application/json" },
+    });
+  }
 
   const month = monthKey();
   const { data: costRow } = await sb.from("system_costs").select("total_usd").eq("month", month).maybeSingle();

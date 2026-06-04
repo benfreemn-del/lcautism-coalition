@@ -81,7 +81,8 @@ var WEBHOOK_URL = "https://byxuapnhhuxekamgnwaf.supabase.co/functions/v1/draft-e
 
 function checkAndForwardNewEmails() {
   var WEBHOOK_SECRET = PropertiesService.getScriptProperties().getProperty("WEBHOOK_SECRET");
-  var threads = GmailApp.search("is:unread -label:ai-drafted", 0, 10);
+  // category:primary skips Gmail's Promotions/Social/Updates tabs (marketing, newsletters).
+  var threads = GmailApp.search("is:unread -label:ai-drafted category:primary", 0, 10);
   var label = GmailApp.getUserLabelByName("ai-drafted") || GmailApp.createLabel("ai-drafted");
 
   threads.forEach(function (thread) {
