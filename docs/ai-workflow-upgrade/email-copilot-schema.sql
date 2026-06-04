@@ -132,3 +132,18 @@ alter table public.queued_replies add column if not exists flag_reason text;
 -- auto-captures unknown senders into public.contacts (categorized via the
 -- email's content), and learns from recently-sent replies. No schema change
 -- needed for those beyond the app_settings table above.
+
+-- ---------------------------------------------------------------------
+-- v10: let signed-in staff EDIT settings from the CRM Settings panel
+-- (voice profile + knowledge base), not just read them. Authenticated
+-- only; anon stays fully locked out (no anon grant, no anon policy).
+-- ---------------------------------------------------------------------
+drop policy if exists app_settings_staff_insert on public.app_settings;
+create policy app_settings_staff_insert on public.app_settings
+  for insert to authenticated with check (true);
+
+drop policy if exists app_settings_staff_update on public.app_settings;
+create policy app_settings_staff_update on public.app_settings
+  for update to authenticated using (true) with check (true);
+
+grant insert, update on public.app_settings to authenticated;
