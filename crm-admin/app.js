@@ -281,10 +281,10 @@ async function renderReplies(c) {
 
     if (r.flag) {
       const sev = r.flag === "sensitive";
-      card.appendChild(el("div", {
-        style: `display:inline-block;margin:0 0 8px;padding:4px 10px;border-radius:999px;font-size:13px;font-weight:600;${sev ? "background:#fde8e6;color:#b5483b" : "background:#fdf0e1;color:#c9692e"}`,
-        text: (sev ? "🔴 Sensitive — review carefully" : "⚑ Important") + (r.flag_reason ? " · " + r.flag_reason : ""),
-      }));
+      card.appendChild(el("div", { class: `flag-badge ${sev ? "flag-sensitive" : "flag-important"}` }, [
+        el("span", { text: sev ? "🔴 Sensitive — review carefully" : "⚑ Important" }),
+        r.flag_reason ? el("span", { class: "flag-reason", text: "· " + r.flag_reason }) : null,
+      ]));
     }
 
     if (r.body_text) {
