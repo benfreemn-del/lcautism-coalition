@@ -323,8 +323,29 @@ async function renderReplies(c) {
         switchView("replies");
       } catch (err) { discardBtn.disabled = false; }
     });
+    const redraftBtn = el("button", { class: "btn btn-ghost btn-small" }, "🔍 Pull full history & redraft");
+    redraftBtn.title = "Search everything we know about this sender and rewrite the draft with the full picture.";
+    redraftBtn.addEventListener("click", async () => {
+      redraftBtn.disabled = true;
+      const label = redraftBtn.textContent;
+      redraftBtn.textContent = "Searching history…";
+      try {
+        const { data, error } = await sb.functions.invoke("redraft-with-context", { body: { id: r.id } });
+        if (error) throw error;
+        if (data && data.error) throw new Error(data.error);
+        ta.value = (data && data.draft) || ta.value;
+        const n = data && data.history_count != null ? data.history_count : 0;
+        toast(`Redrafted using ${n} past email${n === 1 ? "" : "s"} from this person.`);
+      } catch (err) {
+        toast("Couldn't redraft: " + ((err && err.message) || "please try again"), true);
+      } finally {
+        redraftBtn.disabled = false;
+        redraftBtn.textContent = label;
+      }
+    });
     actions.appendChild(approveBtn);
     actions.appendChild(discardBtn);
+    actions.appendChild(redraftBtn);
     card.appendChild(actions);
     c.appendChild(card);
   });
